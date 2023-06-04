@@ -1,0 +1,78 @@
+{
+  "name": "@vscode-use/utils",
+  "version": "0.0.1",
+  "packageManager": "pnpm@7.2.1",
+  "description": "",
+  "author": "Simon He",
+  "license": "MIT",
+  "funding": "https://github.com/sponsors/Simon-He95",
+  "homepage": "https://github.com/Simon-He95/vscode-use/utils#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Simon-He95/vscode-use/utils.git"
+  },
+  "bugs": "https://github.com/Simon-He95/vscode-use/utils/issues",
+  "keywords": [],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./dist/index.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "vscode": "^1.77.0"
+  },
+  "scripts": {
+    "build": "tsup ./src/index.ts --format cjs,esm --dts --clean --minify",
+    "dev": "npm run build -- --watch src",
+    "format": "prettier --write --cache .",
+    "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx,.md,.json --max-warnings 0 --cache",
+    "lint:fix": "pnpm run lint --fix",
+    "prepublishOnly": "nr build",
+    "release": "bumpp && npm publish",
+    "start": "esno src/index.ts",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.25.1",
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.77.0",
+    "bumpp": "^8.2.1",
+    "eslint": "^8.18.0",
+    "esno": "^0.16.3",
+    "lint-staged": "^13.1.0",
+    "picocolors": "^1.0.0",
+    "prettier": "^2.8.1",
+    "rimraf": "^3.0.2",
+    "tsup": "^6.5.0",
+    "tsx": "^3.12.1",
+    "typescript": "^4.7.4",
+    "vitest": "^0.15.1"
+  },
+  "lint-staged": {
+    "*": [
+      "prettier --write --cache --ignore-unknown"
+    ],
+    "*.{vue,js,ts,jsx,tsx,md,json}": "eslint --fix"
+  },
+  "eslintConfig": {
+    "extends": "@antfu"
+  }
+}
