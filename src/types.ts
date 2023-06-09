@@ -1,5 +1,5 @@
-export interface MessageOption<T> {
+export interface MessageOption {
   message: string
   type: 'info' | 'error'
-  buttons?: T[]
+  buttons?: string[] | string
 }

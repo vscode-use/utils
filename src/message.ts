@@ -10,7 +10,7 @@ export function message<T extends string>(options: MessageOption<T> | string) {
     const { type: _type, message: _message, buttons: _buttons = [] } = options
     type = _type
     message = _message
-    buttons = _buttons
+    buttons = Array.isArray(_buttons) ? _buttons : [_buttons]
   }
 
   return type === 'info'
@@ -25,7 +25,7 @@ message.info = function (options: string | { message: string; buttons: string[] 
   else {
     const { message: _message, buttons: _buttons = [] } = options
     message = _message
-    buttons = _buttons
+    buttons = Array.isArray(_buttons) ? _buttons : [_buttons]
   }
   return vscode.window.showInformationMessage(message, ...buttons)
 }
@@ -37,7 +37,7 @@ message.error = function (options: string | { message: string; buttons: string[]
   else {
     const { message: _message, buttons: _buttons = [] } = options
     message = _message
-    buttons = _buttons
+    buttons = Array.isArray(_buttons) ? _buttons : [_buttons]
   }
   return vscode.window.showErrorMessage(message, ...buttons)
 }
