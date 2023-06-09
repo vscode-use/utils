@@ -1,5 +1,5 @@
 export interface MessageOption {
   message: string
-  type: 'info' | 'error'
+  type?: 'info' | 'error'
   buttons?: string[] | string
 }

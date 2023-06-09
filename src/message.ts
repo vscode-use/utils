@@ -7,7 +7,7 @@ export function message(options: MessageOption | string) {
   let buttons: string[] = []
   if (typeof options === 'string') { message = options }
   else {
-    const { type: _type, message: _message, buttons: _buttons = [] } = options
+    const { type: _type = 'info', message: _message, buttons: _buttons = [] } = options
     type = _type
     message = _message
     buttons = Array.isArray(_buttons) ? _buttons : [_buttons]
@@ -18,7 +18,7 @@ export function message(options: MessageOption | string) {
     : vscode.window.showErrorMessage(message, ...buttons)
 }
 
-message.info = function (options: string | { message: string; buttons: string[] }) {
+message.info = function (options: string | { message: string; buttons: string[] | string }) {
   let message = ''
   let buttons: string[] = []
   if (typeof options === 'string') { message = options }
@@ -30,7 +30,7 @@ message.info = function (options: string | { message: string; buttons: string[] 
   return vscode.window.showInformationMessage(message, ...buttons)
 }
 
-message.error = function (options: string | { message: string; buttons: string[] }) {
+message.error = function (options: string | { message: string; buttons: string[] | string }) {
   let message = ''
   let buttons: string[] = []
   if (typeof options === 'string') { message = options }
