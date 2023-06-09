@@ -1,7 +1,7 @@
 import * as vscode from 'vscode'
 import type { MessageOption } from './types'
 
-export function message<T extends string>(options: MessageOption<T> | string) {
+export function message(options: MessageOption | string) {
   let type = 'info'
   let message = ''
   let buttons: string[] = []
