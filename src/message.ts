@@ -18,7 +18,7 @@ export function message<T extends string>(options: MessageOption<T> | string) {
     : vscode.window.showErrorMessage(message, ...buttons)
 }
 
-message.prototype.info = function (options: string | { message: string; buttons: string[] }) {
+message.info = function (options: string | { message: string; buttons: string[] }) {
   let message = ''
   let buttons: string[] = []
   if (typeof options === 'string') { message = options }
@@ -30,7 +30,7 @@ message.prototype.info = function (options: string | { message: string; buttons:
   return vscode.window.showInformationMessage(message, ...buttons)
 }
 
-message.prototype.error = function (options: string | { message: string; buttons: string[] }) {
+message.error = function (options: string | { message: string; buttons: string[] }) {
   let message = ''
   let buttons: string[] = []
   if (typeof options === 'string') { message = options }
