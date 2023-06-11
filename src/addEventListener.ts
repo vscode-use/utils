@@ -8,6 +8,7 @@ export function addEventListener(type: EventType, callback: (...args: any) => vo
     'selection-change': 'onDidChangeTextEditorSelection',
     'editor-visible': 'onDidChangeVisibleTextEditors',
     'activeText-change': 'onDidChangeActiveTextEditor',
+    'text-visible-change': 'onDidChangeTextEditorVisibleRanges',
   }
   const workspaceMap: any = {
     'text-change': 'onDidChangeTextDocument',
