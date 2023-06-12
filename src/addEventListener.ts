@@ -1,5 +1,8 @@
 import * as vscode from 'vscode'
-export function addEventListener(type: EventType, callback: (...args: any) => void) {
+export function addEventListener(
+  type: EventType,
+  callback: (...args: any) => void,
+) {
   const eventMap: any = {
     'terminal-close': 'onDidCloseTerminal',
     'terminal-open': 'onDidOpenTerminal',
@@ -20,25 +23,26 @@ export function addEventListener(type: EventType, callback: (...args: any) => vo
     'rename': 'onDidRenameFiles',
   }
   if (type in eventMap) {
-    const name = eventMap[type];
-    (vscode.window as any)[name]?.(callback)
+    const name = eventMap[type]
+    ;(vscode.window as any)[name]?.(callback)
   }
   else if (type in workspaceMap) {
-    const name = eventMap[type];
-    (vscode.workspace as any)[name]?.(callback)
+    const name = eventMap[type]
+    ;(vscode.workspace as any)[name]?.(callback)
   }
 }
 
-type EventType = 'terminal-close'
-| 'terminal-open'
-| 'terminal-change'
-| 'theme-change'
-| 'selection-change'
-| 'editor-visible'
-| 'text-change'
-| 'text-open'
-| 'text-save'
-| 'folder-change'
-| 'file-create'
-| 'file-delete'
-| 'rename'
+type EventType =
+  | 'terminal-close'
+  | 'terminal-open'
+  | 'terminal-change'
+  | 'theme-change'
+  | 'selection-change'
+  | 'editor-visible'
+  | 'text-change'
+  | 'text-open'
+  | 'text-save'
+  | 'folder-change'
+  | 'file-create'
+  | 'file-delete'
+  | 'rename'
