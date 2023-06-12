@@ -27,7 +27,7 @@ export function addEventListener(
     ;(vscode.window as any)[name]?.(callback)
   }
   else if (type in workspaceMap) {
-    const name = eventMap[type]
+    const name = workspaceMap[type]
     ;(vscode.workspace as any)[name]?.(callback)
   }
 }
