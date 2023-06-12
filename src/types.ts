@@ -1,3 +1,5 @@
+import type { AccessibilityInformation, Command, ThemeColor } from 'vscode'
+
 export interface MessageOption {
   message: string
   type?: 'info' | 'error'
@@ -11,6 +13,8 @@ export type EventType =
 | 'theme-change'
 | 'selection-change'
 | 'editor-visible'
+| 'activeText-change'
+| 'text-visible-change'
 | 'text-change'
 | 'text-open'
 | 'text-save'
@@ -18,3 +22,14 @@ export type EventType =
 | 'file-create'
 | 'file-delete'
 | 'rename'
+
+export interface BarOptions {
+  position?: 'left' | 'right'
+  offset?: number
+  text: string
+  tooltip?: string
+  color?: string | ThemeColor | undefined
+  backgroundColor?: ThemeColor | undefined
+  command?: string | Command | undefined
+  accessibilityInformation?: AccessibilityInformation | undefined
+}
