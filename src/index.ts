@@ -5,5 +5,6 @@ export * from './registerCommand'
 export * from './createTerminal'
 export * from './addEventListener'
 export * from './updateText'
+export * from './createBottomBar'
 export * from './types'
 
