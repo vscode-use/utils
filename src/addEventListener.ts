@@ -23,6 +23,7 @@ export function addEventListener(
     'file-create': 'onDidCreateFiles',
     'file-delete': 'onDidDeleteFiles',
     'rename': 'onDidRenameFiles',
+    'config-change': 'onDidChangeConfiguration',
   }
   if (type in eventMap) {
     const name = eventMap[type]
@@ -33,4 +34,3 @@ export function addEventListener(
     return (vscode.workspace as any)[name]?.(callback)
   }
 }
-
