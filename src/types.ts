@@ -22,6 +22,7 @@ export type EventType =
 | 'file-create'
 | 'file-delete'
 | 'rename'
+| 'config-change'
 
 export interface BarOptions {
   position?: 'left' | 'right'
