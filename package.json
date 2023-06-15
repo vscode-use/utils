@@ -38,9 +38,12 @@
   "engines": {
     "vscode": "^1.77.0"
   },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "scripts": {
     "build": "tsup ./src/index.ts --format cjs,esm --dts --clean --minify",
-    "dev": "npm run build -- --watch src",
+    "dev": "tsup ./src/index.ts --format cjs,esm --dts --clean --watch src",
     "format": "prettier --write --cache .",
     "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx,.md,.json --max-warnings 0 --cache",
     "lint:fix": "pnpm run lint --fix",
