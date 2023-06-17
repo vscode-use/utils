@@ -8,5 +8,6 @@ export * from './updateText'
 export * from './createBottomBar'
 export * from './CompletionItem'
 export * from './registerCompletionItemProvider'
+export * from './isDark'
 export * from './types'
 
