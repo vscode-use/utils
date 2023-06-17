@@ -9,5 +9,6 @@ export * from './createBottomBar'
 export * from './createCompletionItem'
 export * from './registerCompletionItemProvider'
 export * from './isDark'
+export * from './getSelection'
+export * from './getActiveTextEditorLanguageId'
 export * from './types'
-
