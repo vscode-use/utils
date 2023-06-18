@@ -11,4 +11,6 @@ export * from './registerCompletionItemProvider'
 export * from './isDark'
 export * from './getSelection'
 export * from './getActiveTextEditorLanguageId'
+export * from './createProgress'
 export * from './types'
+
