@@ -1,13 +1,24 @@
-## @vscode-use/utils
+<p align="center">
+<img src="./assets/kv.png" alt="css selector">
+</p>
+<p align="center"> English | <a href="./README_zh.md">简体中文</a></p>
 
-> WIP: 这个库是为了快速在 vscode 插件中使用一些常用的命令
+> WIP: This library is designed to quickly use some common commands in the vscode plug-in
 
 ## Api
 
-- registerCommand 注册指令
-- getConfiguration 获取 workspace configuration
-- message {type:'info'|'error',message:string,buttons:['ok']} 弹出消息
-- openFile 打开某一个文件
+- registerCommand ***Registration instruction***
+- getConfiguration ***achieve workspace configuration***
+- message {type:'info'|'error',message:string,buttons:['ok']} ***popup message***
+- openFile ***open file***
+- addEventListener ***listen vscode file switching, terminal, content change, add, delete and other events***
+- createTerminal ***Quickly create a terminal***
+- createCompletionItem ***Generate the prompt content for the register completion item provider***
+- registerCompletionItemProvider ***Generate a prompt based on the input***
+- isDark ***Determine if the current vscode theme is dark***
+- getSelection ***Gets information about the current mouse row***
+- getActiveTextEditorLanguageId ***Gets a type of the current file like javascriptreact | typescriptreact | vue 等***
+- createProgress ***Create an execution progress bar in vscode***
 
 ## License
 
