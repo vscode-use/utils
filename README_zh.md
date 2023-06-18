@@ -18,6 +18,7 @@
 - getSelection ***获取当前鼠标所在行的信息***
 - getActiveTextEditorLanguageId ***获取当前文件的一个类型javascriptreact | typescriptreact | vue 等***
 - createProgress ***创建一个vscode中的执行进度条***
+- registerInlayHintsProvider ***给出一个类似copilot的hint提示***
 
 ## License
 

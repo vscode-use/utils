@@ -19,6 +19,7 @@
 - getSelection ***Gets information about the current mouse row***
 - getActiveTextEditorLanguageId ***Gets a type of the current file like javascriptreact | typescriptreact | vue 等***
 - createProgress ***Create an execution progress bar in vscode***
+- registerInlayHintsProvider ***Give a hint similar to copilot***
 
 ## License
 
