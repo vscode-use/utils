@@ -46,3 +46,8 @@ export type ProgressReport = (value: {
   message?: string | undefined
   increment?: number | undefined
 }) => void
+
+export interface PositionOption {
+  line: number
+  character: number
+}
