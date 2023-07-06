@@ -9,7 +9,7 @@ interface CompletionItemOptions {
   type?: CompletionItemKind
 }
 export function createCompletionItem(options: CompletionItemOptions) {
-  const { content, snippet, detail, type = vscode.CompletionItemKind.Variable } = options
+  const { content, snippet, detail, type } = options
   const completion = new vscode.CompletionItem(content, type)
   if (snippet !== undefined) {
     completion.insertText = typeof snippet === 'string'
