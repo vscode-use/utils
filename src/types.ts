@@ -47,4 +47,5 @@ export type ProgressReport = (value: {
   increment?: number | undefined
 }) => void
 
-export type PositionOption = [number, number]
+export type PositionOption1 = [number, number]
+export interface PositionOption2 { line: number; character: number }
