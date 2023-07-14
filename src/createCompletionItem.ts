@@ -1,5 +1,5 @@
 import * as vscode from 'vscode'
-import type { CompletionItemKind, MarkdownString, SnippetString } from 'vscode'
+import type { Command, CompletionItemKind, MarkdownString, SnippetString } from 'vscode'
 import { createSnippetString } from './createSnippetString'
 
 interface CompletionItemOptions {
@@ -8,9 +8,14 @@ interface CompletionItemOptions {
   detail?: string
   type?: CompletionItemKind
   documentation?: string | MarkdownString
+  sortText?: string
+  filterText?: string
+  preselect?: boolean
+  keepWhitespace?: boolean
+  command?: Command
 }
 export function createCompletionItem(options: CompletionItemOptions) {
-  const { content, snippet, detail, type, documentation } = options
+  const { content, snippet, detail, type, documentation, sortText, filterText, preselect, keepWhitespace, command } = options
   const completion = new vscode.CompletionItem(content, type)
   if (snippet !== undefined) {
     completion.insertText = typeof snippet === 'string'
@@ -21,5 +26,14 @@ export function createCompletionItem(options: CompletionItemOptions) {
     completion.documentation = documentation
   if (detail)
     completion.detail = detail
+  if (sortText)
+    completion.sortText = sortText
+  if (filterText)
+    completion.filterText = filterText
+  completion.preselect = preselect
+  if (keepWhitespace)
+    completion.keepWhitespace = keepWhitespace
+  if (command)
+    completion.command = command
   return completion
 }
