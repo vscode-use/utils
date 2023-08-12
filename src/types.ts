@@ -48,4 +48,5 @@ export type ProgressReport = (value: {
 }) => void
 
 export type PositionOption1 = [number, number]
-export interface PositionOption2 { line: number; character: number }
+export type PositionOption2 = { line: number; character?: number;column?: number } & Record<string, string | number>
+
