@@ -3,7 +3,7 @@
 </p>
 <p align="center"> English | <a href="./README_zh.md">简体中文</a></p>
 
-This library is designed to quickly use some common commands in the vscode plug-in
+🐰 This library is designed to quickly use some common commands in the vscode plug-in
 
 ## Api
 
