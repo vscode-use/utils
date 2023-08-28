@@ -3,23 +3,29 @@
 </p>
 <p align="center"> English | <a href="./README_zh.md">简体中文</a></p>
 
-> WIP: This library is designed to quickly use some common commands in the vscode plug-in
+This library is designed to quickly use some common commands in the vscode plug-in
 
 ## Api
 
-- registerCommand ***Registration instruction***
-- getConfiguration ***achieve workspace configuration***
-- message {type:'info'|'error',message:string,buttons:['ok']} ***popup message***
-- openFile ***open file***
-- addEventListener ***listen vscode file switching, terminal, content change, add, delete and other events***
-- createTerminal ***Quickly create a terminal***
-- createCompletionItem ***Generate the prompt content for the register completion item provider***
-- registerCompletionItemProvider ***Generate a prompt based on the input***
-- isDark ***Determine if the current vscode theme is dark***
-- getSelection ***Gets information about the current mouse row***
-- getActiveTextEditorLanguageId ***Gets a type of the current file like javascriptreact | typescriptreact | vue 等***
+- registerCommand ***Registration instructions***
+- executeCommand ***Trigger instructions***
+- getConfiguration ***get workspace configuration***
+- message {type:'info'|'error',message:string,buttons:['ok']} ***Pop up message***
+- openFile ***Open a file.***
+- addEventListener ***Listen to file switching, terminal, content change, add, delete and other events in vscode***
+- createTerminal ***快速创建一个终端***
+- createCompletionItem ***Generate the prompt content of registerCompletionItemProvider***
+- registerCompletionItemProvider ***Generate the corresponding prompt according to the input***
+- isDark ***Determine whether the current vscode theme is dark***
+- getSelection ***Get the information of the line where the current mouse is located***
+- getActiveTextEditorLanguageId ***Get a type of the current file javascriptreact | typescriptreact | vue, etc.***
 - createProgress ***Create an execution progress bar in vscode***
-- registerInlayHintsProvider ***Give a hint similar to copilot***
+- registerInlayHintsProvider ***Give a hint similar to copilot.***
+- copyText ***Plug the content into the pasteboard.***
+- updateText ***修改文本内容***
+- createBottomBar ***Create the bottom bar button***
+- nextTick ***Create the bottom bar button***
+- createSquare ***Create a square block***
 
 ## License
 

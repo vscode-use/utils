@@ -2,11 +2,12 @@
 <img src="./assets/kv.png" alt="css selector">
 </p>
 <p align="center"> <a href="./README.md">English</a> | 简体中文</p>
-> WIP: 这个库是为了快速在 vscode 插件中使用一些常用的命令
+🐰 这个库是为了快速在 vscode 插件中使用一些常用的命令
 
 ## Api
 
 - registerCommand ***注册指令***
+- executeCommand ***触发指令***
 - getConfiguration ***获取 workspace configuration***
 - message {type:'info'|'error',message:string,buttons:['ok']} ***弹出消息***
 - openFile ***打开某一个文件***
@@ -19,6 +20,11 @@
 - getActiveTextEditorLanguageId ***获取当前文件的一个类型javascriptreact | typescriptreact | vue 等***
 - createProgress ***创建一个vscode中的执行进度条***
 - registerInlayHintsProvider ***给出一个类似copilot的hint提示***
+- copyText ***往粘贴板中塞入内容***
+- updateText ***修改文本内容***
+- createBottomBar ***创建底部栏按钮***
+- nextTick ***修改文本内容更新后的回调***
+- createSquare ***创建一个方形小块***
 
 ## License
 
