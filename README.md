@@ -13,7 +13,7 @@
 - message {type:'info'|'error',message:string,buttons:['ok']} ***Pop up message***
 - openFile ***Open a file.***
 - addEventListener ***Listen to file switching, terminal, content change, add, delete and other events in vscode***
-- createTerminal ***快速创建一个终端***
+- createTerminal ***Quickly create a terminal***
 - createCompletionItem ***Generate the prompt content of registerCompletionItemProvider***
 - registerCompletionItemProvider ***Generate the corresponding prompt according to the input***
 - isDark ***Determine whether the current vscode theme is dark***
@@ -22,7 +22,7 @@
 - createProgress ***Create an execution progress bar in vscode***
 - registerInlayHintsProvider ***Give a hint similar to copilot.***
 - copyText ***Plug the content into the pasteboard.***
-- updateText ***修改文本内容***
+- updateText ***Modify the text content***
 - createBottomBar ***Create the bottom bar button***
 - nextTick ***Create the bottom bar button***
 - createSquare ***Create a square block***
