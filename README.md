@@ -23,6 +23,7 @@
 - registerInlayHintsProvider ***Give a hint similar to copilot.***
 - copyText ***Plug the content into the pasteboard.***
 - updateText ***Modify the text content***
+- jumpToLine ***Open a file and jump to a certain line***
 - createBottomBar ***Create the bottom bar button***
 - nextTick ***Create the bottom bar button***
 - createSquare ***Create a square block***

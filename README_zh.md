@@ -22,6 +22,7 @@
 - registerInlayHintsProvider ***给出一个类似copilot的hint提示***
 - copyText ***往粘贴板中塞入内容***
 - updateText ***修改文本内容***
+- jumpToLine ***打开文件并跳转到某一行***
 - createBottomBar ***创建底部栏按钮***
 - nextTick ***修改文本内容更新后的回调***
 - createSquare ***创建一个方形小块***
