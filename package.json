@@ -6,12 +6,12 @@
   "author": "Simon He",
   "license": "MIT",
   "funding": "https://github.com/sponsors/Simon-He95",
-  "homepage": "https://github.com/Simon-He95/vscode-use/utils#readme",
+  "homepage": "https://github.com/vscode-use/utils#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Simon-He95/vscode-use/utils.git"
+    "url": "git+https://github.com/vscode-use/utils.git"
   },
-  "bugs": "https://github.com/Simon-He95/vscode-use/utils/issues",
+  "bugs": "https://github.com/vscode-use/utils/issues",
   "keywords": [],
   "sideEffects": false,
   "exports": {
