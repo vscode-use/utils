@@ -2,7 +2,7 @@ import type { AccessibilityInformation, Command, ProgressLocation, ThemeColor } 
 
 export interface MessageOption {
   message: string
-  type?: 'info' | 'error'
+  type?: 'info' | 'error' | 'warn'
   buttons?: string[] | string
 }
 
@@ -48,5 +48,5 @@ export type ProgressReport = (value: {
 }) => void
 
 export type PositionOption1 = [number, number]
-export type PositionOption2 = { line: number; character?: number;column?: number } & Record<string, string | number>
+export type PositionOption2 = { line: number; character?: number; column?: number } & Record<string, string | number>
 

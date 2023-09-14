@@ -21,7 +21,9 @@ export function message(options: MessageOption | string) {
 
   return type === 'info'
     ? vscode.window.showInformationMessage(message, ...buttons)
-    : vscode.window.showErrorMessage(message, ...buttons)
+    : type === 'error'
+      ? vscode.window.showErrorMessage(message, ...buttons)
+      : vscode.window.showWarningMessage(message, ...buttons)
 }
 
 message.info = function (
@@ -54,4 +56,20 @@ message.error = function (
     buttons = Array.isArray(_buttons) ? _buttons : [_buttons]
   }
   return vscode.window.showErrorMessage(message, ...buttons)
+}
+
+message.warn = function (
+  options: string | { message: string; buttons: string[] | string },
+) {
+  let message = ''
+  let buttons: string[] = []
+  if (typeof options === 'string') {
+    message = options
+  }
+  else {
+    const { message: _message, buttons: _buttons = [] } = options
+    message = _message
+    buttons = Array.isArray(_buttons) ? _buttons : [_buttons]
+  }
+  return vscode.window.showWarningMessage(message, ...buttons)
 }
