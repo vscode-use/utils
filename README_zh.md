@@ -27,6 +27,7 @@
 - nextTick ***修改文本内容更新后的回调***
 - createSquare ***创建一个方形小块***
 - watchFiles ***监听文件内容和删除的变化***
+- createEvents ***用于订阅事件通信的工具***
 
 ## License
 
