@@ -1,4 +1,4 @@
-import type { AccessibilityInformation, Command, ProgressLocation, ThemeColor } from 'vscode'
+import type { AccessibilityInformation, Command, ProgressLocation, ThemeColor, Uri } from 'vscode'
 
 export interface MessageOption {
   message: string
@@ -50,3 +50,10 @@ export type ProgressReport = (value: {
 export type PositionOption1 = [number, number]
 export type PositionOption2 = { line: number; character?: number; column?: number } & Record<string, string | number>
 
+export interface WatchFilesOptions {
+  onChange?: (e: Uri) => any
+  onDelete?: (e: Uri) => any
+  ignoreCreateEvents?: boolean
+  ignoreChangeEvents?: boolean
+  ignoreDeleteEvents?: boolean
+}

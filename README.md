@@ -27,6 +27,7 @@
 - createBottomBar ***Create the bottom bar button***
 - nextTick ***Create the bottom bar button***
 - createSquare ***Create a square block***
+- watchFiles ***Monitor changes in file content and deletion***
 
 ## License
 
