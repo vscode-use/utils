@@ -2,7 +2,9 @@ import * as vscode from 'vscode'
 import type { TextEditor } from 'vscode'
 import { openFile } from './openFile'
 
-export function jumpToLine(lineNumber: number, filepath: string | TextEditor) {
+export function jumpToLine(lineNumber: number, filepath: string | TextEditor | undefined = vscode.window.activeTextEditor) {
+  if (!filepath)
+    return
   if (typeof filepath === 'string') {
     openFile(filepath).then((editor) => {
       toLine(lineNumber, editor)
