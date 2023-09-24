@@ -30,6 +30,9 @@
 - watchFiles ***Monitor changes in file content and deletion***
 - createEvents ***Tools for subscribing to event communication***
 - getActiveText ***Get the text content of the current activation tab***
+- fold ***fold code***
+- unFold ***unfold code***
+
 
 ## License
 

@@ -29,6 +29,9 @@
 - watchFiles ***监听文件内容和删除的变化***
 - createEvents ***用于订阅事件通信的工具***
 - getActiveText ***获取到当前激活tab的文本内容***
+- fold ***折叠代码***
+- unFold ***展开代码***
+
 
 ## License
 
