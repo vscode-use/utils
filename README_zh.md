@@ -4,7 +4,12 @@
 <p align="center"> <a href="./README.md">English</a> | 简体中文</p>
 🐰 这个库是为了快速在 vscode 插件中使用一些常用的命令
 
-## Api
+## 📍 Install
+```
+npm i @vscode-use/utils -d
+```
+
+## 📝 Api
 
 - registerCommand ***注册指令***
 - executeCommand ***触发指令***

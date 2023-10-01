@@ -5,7 +5,12 @@
 
 🐰 This library is designed to quickly use some common commands in the vscode plug-in
 
-## Api
+## 📍 Install
+```
+npm i @vscode-use/utils -d
+```
+
+## 📝 Api
 
 - registerCommand ***Registration instructions***
 - executeCommand ***Trigger instructions***
