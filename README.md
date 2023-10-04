@@ -37,6 +37,7 @@ npm i @vscode-use/utils -d
 - getActiveText ***Get the text content of the current activation tab***
 - fold ***fold code***
 - unFold ***unfold code***
+- registerDefinitionProvider ***It provides option + click to achieve the function of fast jump.***
 
 
 ## License

@@ -36,6 +36,7 @@ npm i @vscode-use/utils -d
 - getActiveText ***获取到当前激活tab的文本内容***
 - fold ***折叠代码***
 - unFold ***展开代码***
+- registerDefinitionProvider ***提供了option+点击，实现快速跳转的功能***
 
 
 ## License
