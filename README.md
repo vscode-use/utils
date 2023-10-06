@@ -38,7 +38,7 @@ npm i @vscode-use/utils -d
 - fold ***fold code***
 - unFold ***unfold code***
 - registerDefinitionProvider ***It provides option + click to achieve the function of fast jump.***
-
+- openExternalUrl ***Open the external url in the browser***
 
 ## License
 

@@ -37,6 +37,7 @@ npm i @vscode-use/utils -d
 - fold ***折叠代码***
 - unFold ***展开代码***
 - registerDefinitionProvider ***提供了option+点击，实现快速跳转的功能***
+- openExternalUrl ***在浏览器中打开外部网址***
 
 
 ## License
