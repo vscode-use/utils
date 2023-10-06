@@ -8,6 +8,7 @@ export function getSelection() {
       line,
       character,
       lineText: activeTextEditor.document.lineAt(line).text,
+      selectedText: activeTextEditor.document.getText(activeTextEditor.selection),
     }
   }
 }
