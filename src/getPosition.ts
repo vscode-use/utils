@@ -11,5 +11,6 @@ export function getPosition(offset: number) {
     line,
     column,
     character: column,
+    position: new vscode.Position(line, column),
   }
 }
