@@ -39,6 +39,7 @@ npm i @vscode-use/utils -d
 - unFold ***unfold code***
 - registerDefinitionProvider ***It provides option + click to achieve the function of fast jump.***
 - openExternalUrl ***Open the external url in the browser***
+- getLineText ***Get the text of a certain line***
 
 ## License
 
