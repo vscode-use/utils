@@ -1,16 +1,15 @@
+import * as vscode from 'vscode'
 /**
- * 根据给到的内容和字符串的位置，计算出行和列
+ * 根据offset获取行列
  */
-export function getPosition(content: string, position: number) {
-  let count = 0
-  for (let i = 0; i < content.split('\n').length; i++) {
-    const len = content[i].length
-    if ((count <= position) && (count + len >= position)) {
-      return {
-        line: i,
-        charater: position - count + 1,
-      }
-    }
-    count += len + 1
+export function getPosition(offset: number) {
+  const document = vscode.window.activeTextEditor!.document
+  const position = document.positionAt(offset)
+  const line = position.line
+  const column = position.character + 1
+  return {
+    line,
+    column,
+    character: column,
   }
 }
