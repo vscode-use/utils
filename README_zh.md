@@ -39,7 +39,7 @@ npm i @vscode-use/utils -d
 - registerDefinitionProvider ***提供了option+点击，实现快速跳转的功能***
 - openExternalUrl ***在浏览器中打开外部网址***
 - getLineText ***获取某一行的文本***
-
+- useTheme ***主题信息获取和操作***
 
 ## License
 
