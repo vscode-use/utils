@@ -6,7 +6,7 @@ function getCurrentTheme() {
 
 function getAllTheme() {
   const extensions = vscode.extensions.all
-  const themeColors: { label: string; path: string; id: string; extensionName: string }[] = []
+  const themeColors: { label: string; path: string; id: string; uiTheme: string }[] = []
 
   // 遍历所有已安装的扩展
   for (const extension of extensions) {
@@ -18,14 +18,8 @@ function getAllTheme() {
 
       // 遍历扩展中的主题色
       for (const theme of themes) {
-        if (theme.label && theme.path) {
-          themeColors.push({
-            label: theme.label,
-            path: theme.path,
-            id: theme.id,
-            extensionName: theme.uiTheme,
-          })
-        }
+        if (theme.label && theme.path)
+          themeColors.push(theme)
       }
     }
   }
