@@ -40,6 +40,7 @@ npm i @vscode-use/utils -d
 - openExternalUrl ***在浏览器中打开外部网址***
 - getLineText ***获取某一行的文本***
 - useTheme ***主题信息获取和操作***
+- isInPosition ***判断一块区域是否是另一块的子区域***
 
 ## License
 

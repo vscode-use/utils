@@ -41,6 +41,7 @@ npm i @vscode-use/utils -d
 - openExternalUrl ***Open the external url in the browser***
 - getLineText ***Get the text of a certain line***
 - useTheme ***Theme Configuration and Operatation***
+- isInPosition ***Determine whether one area is a sub-area of another***
 
 ## License
 

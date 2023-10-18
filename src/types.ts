@@ -48,7 +48,17 @@ export type ProgressReport = (value: {
 }) => void
 
 export type PositionOption1 = [number, number]
-export type PositionOption2 = { line: number; character?: number; column?: number } & Record<string, any>
+export type PositionOption2 = {
+  line: number
+  character?: number
+  column: number
+  [key: string]: any
+} | {
+  line: number
+  character: number
+  column?: number
+  [key: string]: any
+}
 
 export interface WatchFilesOptions {
   onChange?: (e: Uri) => any
@@ -56,4 +66,10 @@ export interface WatchFilesOptions {
   ignoreCreateEvents?: boolean
   ignoreChangeEvents?: boolean
   ignoreDeleteEvents?: boolean
+}
+
+export interface RangeLoc {
+  start: PositionOption2
+  end: PositionOption2
+  [key: string]: any
 }
