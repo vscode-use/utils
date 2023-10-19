@@ -42,6 +42,7 @@ npm i @vscode-use/utils -d
 - getLineText ***Get the text of a certain line***
 - useTheme ***Theme Configuration and Operatation***
 - isInPosition ***Determine whether one area is a sub-area of another***
+- getCurrentFileUrl ***Get the path of the current activation file***
 
 ## License
 

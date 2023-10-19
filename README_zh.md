@@ -41,6 +41,7 @@ npm i @vscode-use/utils -d
 - getLineText ***获取某一行的文本***
 - useTheme ***主题信息获取和操作***
 - isInPosition ***判断一块区域是否是另一块的子区域***
+- getCurrentFileUrl ***获取当前激活文件的路径***
 
 ## License
 
