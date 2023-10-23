@@ -42,6 +42,7 @@ npm i @vscode-use/utils -d
 - useTheme ***主题信息获取和操作***
 - isInPosition ***判断一块区域是否是另一块的子区域***
 - getCurrentFileUrl ***获取当前激活文件的路径***
+- createInput ***创建一个输入框***
 
 ## License
 

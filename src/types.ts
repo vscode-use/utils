@@ -1,4 +1,4 @@
-import type { AccessibilityInformation, Command, ProgressLocation, ThemeColor, Uri } from 'vscode'
+import type { AccessibilityInformation, Command, InputBoxValidationMessage, ProgressLocation, ThemeColor, Uri } from 'vscode'
 
 export interface MessageOption {
   message: string
@@ -72,4 +72,16 @@ export interface RangeLoc {
   start: PositionOption2
   end: PositionOption2
   [key: string]: any
+}
+
+export interface CreateInputOptions {
+  ignoreFocusOut?: boolean
+  password?: boolean
+  prompt?: string
+  title?: string
+  value: string
+  selection?: [number, number]
+  placeHolder?: string
+  validate?: (value: string) => string | InputBoxValidationMessage | undefined | null |
+  Thenable<string | InputBoxValidationMessage | undefined | null>
 }
