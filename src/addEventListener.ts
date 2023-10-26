@@ -14,6 +14,7 @@ export function addEventListener(
     'editor-visible': 'onDidChangeVisibleTextEditors',
     'activeText-change': 'onDidChangeActiveTextEditor',
     'text-visible-change': 'onDidChangeTextEditorVisibleRanges',
+    'text-column-change': 'onDidChangeTextEditorViewColumn',
   }
   const workspaceMap: any = {
     'text-change': 'onDidChangeTextDocument',
@@ -24,6 +25,7 @@ export function addEventListener(
     'file-delete': 'onDidDeleteFiles',
     'rename': 'onDidRenameFiles',
     'config-change': 'onDidChangeConfiguration',
+    'text-close': 'onDidCloseTextDocument',
   }
   if (type in eventMap) {
     const name = eventMap[type]
