@@ -44,6 +44,7 @@ npm i @vscode-use/utils -d
 - isInPosition ***Determine whether one area is a sub-area of another***
 - getCurrentFileUrl ***Get the path of the current activation file***
 - createInput ***Create an input box***
+- getLocale ***Get the local language environment***
 
 ## License
 

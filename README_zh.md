@@ -43,6 +43,7 @@ npm i @vscode-use/utils -d
 - isInPosition ***判断一块区域是否是另一块的子区域***
 - getCurrentFileUrl ***获取当前激活文件的路径***
 - createInput ***创建一个输入框***
+- getLocale ***获取本地的语言环境***
 
 ## License
 
