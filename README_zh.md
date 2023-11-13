@@ -25,7 +25,8 @@ npm i @vscode-use/utils -d
 - getActiveTextEditorLanguageId ***获取当前文件的一个类型javascriptreact | typescriptreact | vue 等***
 - createProgress ***创建一个vscode中的执行进度条***
 - registerInlayHintsProvider ***给出一个类似copilot的hint提示***
-- copyText ***往粘贴板中塞入内容***
+- getCopyText ***读取粘贴板中的内容***
+- setCopyText 往粘贴板中塞入内容***
 - updateText ***修改文本内容***
 - jumpToLine ***打开文件并跳转到某一行***
 - createBottomBar ***创建底部栏按钮***

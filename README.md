@@ -26,7 +26,8 @@ npm i @vscode-use/utils -d
 - getActiveTextEditorLanguageId ***Get a type of the current file javascriptreact | typescriptreact | vue, etc.***
 - createProgress ***Create an execution progress bar in vscode***
 - registerInlayHintsProvider ***Give a hint similar to copilot.***
-- copyText ***Plug the content into the pasteboard.***
+- getCopyText ***Read the pasteboard Content.***
+- setCopyText ***Plug the content into the pasteboard.***
 - updateText ***Modify the text content***
 - jumpToLine ***Open a file and jump to a certain line***
 - createBottomBar ***Create the bottom bar button***
