@@ -38,6 +38,7 @@ npm i @vscode-use/utils -d
 - fold ***折叠代码***
 - unFold ***展开代码***
 - registerDefinitionProvider ***提供了option+点击，实现快速跳转的功能***
+- registerHoverProvider ***为鼠标悬停提供回调***
 - openExternalUrl ***在浏览器中打开外部网址***
 - getLineText ***获取某一行的文本***
 - useTheme ***主题信息获取和操作***

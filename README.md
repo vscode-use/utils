@@ -39,6 +39,7 @@ npm i @vscode-use/utils -d
 - fold ***fold code***
 - unFold ***unfold code***
 - registerDefinitionProvider ***It provides option + click to achieve the function of fast jump.***
+- registerHoverProvider ***Provide a callback for mouse hover***
 - openExternalUrl ***Open the external url in the browser***
 - getLineText ***Get the text of a certain line***
 - useTheme ***Theme Configuration and Operatation***
