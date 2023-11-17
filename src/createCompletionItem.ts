@@ -14,9 +14,9 @@ interface CompletionItemOptions {
   keepWhitespace?: boolean
   command?: Command
 }
-export function createCompletionItem(options: CompletionItemOptions) {
-  const { content, snippet, detail, type, documentation, sortText, filterText, preselect, keepWhitespace, command } = options
-  const completion = new vscode.CompletionItem(content, type)
+export function createCompletionItem(options: CompletionItemOptions & { params: string | string[] }) {
+  const { content, snippet, detail, type, documentation, sortText, filterText, preselect, keepWhitespace, command, params } = options
+  const completion = new vscode.CompletionItem(content, type) as any
   if (snippet !== undefined) {
     completion.insertText = typeof snippet === 'string'
       ? createSnippetString(snippet)
@@ -35,5 +35,7 @@ export function createCompletionItem(options: CompletionItemOptions) {
     completion.keepWhitespace = keepWhitespace
   if (command)
     completion.command = command
+  if (params)
+    completion.params = params
   return completion
 }
