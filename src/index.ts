@@ -1,4 +1,5 @@
 export * from './getConfiguration'
+export * from './setConfiguration'
 export * from './message'
 export * from './openFile'
 export * from './registerCommand'
