@@ -27,6 +27,10 @@ export function addEventListener(
     'config-change': 'onDidChangeConfiguration',
     'text-close': 'onDidCloseTextDocument',
   }
+  const authenticationMap: any = {
+    'auth-change': 'onDidChangeSessions',
+  }
+
   if (type in eventMap) {
     const name = eventMap[type]
     return (vscode.window as any)[name]?.(callback)
@@ -34,5 +38,12 @@ export function addEventListener(
   else if (type in workspaceMap) {
     const name = workspaceMap[type]
     return (vscode.workspace as any)[name]?.(callback)
+  }
+  else if (type in authenticationMap) {
+    const name = authenticationMap[type]
+    return (vscode.authentication as any)[name]?.((e) => {
+      const getSession = async (name: string) => await vscode.authentication.getSession(name, ['user:read'])
+      return callback(e.provider.id, getSession)
+    })
   }
 }
