@@ -41,7 +41,7 @@ export function addEventListener(
   }
   else if (type in authenticationMap) {
     const name = authenticationMap[type]
-    return (vscode.authentication as any)[name]?.((e) => {
+    return (vscode.authentication as any)[name]?.((e: any) => {
       const getSession = async (name: string) => await vscode.authentication.getSession(name, ['user:read'])
       return callback(e.provider.id, getSession)
     })
