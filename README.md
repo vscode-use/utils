@@ -48,6 +48,7 @@ npm i @vscode-use/utils -d
 - createInput： ***Create an input box***
 - getLocale： ***Get the local language environment***
 - rename： ***Quickly rename files***
+- createDefinitionLocation ***Create jump address data after left-clicking after pressing option***
 
 
 ## License

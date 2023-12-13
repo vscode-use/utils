@@ -47,6 +47,7 @@ npm i @vscode-use/utils -d
 - createInput： ***创建一个输入框***
 - getLocale： ***获取本地的语言环境***
 - rename： ***快速给文件重命名***
+- createDefinitionLocation ***创建按下option后左键点击后的跳转地址数据***
 
 ## License
 
