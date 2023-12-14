@@ -49,6 +49,8 @@ npm i @vscode-use/utils -d
 - getLocale： ***Get the local language environment***
 - rename： ***Quickly rename files***
 - createDefinitionLocation ***Create jump address data after left-clicking after pressing option***
+- setStyle ***Add style to a certain area***
+- createStyle ***Create Style***
 
 
 ## License

@@ -48,7 +48,9 @@ npm i @vscode-use/utils -d
 - getLocale： ***获取本地的语言环境***
 - rename： ***快速给文件重命名***
 - createDefinitionLocation ***创建按下option后左键点击后的跳转地址数据***
-
+- setStyle ***给某一块区域增加样式***
+- createStyle ***创建样式***
+- 
 ## License
 
 [MIT](./LICENSE) License © 2022 [Simon He](https://github.com/Simon-He95)
