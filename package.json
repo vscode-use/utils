@@ -1,6 +1,6 @@
 {
   "name": "@vscode-use/utils",
-  "version": "0.0.67",
+  "version": "0.0.68",
   "packageManager": "pnpm@7.2.1",
   "description": "",
   "author": "Simon He",
