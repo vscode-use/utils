@@ -25,7 +25,8 @@ export function jumpToLine(lineNumber: number | PositionOption1 | [PositionOptio
   else {
     range = new vscode.Range(0, 0, 0, 0)
   }
-  return openFile(filepath, range)
+  if (filepath)
+    return openFile(filepath, range)
 }
 
 export function toLine(lineNumber: number | [number, number], editor: TextEditor) {
