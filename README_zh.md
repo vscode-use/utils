@@ -50,7 +50,7 @@ npm i @vscode-use/utils -d
 - createDefinitionLocation ***创建按下option后左键点击后的跳转地址数据***
 - setStyle ***给某一块区域增加样式***
 - createStyle ***创建样式***
-- - getActiveTextEditor ***获取当前激活的编辑器***
+- getActiveTextEditor ***获取当前激活的编辑器***
 - getKeyWords ***获取position位置处的关键词***
   
 ## 📖 @vscode-use/utils api 说明
