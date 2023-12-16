@@ -1,5 +1,6 @@
 import * as vscode from 'vscode'
 import { createRange } from './createRange'
+import { getActiveTextEditor } from './getActiveTextEditor'
 import type { PositionOption1, PositionOption2 } from './types'
 
 type ISelections = { start: PositionOption2 | PositionOption1; end: PositionOption2 | PositionOption1; position?: 'left' | 'right' }[]
@@ -12,6 +13,7 @@ export function setSelections(selectionsOptions: ISelections) {
       : new vscode.Selection(range.start, range.end)
     return selection
   })
-  const editor = vscode.window.activeTextEditor!
-  editor.selections = selections
+  const activeTextEditor = getActiveTextEditor()
+  if (activeTextEditor)
+    activeTextEditor.selections = selections
 }

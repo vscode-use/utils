@@ -1,9 +1,8 @@
-import * as vscode from 'vscode'
 import type { TextEditorEdit } from 'vscode'
+import { getActiveTextEditor } from './getActiveTextEditor'
 
 export function updateText(callback: (editBuilder: TextEditorEdit) => void) {
-  const textEditor = vscode.window.activeTextEditor
-  if (!textEditor)
-    return
-  textEditor.edit(callback)
+  const activeTextEditor = getActiveTextEditor()
+  if (activeTextEditor)
+    activeTextEditor.edit(callback)
 }

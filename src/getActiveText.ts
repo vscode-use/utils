@@ -1,4 +1,7 @@
-import * as vscode from 'vscode'
+import { getActiveTextEditor } from './getActiveTextEditor'
+
 export function getActiveText() {
-  return vscode.window.activeTextEditor?.document.getText()
+  const activeTextEditor = getActiveTextEditor()
+  if (activeTextEditor)
+    return activeTextEditor.document.getText()
 }

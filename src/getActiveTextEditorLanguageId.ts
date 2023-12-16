@@ -1,7 +1,7 @@
-import * as vscode from 'vscode'
+import { getActiveTextEditor } from './getActiveTextEditor'
 
 export function getActiveTextEditorLanguageId() {
-  const editor = vscode.window.activeTextEditor
-  if (editor)
-    return editor.document.languageId
+  const activeTextEditor = getActiveTextEditor()
+  if (activeTextEditor)
+    return activeTextEditor.document.languageId
 }

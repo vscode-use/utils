@@ -51,6 +51,8 @@ npm i @vscode-use/utils -d
 - createDefinitionLocation ***Create jump address data after left-clicking after pressing option***
 - setStyle ***Add style to a certain area***
 - createStyle ***Create Style***
+- getActiveTextEditor ***Get the currently activated editor***
+- getKeyWords ***Get the keywords at the position***
 
 ## 📖 @vscode-use/utils api description
 
@@ -349,6 +351,18 @@ npm i @vscode-use/utils -d
      value: ''
    })
    ```
+
+  ### getActiveTextEditor
+
+  ```
+  const activeTextEditor = getActiveTextEditor()
+  ```
+
+  ### getKeyWords
+
+  ```
+  const keyWords = getKeyWords(position)
+  ```
 
 ## License
 

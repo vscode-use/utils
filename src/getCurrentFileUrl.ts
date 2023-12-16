@@ -1,5 +1,7 @@
-import * as vscode from 'vscode'
+import { getActiveTextEditor } from './getActiveTextEditor'
 
 export function getCurrentFileUrl() {
-  return vscode.window.activeTextEditor!.document.uri.fsPath
+  const activeTextEditor = getActiveTextEditor()
+  if (activeTextEditor)
+    return activeTextEditor.document.uri.fsPath
 }

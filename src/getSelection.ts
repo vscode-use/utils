@@ -1,7 +1,7 @@
-import * as vscode from 'vscode'
+import { getActiveTextEditor } from './getActiveTextEditor'
 
 export function getSelection() {
-  const activeTextEditor = vscode.window.activeTextEditor
+  const activeTextEditor = getActiveTextEditor()
   if (activeTextEditor) {
     const { line, character } = activeTextEditor.selection.active
 
