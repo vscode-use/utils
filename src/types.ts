@@ -86,3 +86,5 @@ export interface CreateInputOptions {
   validate?: (value: string) => string | InputBoxValidationMessage | undefined | null |
   Thenable<string | InputBoxValidationMessage | undefined | null>
 }
+
+export type ISelections = { start: PositionOption2 | PositionOption1; end: PositionOption2 | PositionOption1; position?: 'left' | 'right' }[]

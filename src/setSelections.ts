@@ -1,9 +1,7 @@
 import * as vscode from 'vscode'
 import { createRange } from './createRange'
 import { getActiveTextEditor } from './getActiveTextEditor'
-import type { PositionOption1, PositionOption2 } from './types'
-
-type ISelections = { start: PositionOption2 | PositionOption1; end: PositionOption2 | PositionOption1; position?: 'left' | 'right' }[]
+import type { ISelections } from './types'
 
 export function setSelections(selectionsOptions: ISelections) {
   const selections = selectionsOptions.map(({ start, end, position }) => {
