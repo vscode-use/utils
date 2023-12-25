@@ -53,6 +53,7 @@ npm i @vscode-use/utils -d
 - createStyle ***Create Style***
 - getActiveTextEditor ***Get the currently activated editor***
 - getKeyWords ***Get the keywords at the position***
+- setCommandParams ***Set the click command parameter of MarkdownString***
 
 ## 📖 @vscode-use/utils api description
 
@@ -364,6 +365,15 @@ npm i @vscode-use/utils -d
   const keyWords = getKeyWords(position)
   ```
 
+  ### Set the click command parameter of MarkdownString
+
+  ```
+  const md = new vscode.MarkdownString()
+  md.isTrusted = true
+  md.supportHtml = true
+  const commandUri = `command:a.b?${setCommandParams(['params1', 'params2'])}`
+  md.appendMarkdown(`[🦘](${commandUri})`);
+  ```
 ## License
 
 [MIT](./LICENSE) License © 2022 [Simon He](https://github.com/Simon-He95)

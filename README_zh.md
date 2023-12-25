@@ -52,6 +52,7 @@ npm i @vscode-use/utils -d
 - createStyle ***创建样式***
 - getActiveTextEditor ***获取当前激活的编辑器***
 - getKeyWords ***获取position位置处的关键词***
+- setCommandParams ***设置MarkdownString的点击command参数***
   
 ## 📖 @vscode-use/utils api 说明
 
@@ -363,6 +364,15 @@ npm i @vscode-use/utils -d
   const keyWords = getKeyWords(position)
   ```
   
+  ### 设置MarkdownString的点击command参数
+
+  ```
+  const md = new vscode.MarkdownString()
+  md.isTrusted = true
+  md.supportHtml = true
+  const commandUri = `command:a.b?${setCommandParams(['params1', 'params2'])}`
+  md.appendMarkdown(`[🦘](${commandUri})`);
+  ```
 
 ## License
 
