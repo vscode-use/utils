@@ -7,7 +7,7 @@ import { getActiveTextEditor } from './getActiveTextEditor'
  */
 export function getOffsetFromPosition(position: Position, code?: string) {
   if (code)
-    return code.split('\n').slice(0, position.line).reduce((prev, cur) => prev + cur.length + 1, 0) + position.character
+    return code.split('\n').slice(0, position.line).reduce((prev, cur) => prev + cur.length + 1, 0) + (position.character || 0)
 
   return getActiveTextEditor()?.document.offsetAt(position)
 }
