@@ -1,10 +1,10 @@
 import * as vscode from 'vscode'
-import type { Range, TextEditor } from 'vscode'
+import type { TextDocumentShowOptions, TextEditor } from 'vscode'
 
-export function openFile(fileUri: string, selection?: Range): Promise<TextEditor> {
+export function openFile(fileUri: string, showOptions?: TextDocumentShowOptions): Promise<TextEditor> {
   return new Promise((resolve) => {
     vscode.workspace
       .openTextDocument(fileUri)
-      .then(doc => vscode.window.showTextDocument(doc, { selection }).then(resolve))
+      .then(doc => vscode.window.showTextDocument(doc, showOptions).then(resolve))
   })
 }
