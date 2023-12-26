@@ -54,6 +54,7 @@ npm i @vscode-use/utils -d
 - getKeyWords ***获取 position 位置处的关键词***
 - setCommandParams ***设置 MarkdownString 的点击 command 参数***
 - getOffsetFromPosition ***根据 position 计算 offset***
+- getRootPath ***获取项目根目录路径***
   
 ## 📖 @vscode-use/utils api 说明
 

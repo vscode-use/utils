@@ -55,6 +55,7 @@ npm i @vscode-use/utils -d
 - getKeyWords ***Get the keywords at the position***
 - setCommandParams ***Set the click command parameter of MarkdownString***
 - getOffsetFromPosition ***Get the offset from position***
+- getRootPath ***Get the root directory path of the project***
 
 ## 📖 @vscode-use/utils api description
 
