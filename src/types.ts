@@ -18,6 +18,7 @@ export type EventType =
   | 'text-change'
   | 'text-open'
   | 'text-save'
+  | 'text-close'
   | 'folder-change'
   | 'file-create'
   | 'file-delete'
