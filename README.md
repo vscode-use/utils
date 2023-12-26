@@ -54,6 +54,7 @@ npm i @vscode-use/utils -d
 - getActiveTextEditor ***Get the currently activated editor***
 - getKeyWords ***Get the keywords at the position***
 - setCommandParams ***Set the click command parameter of MarkdownString***
+- getOffsetFromPosition ***Get the offset from position***
 
 ## 📖 @vscode-use/utils api description
 
@@ -374,6 +375,13 @@ npm i @vscode-use/utils -d
   const commandUri = `command:a.b?${setCommandParams(['params1', 'params2'])}`
   md.appendMarkdown(`[🦘](${commandUri})`);
   ```
+
+  ### getOffsetFromPosition
+  ```
+  const offset = getOffsetFromPosition(position) // Get the offset of the current text and location
+  const offset = getOffsetFromPosition(position,code) // 获取指定code，位置的offset
+  ```
+
 ## License
 
 [MIT](./LICENSE) License © 2022 [Simon He](https://github.com/Simon-He95)

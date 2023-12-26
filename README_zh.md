@@ -22,7 +22,7 @@ npm i @vscode-use/utils -d
 - registerCompletionItemProvider： ***根据输入生成对应的提示***
 - isDark： ***判断当前vscode主题是否是dark***
 - getSelection： ***获取当前鼠标所在行的信息***
-- getActiveTextEditorLanguageId： ***获取当前文件的一个类型javascriptreact | typescriptreact | vue 等***
+- getActiveTextEditorLanguageId： ***获取当前文件的一个类型 javascriptreact | typescriptreact | vue 等***
 - createProgress： ***创建一个vscode中的执行进度条***
 - registerInlayHintsProvider： ***给出一个类似copilot的hint提示***
 - getCopyText： ***读取粘贴板中的内容***
@@ -37,7 +37,7 @@ npm i @vscode-use/utils -d
 - getActiveText： ***获取到当前激活tab的文本内容***
 - fold： ***折叠代码***
 - unFold： ***展开代码***
-- registerDefinitionProvider： ***提供了option+点击，实现快速跳转的功能***
+- registerDefinitionProvider： ***提供了 option+click，实现快速跳转的功能***
 - registerHoverProvider： ***为鼠标悬停提供回调***
 - openExternalUrl： ***在浏览器中打开外部网址***
 - getLineText： ***获取某一行的文本***
@@ -47,12 +47,13 @@ npm i @vscode-use/utils -d
 - createInput： ***创建一个输入框***
 - getLocale： ***获取本地的语言环境***
 - rename： ***快速给文件重命名***
-- createDefinitionLocation ***创建按下option后左键点击后的跳转地址数据***
+- createDefinitionLocation ***创建按下 option 后左键点击后的跳转地址数据***
 - setStyle ***给某一块区域增加样式***
 - createStyle ***创建样式***
 - getActiveTextEditor ***获取当前激活的编辑器***
-- getKeyWords ***获取position位置处的关键词***
-- setCommandParams ***设置MarkdownString的点击command参数***
+- getKeyWords ***获取 position 位置处的关键词***
+- setCommandParams ***设置 MarkdownString 的点击 command 参数***
+- getOffsetFromPosition ***根据 position 计算 offset***
   
 ## 📖 @vscode-use/utils api 说明
 
@@ -372,6 +373,12 @@ npm i @vscode-use/utils -d
   md.supportHtml = true
   const commandUri = `command:a.b?${setCommandParams(['params1', 'params2'])}`
   md.appendMarkdown(`[🦘](${commandUri})`);
+  ```
+
+  ### getOffsetFromPosition
+  ```
+  const offset = getOffsetFromPosition(position) // 获取当前文本，位置的offset
+  const offset = getOffsetFromPosition(position,code) // 获取指定code，位置的offset
   ```
 
 ## License
