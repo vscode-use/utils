@@ -217,7 +217,8 @@ npm i @vscode-use/utils -d
 
    ### Read config
    ```
-   const mode = getConfiguration('vscode-use').get('mode')
+   const mode1 = getConfiguration('vscode-use').get('mode')
+   const mode2 = getConfiguration('vscode-use.mode')
    ```
 
    ### Update config
