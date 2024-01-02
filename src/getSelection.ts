@@ -9,6 +9,7 @@ export function getSelection() {
       line,
       character,
       lineText: activeTextEditor.document.lineAt(line).text,
+      selection: activeTextEditor.selection,
       selectedTextArray: activeTextEditor.selections.map(selection => activeTextEditor.document.getText(selection)),
     }
   }
