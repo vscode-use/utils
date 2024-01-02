@@ -60,12 +60,8 @@
     "bumpp": "^8.2.1",
     "eslint": "^8.18.0",
     "esno": "^0.16.3",
-    "lint-staged": "^13.1.0",
-    "picocolors": "^1.0.0",
     "prettier": "^2.8.1",
-    "rimraf": "^3.0.2",
     "tsup": "^6.5.0",
-    "tsx": "^3.12.1",
     "typescript": "^4.7.4",
     "vitest": "^0.15.1"
   },
