@@ -3,6 +3,10 @@ import { createRange } from './createRange'
 import { getActiveTextEditor } from './getActiveTextEditor'
 import type { ISelections } from './types'
 
+/**
+ * 设置多个选中区域
+ * @param selectionsOptions
+ */
 export function setSelections(selectionsOptions: ISelections) {
   const selections = selectionsOptions.map(({ start, end, position }) => {
     const range = createRange(start, end)

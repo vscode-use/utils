@@ -1,5 +1,9 @@
 import { getActiveTextEditor } from './getActiveTextEditor'
 
+/**
+ * 获取选中区域的一些信息
+ * @returns
+ */
 export function getSelection() {
   const activeTextEditor = getActiveTextEditor()
   if (activeTextEditor) {

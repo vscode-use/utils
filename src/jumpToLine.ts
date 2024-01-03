@@ -1,13 +1,21 @@
 import * as vscode from 'vscode'
-import type { Range, TextEditor } from 'vscode'
 import { openFile } from './openFile'
 import { getCurrentFileUrl } from './getCurrentFileUrl'
 import type { PositionOption1 } from './types'
+import { createRange } from './createRange'
+import { setSelection } from './setSelection'
+import { getActiveTextEditor } from './getActiveTextEditor'
 
-export function jumpToLine(lineNumber: number | PositionOption1 | [PositionOption1, PositionOption1] | Range, filepath = getCurrentFileUrl()) {
-  let range: Range
+/**
+ * 跳入某个文件的某一行的位置
+ * @param lineNumber 行数或者 range 范围
+ * @param filepath 路径 默认使用当前激活的文件
+ * @returns
+ */
+export function jumpToLine(lineNumber: number | PositionOption1 | [PositionOption1, PositionOption1] | vscode.Range, filepath = getCurrentFileUrl()) {
+  let range: vscode.Range
   if (typeof lineNumber === 'number') {
-    range = new vscode.Range(lineNumber, 0, lineNumber, 0)
+    range = createRange([lineNumber, 0], [lineNumber, 0])
   }
   else if (lineNumber instanceof vscode.Range) {
     range = lineNumber
@@ -15,26 +23,33 @@ export function jumpToLine(lineNumber: number | PositionOption1 | [PositionOptio
   else if (Array.isArray(lineNumber)) {
     if (typeof lineNumber[0] === 'number') {
       const _lineNumber = lineNumber as PositionOption1
-      range = new vscode.Range(_lineNumber[0], _lineNumber[1], _lineNumber[0], _lineNumber[1])
+      range = createRange(_lineNumber, _lineNumber)
     }
     else {
       const _lineNumber = lineNumber as [PositionOption1, PositionOption1]
-      range = new vscode.Range(_lineNumber[0][0], _lineNumber[0][1], _lineNumber[1][0], _lineNumber[1][1])
+      range = createRange(_lineNumber[0], _lineNumber[1])
     }
   }
   else {
-    range = new vscode.Range(0, 0, 0, 0)
+    range = createRange([0, 0], [0, 0])
   }
   if (filepath)
     return openFile(filepath, { selection: range })
 }
 
-export function toLine(lineNumber: number | [number, number], editor: TextEditor) {
+/**
+ * 跳到当前文件的某一行
+ * @param lineNumber 行数
+ */
+export function toLine(lineNumber: number | [number, number]) {
   let range
   if (Array.isArray(lineNumber))
-    range = new vscode.Range(lineNumber[0] - 1, lineNumber[1], lineNumber[0], 0)
+    range = createRange([lineNumber[0] - 1, lineNumber[1]], [lineNumber[0], 0])
   else
-    range = new vscode.Range(lineNumber - 1, 0, lineNumber, 0)
-  editor.revealRange(range, vscode.TextEditorRevealType.InCenter)
-  editor.selection = new vscode.Selection(range.start, range.start)
+    range = createRange([lineNumber - 1, 0], [lineNumber, 0])
+  const editor = getActiveTextEditor()
+  if (editor) {
+    editor.revealRange(range, vscode.TextEditorRevealType.InCenter)
+    setSelection(range.start, range.start)
+  }
 }

@@ -1,5 +1,11 @@
 import type { PositionOption2, RangeLoc } from './types'
 
+/**
+ * 判断一个位置是否在另一个位置的范围内
+ * @param parentLoc 父位置
+ * @param childLoc 子位置
+ * @returns
+ */
 export function isInPosition(parentLoc: RangeLoc, childLoc: PositionOption2) {
   const { start, end } = parentLoc
   const startLine = start.line

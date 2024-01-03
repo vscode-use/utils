@@ -23,6 +23,7 @@ export function getPosition(offset: number, content: string = getActiveText()!) 
     line,
     column,
     character: column,
+    offset,
     position: new vscode.Position(line, column),
   }
 }

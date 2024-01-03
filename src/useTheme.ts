@@ -1,4 +1,5 @@
 import * as vscode from 'vscode'
+
 function getCurrentTheme() {
   const config = vscode.workspace.getConfiguration()
   return config.get('workbench.colorTheme') as string
@@ -32,6 +33,10 @@ function setTheme(theme: string) {
   return config.update('workbench.colorTheme', theme, vscode.ConfigurationTarget.Global)
 }
 
+/**
+ * 获取和操作当前主题色相关信息
+ * @returns
+ */
 export function useTheme() {
   return {
     getCurrentTheme,

@@ -1,6 +1,12 @@
 import * as vscode from 'vscode'
 import type { EventType } from './types'
 
+/**
+ * 添加事件监听
+ * @param type 事件类型
+ * @param callback 回调函数
+ * @returns
+ */
 export function addEventListener(
   type: EventType,
   callback: (...args: any) => void,

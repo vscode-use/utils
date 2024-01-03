@@ -1,5 +1,3 @@
-// 用于订阅事件通信的工具
-
 type EventsMap = Record<string, any>
 
 interface DefaultEvents extends EventsMap {
@@ -57,6 +55,9 @@ export declare class Emitter<Events extends EventsMap = DefaultEvents> {
   ): void
 }
 
+/**
+ * 用于订阅事件通信的工具
+ */
 export function createEvents<Events extends EventsMap = DefaultEvents>(): Emitter<Events> {
   return {
     events: {},
