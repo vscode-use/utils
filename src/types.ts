@@ -4,6 +4,8 @@ export interface MessageOption {
   message: string
   type?: 'info' | 'error' | 'warn'
   buttons?: string[] | string
+  modal?: boolean
+  detail?: string
 }
 
 export type EventType =
