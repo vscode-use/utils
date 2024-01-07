@@ -13,7 +13,7 @@ export function getPosition(offset: number, content: string = getActiveText()!) 
     const cur = num + contents[n].length + (n > 0 ? 1 : 0)
     if (num <= offset && cur >= offset) {
       line = n
-      column = offset - num - 1
+      column = offset - num - (n > 0 ? 1 : 0)
       break
     }
 
