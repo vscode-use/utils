@@ -55,6 +55,7 @@ npm i @vscode-use/utils -d
 - setCommandParams ***设置 MarkdownString 的点击 command 参数***
 - getOffsetFromPosition ***根据 position 计算 offset***
 - getRootPath ***获取项目根目录路径***
+- registerCodeLensProvider ***注册文本中头部的文字按钮并绑上事件***
   
 ## 📖 @vscode-use/utils api 说明
 

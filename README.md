@@ -56,6 +56,7 @@ npm i @vscode-use/utils -d
 - setCommandParams ***Set the click command parameter of MarkdownString***
 - getOffsetFromPosition ***Get the offset from position***
 - getRootPath ***Get the root directory path of the project***
+- registerCodeLensProvider ***Register the text button at the head of the text and tie the event.***
 
 ## 📖 @vscode-use/utils api description
 
