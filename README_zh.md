@@ -56,6 +56,7 @@ npm i @vscode-use/utils -d
 - getOffsetFromPosition ***根据 position 计算 offset***
 - getRootPath ***获取项目根目录路径***
 - registerCodeLensProvider ***注册文本中头部的文字按钮并绑上事件***
+- createCodeLens ***快速创建 provideCodeLenses 中的 item***
   
 ## 📖 @vscode-use/utils api 说明
 

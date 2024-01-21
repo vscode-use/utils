@@ -6,6 +6,7 @@ import { createRange } from './createRange'
 import { setSelection } from './setSelection'
 import { getActiveTextEditor } from './getActiveTextEditor'
 
+// todo: support lineNumber is Position
 /**
  * 跳入某个文件的某一行的位置
  * @param lineNumber 行数或者 range 范围
@@ -34,7 +35,7 @@ export function jumpToLine(lineNumber: number | PositionOption1 | [PositionOptio
     range = createRange([0, 0], [0, 0])
   }
   if (filepath)
-    return openFile(filepath, { selection: range })
+    return openFile(filepath as string, { selection: range })
 }
 
 /**
