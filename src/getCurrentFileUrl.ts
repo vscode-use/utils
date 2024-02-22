@@ -5,7 +5,7 @@ import { getActiveTextEditor } from './getActiveTextEditor'
  * 获取当前激活文件的路径
  * @returns
  */
-export function getCurrentFileUrl<T extends boolean>(isUri?: T): undefined | (T extends true ? Uri : string) {
+export function getCurrentFileUrl<T extends boolean = false>(isUri?: T): undefined | (T extends true ? Uri : string) {
   const activeTextEditor = getActiveTextEditor()
 
   if (!activeTextEditor)
@@ -14,4 +14,3 @@ export function getCurrentFileUrl<T extends boolean>(isUri?: T): undefined | (T 
     ? activeTextEditor.document.uri
     : activeTextEditor.document.uri.fsPath) as any
 }
-
