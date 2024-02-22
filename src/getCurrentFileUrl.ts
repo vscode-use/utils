@@ -1,14 +1,17 @@
+import type { Uri } from 'vscode'
 import { getActiveTextEditor } from './getActiveTextEditor'
 
 /**
  * 获取当前激活文件的路径
  * @returns
  */
-export function getCurrentFileUrl(isUri = false) {
+export function getCurrentFileUrl<T extends boolean>(isUri?: T): undefined | (T extends true ? Uri : string) {
   const activeTextEditor = getActiveTextEditor()
+
   if (!activeTextEditor)
     return
-  return isUri
+  return (isUri
     ? activeTextEditor.document.uri
-    : activeTextEditor.document.uri.fsPath
+    : activeTextEditor.document.uri.fsPath) as any
 }
+
