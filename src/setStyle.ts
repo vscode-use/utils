@@ -7,8 +7,15 @@ import { getActiveTextEditor } from './getActiveTextEditor'
  * @param range
  * @returns
  */
-export function setStyle(decorationType: TextEditorDecorationType, range?: Range) {
+export function setStyle(decorationType: TextEditorDecorationType, range?: Range | Range[]) {
   const activeTextEditor = getActiveTextEditor()
-  if (activeTextEditor)
-    return activeTextEditor.setDecorations(decorationType, range ? [range] : [])
+  if (!activeTextEditor)
+    return
+
+  const rangeOrOptins = range
+    ? (range as any)?.length
+        ? range
+        : [range]
+    : []
+  return activeTextEditor.setDecorations(decorationType, rangeOrOptins as Range[])
 }
