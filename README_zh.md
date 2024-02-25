@@ -58,7 +58,8 @@ npm i @vscode-use/utils -d
 - getRootPath ***获取项目根目录路径***
 - registerCodeLensProvider ***注册文本中头部的文字按钮并绑上事件***
 - createCodeLens ***快速创建 provideCodeLenses 中的 item***
-  
+- saveFile ***保存文件***
+
 ## 📖 @vscode-use/utils api 说明
 
   ### 注册指令，需要在 package.json 中声明 右下角弹出提示

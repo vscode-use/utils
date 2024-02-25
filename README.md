@@ -59,6 +59,7 @@ npm i @vscode-use/utils -d
 - getRootPath ***Get the root directory path of the project***
 - registerCodeLensProvider ***Register the text button at the head of the text and tie the event.***
 - createCodeLens ***Quickly create items in provideCodeLenses***
+- saveFile ***Save the file***
 
 ## 📖 @vscode-use/utils api description
 
