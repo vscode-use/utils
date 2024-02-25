@@ -13,7 +13,7 @@ export function setStyle(decorationType: TextEditorDecorationType, range?: Range
     return
 
   const rangeOrOptins = range
-    ? (range as any)?.length
+    ? (range as any).length
         ? range
         : [range]
     : []
