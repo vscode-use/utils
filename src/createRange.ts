@@ -6,19 +6,23 @@ import { createPosition } from './createPosition'
  * 创建一个 range
  */
 export function createRange(startLine: number, startChar: number, endLine: number, endChar: number): vscode.Range
-export function createRange(startLine: number, startChar: number, end: PositionOption2 | PositionOption1): vscode.Range
-export function createRange(start: PositionOption2 | PositionOption1, endLine: number, endChar: number): vscode.Range
-export function createRange(start: PositionOption2 | PositionOption1, end: PositionOption2 | PositionOption1): vscode.Range
+export function createRange(startLine: number, startChar: number, end: PositionOption2 | PositionOption1 | vscode.Position): vscode.Range
+export function createRange(start: PositionOption2 | PositionOption1 | vscode.Position, endLine: number, endChar: number): vscode.Range
+export function createRange(start: PositionOption2 | PositionOption1 | vscode.Position, end: PositionOption2 | PositionOption1 | vscode.Position): vscode.Range
 export function createRange(start: PositionOption2 | PositionOption1 | number, end: PositionOption2 | PositionOption1 | number, v1?: PositionOption2 | PositionOption1 | number, v2?: number) {
   let _start!: vscode.Position
   let _end!: vscode.Position
-  if (typeof start === 'number' && typeof end === 'number')
+  if (start instanceof vscode.Position)
+    _start = start
+  else if (typeof start === 'number' && typeof end === 'number')
     _start = createPosition(start, end)
   else if (Array.isArray(start))
     _start = createPosition(start)
   else if (typeof start === 'object')
     _start = createPosition(start.line, start.character ?? start.column!)
-  if (Array.isArray(end))
+  if (end instanceof vscode.Position)
+    _end = end
+  else if (Array.isArray(end))
     _end = createPosition(end)
   else if (typeof v1 === 'number' && typeof v2 === 'number')
     _end = createPosition(v1, v2)
