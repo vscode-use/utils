@@ -91,3 +91,5 @@ export interface CreateInputOptions {
 }
 
 export type ISelections = { start: PositionOption2 | PositionOption1; end: PositionOption2 | PositionOption1; position?: 'left' | 'right' }[]
+
+export type ClearStyle = () => void
