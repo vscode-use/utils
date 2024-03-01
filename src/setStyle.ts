@@ -1,13 +1,14 @@
 import type { Range, TextEditorDecorationType } from 'vscode'
 import { getActiveTextEditor } from './getActiveTextEditor'
+import type { ClearStyle } from './types'
 
 /**
  * 设置样式
  * @param decorationType
  * @param range
- * @returns
+ * @returns ClearStyle
  */
-export function setStyle(decorationType: TextEditorDecorationType, range?: Range | Range[]) {
+export function setStyle(decorationType: TextEditorDecorationType, range?: Range | Range[]): ClearStyle | undefined {
   const activeTextEditor = getActiveTextEditor()
   if (!activeTextEditor)
     return
@@ -17,5 +18,6 @@ export function setStyle(decorationType: TextEditorDecorationType, range?: Range
         ? range
         : [range]
     : []
-  return activeTextEditor.setDecorations(decorationType, rangeOrOptins as Range[])
+  activeTextEditor.setDecorations(decorationType, rangeOrOptins as Range[])
+  return () => activeTextEditor.setDecorations(decorationType, [])
 }
