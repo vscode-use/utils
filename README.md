@@ -62,6 +62,7 @@ npm i @vscode-use/utils -d
 - saveFile ***Save the file***
 - createStyleAnimation ***Add style animation***
 - createStyleAnimations ***Add style animation group***
+- getWordRangeAtPosition ***Get the area of ​​keywords for your location***
 
 ## 📖 @vscode-use/utils api description
 

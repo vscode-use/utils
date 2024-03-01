@@ -61,6 +61,7 @@ npm i @vscode-use/utils -d
 - saveFile ***保存文件***
 - createStyleAnimation ***添加样式动画***
 - createStyleAnimations ***添加样式动画组***
+- getWordRangeAtPosition ***获取所在位置的关键词的区域***
 
 ## 📖 @vscode-use/utils api 说明
 
