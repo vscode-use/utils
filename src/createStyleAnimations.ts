@@ -3,6 +3,12 @@ import { createStyle } from './createStyle'
 import { setStyle } from './setStyle'
 import type { ClearStyle } from './types'
 
+/**
+ * createStyleAnimations
+ * @param styles { style: DecorationRenderOptions; duration?: number; delay?: number }[] 样式组
+ * @param options { duration?: number; range: Range; delay?: number }
+ * @returns 最后一个动画的清除函数
+ */
 export async function createStyleAnimations(styles: { style: DecorationRenderOptions; duration?: number; delay?: number }[], options: { duration?: number; range: Range; delay?: number }): Promise<ClearStyle | undefined> {
   let lastClearStyle!: ClearStyle
   for (const s of styles) {
