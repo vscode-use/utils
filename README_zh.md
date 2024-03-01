@@ -60,6 +60,7 @@ npm i @vscode-use/utils -d
 - createCodeLens ***快速创建 provideCodeLenses 中的 item***
 - saveFile ***保存文件***
 - createStyleAnimation ***添加样式动画***
+- createStyleAnimations ***添加样式动画组***
 
 ## 📖 @vscode-use/utils api 说明
 
