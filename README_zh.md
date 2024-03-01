@@ -59,6 +59,7 @@ npm i @vscode-use/utils -d
 - registerCodeLensProvider ***注册文本中头部的文字按钮并绑上事件***
 - createCodeLens ***快速创建 provideCodeLenses 中的 item***
 - saveFile ***保存文件***
+- createStyleAnimation ***添加样式动画***
 
 ## 📖 @vscode-use/utils api 说明
 

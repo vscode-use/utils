@@ -60,6 +60,7 @@ npm i @vscode-use/utils -d
 - registerCodeLensProvider ***Register the text button at the head of the text and tie the event.***
 - createCodeLens ***Quickly create items in provideCodeLenses***
 - saveFile ***Save the file***
+- createStyleAnimation ***Add style animation***
 
 ## 📖 @vscode-use/utils api description
 
