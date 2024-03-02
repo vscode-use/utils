@@ -2,7 +2,9 @@
 <img src="./assets/kv.png" alt="css selector">
 </p>
 <p align="center"> <a href="./README.md">English</a> | 简体中文</p>
-🐰 这个库是为了快速在 vscode 插件中使用一些常用的命令
+🐰 vscode use 针对 vscode api 进行了二次的封装，提供了大量精简实用的函数，并且让函数名更贴近实际意义，就如 vscode 中的 lodash。
+
+## [📘 Documentation](https://vscode-use-docs.netlify.app/)
 
 ## 📍 Install
 ```

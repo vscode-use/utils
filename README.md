@@ -3,7 +3,9 @@
 </p>
 <p align="center"> English | <a href="./README_zh.md">简体中文</a></p>
 
-🐰 This library is designed to quickly use some common commands in the vscode plug-in
+🐰 vscode use has a secondary encapsulation of the vscode api, providing a large number of streamlined and practical functions, and making the function names closer to the actual meaning, just like lodash in vscode.
+
+## [📘 Documentation](https://vscode-use-docs.netlify.app/)
 
 ## 📍 Install
 ```
