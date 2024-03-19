@@ -7,6 +7,6 @@ import type { QuickPickOptions } from 'vscode'
  * @param quickPickOptions
  * @returns
  */
-export function createSelect(options: string[], quickPickOptions?: QuickPickOptions) {
-  return vscode.window.showQuickPick(options, quickPickOptions)
+export function createSelect<T extends QuickPickOptions>(options: string[], quickPickOptions?: T): Thenable<string | string[] | undefined> {
+  return vscode.window.showQuickPick(options, quickPickOptions as T['canPickMany'] extends true ? (QuickPickOptions & { canPickMany: true }) : QuickPickOptions)
 }
