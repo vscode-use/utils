@@ -1,4 +1,4 @@
-import type { AccessibilityInformation, Command, InputBoxValidationMessage, ProgressLocation, ThemeColor, Uri } from 'vscode'
+import type { AccessibilityInformation, ColorTheme, Command, ConfigurationChangeEvent, FileCreateEvent, FileDeleteEvent, FileRenameEvent, InputBoxValidationMessage, ProgressLocation, Terminal, TextDocument, TextDocumentChangeEvent, TextEditor, TextEditorSelectionChangeEvent, TextEditorViewColumnChangeEvent, TextEditorVisibleRangesChangeEvent, ThemeColor, Uri, WorkspaceFoldersChangeEvent } from 'vscode'
 
 export interface MessageOption {
   message: string
@@ -8,25 +8,28 @@ export interface MessageOption {
   detail?: string
 }
 
-export type EventType =
-  | 'terminal-close'
-  | 'terminal-open'
-  | 'terminal-change'
-  | 'theme-change'
-  | 'selection-change'
-  | 'editor-visible'
-  | 'activeText-change'
-  | 'text-visible-change'
-  | 'text-change'
-  | 'text-open'
-  | 'text-save'
-  | 'text-close'
-  | 'folder-change'
-  | 'file-create'
-  | 'file-delete'
-  | 'rename'
-  | 'config-change'
-  | 'auth-change'
+export interface EventCallbackMap {
+  'terminal-close': (terminal: Terminal) => void
+  'terminal-open': (terminal: Terminal) => void
+  'terminal-change': (terminal: Terminal) => void
+  'theme-change': (colorTheme: ColorTheme) => void
+  'selection-change': (e: TextEditorSelectionChangeEvent) => void
+  'editor-visible': (editors: TextEditor[]) => void
+  'activeText-change': (editor: TextEditor | undefined) => void
+  'text-visible-change': (e: TextEditorVisibleRangesChangeEvent) => void
+  'text-column-change': (e: TextEditorViewColumnChangeEvent) => void
+}
+export interface WorkspaceCallbackMap {
+  'text-change': (e: TextDocumentChangeEvent) => void
+  'text-open': (doc: TextDocument) => void
+  'text-save': (doc: TextDocument) => void
+  'folder-change': (e: WorkspaceFoldersChangeEvent) => void
+  'file-create': (e: FileCreateEvent) => void
+  'file-delete': (e: FileDeleteEvent) => void
+  'rename': (e: FileRenameEvent) => void
+  'config-change': (e: ConfigurationChangeEvent) => void
+  'text-close': (doc: TextDocument) => void
+}
 
 export interface BarOptions {
   position?: 'left' | 'right'
