@@ -4,7 +4,7 @@ import type { PositionOption1, PositionOption2 } from './types'
 /**
  * 创建位置
  * @description create position
- * @returns
+ * @returns Position
  */
 export function createPosition(pos: number, pos1: number): vscode.Position
 export function createPosition(pos: PositionOption2 | PositionOption1): vscode.Position

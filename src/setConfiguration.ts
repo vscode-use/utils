@@ -7,7 +7,7 @@ import type { ConfigurationTarget } from 'vscode'
  * @param value 值
  * @param configurationTarget 范围
  * @param overrideInLanguage 是否覆盖默认
- * @returns
+ * @returns Promise<void>
  */
 export function setConfiguration(name: string, value: any, configurationTarget?: ConfigurationTarget | boolean | null, overrideInLanguage?: boolean) {
   const config = vscode.workspace.getConfiguration()

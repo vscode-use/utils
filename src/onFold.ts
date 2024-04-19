@@ -3,7 +3,7 @@ import * as vscode from 'vscode'
 /**
  * 折叠指定的 range
  * @param rangesToFold Range[] 需要被折叠的 range
- * @returns
+ * @returns Promise<void>[]
  */
 export function onFold(rangesToFold: Range[]) {
   return rangesToFold.map(range =>

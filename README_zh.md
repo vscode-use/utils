@@ -363,7 +363,6 @@ npm i @vscode-use/utils -d
   })
   ```
 
-
   ### 获取当前激活的编辑器
 
   ```
@@ -375,7 +374,7 @@ npm i @vscode-use/utils -d
   ```
   const keyWords = getKeyWords(position)
   ```
-  
+
   ### 设置MarkdownString的点击command参数
 
   ```

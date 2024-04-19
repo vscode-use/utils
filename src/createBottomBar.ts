@@ -13,7 +13,15 @@ import type { BarOptions } from './types'
   command?: string | Command | undefined // 栏的命令
   accessibilityInformation?: AccessibilityInformation | undefined // 栏的辅助信息
 }
- * @returns
+ * @param options.position 'left' | 'right' 栏的位置
+ * @param options.offset number 栏的偏移量
+ * @param options.text string 栏的文本
+ * @param options.tooltip string 栏的提示
+ * @param options.color string | ThemeColor | undefined 栏的颜色
+ * @param options.backgroundColor ThemeColor | undefined 栏的背景颜色
+ * @param options.command string | Command | undefined 栏的命令
+ * @param options.accessibilityInformation AccessibilityInformation | undefined 栏的辅助信息
+ * @returns StatusBarItem
  */
 export function createBottomBar(options: BarOptions) {
   const { position = 'left', offset, text, tooltip, color, backgroundColor, accessibilityInformation, command } = options

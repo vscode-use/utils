@@ -31,16 +31,24 @@ export interface CompletionItemOptions {
   command?: Command // 补全项的命令
   [key: string]: any // 补全项的其他属性
 }
- * @returns
+ * @param options.content string 补全项的内容
+ * @param options.snippet string | SnippetString 补全项的代码片段
+ * @param options.detail string 补全项的详细信息
+ * @param options.type CompletionItemKind 补全项的类型
+ * @param options.documentation string | MarkdownString 补全项的文档
+ * @param options.sortText string 补全项的排序文本
+ * @param options.filterText string 补全项的过滤文本
+ * @param options.preselect boolean 补全项是否预选
+ * @param options.keepWhitespace boolean 补全项是否保留空格
+ * @param options.command Command 补全项的命令
+ * @returns CompletionItem
  */
 export function createCompletionItem(options: CompletionItemOptions & { params?: string | string[] }) {
   const { content, snippet, type } = options
 
-  return Object.assign(new vscode.CompletionItem(content, type) as any,
-    options,
-    {
-      insertText: typeof snippet === 'string'
-        ? createSnippetString(snippet)
-        : snippet,
-    })
+  return Object.assign(new vscode.CompletionItem(content, type) as any, options, {
+    insertText: typeof snippet === 'string'
+      ? createSnippetString(snippet)
+      : snippet,
+  })
 }

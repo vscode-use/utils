@@ -4,7 +4,7 @@ import type { ThemeColor } from 'vscode'
 /**
  * 创建一个方块
  * @param backgroundColor
- * @returns
+ * @returns TextEditorDecorationType
  */
 export function createSquare(backgroundColor: string | ThemeColor) {
   return vscode.window.createTextEditorDecorationType({

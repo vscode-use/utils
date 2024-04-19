@@ -2,7 +2,7 @@ import { getActiveTextEditor } from './getActiveTextEditor'
 
 /**
  * 获取当前激活文件的语言
- * @returns
+ * @returns string
  */
 export function getActiveTextEditorLanguageId() {
   const activeTextEditor = getActiveTextEditor()

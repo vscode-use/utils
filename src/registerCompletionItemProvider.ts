@@ -7,7 +7,7 @@ import type { CancellationToken, CompletionItem, CompletionList, ProviderResult 
  * @param provideCompletionItems 为给定的职位和文件提供完成项目
  * @param resolveCompletionItem 给定一个完成项，填写更多数据
  * @param triggerCharacters 触发条件比如通过输入某一个字符触发
- * @returns
+ * @returns Disposable
  */
 export function registerCompletionItemProvider<T extends CompletionItem = CompletionItem>(filter: string | string[], provideCompletionItems: (document: vscode.TextDocument, position: vscode.Position) => ProviderResult<T[] | CompletionList<T>>, resolveCompletionItem: ((item: T, token: CancellationToken) => ProviderResult<T>) | string | string[], triggerCharacters: string | string[] = []) {
   if (typeof resolveCompletionItem !== 'function') {
@@ -27,4 +27,3 @@ export function registerCompletionItemProvider<T extends CompletionItem = Comple
     ...triggerCharacters,
   )
 }
-

@@ -2,7 +2,7 @@ import { getActiveTextEditor } from './getActiveTextEditor'
 
 /**
  * 获取当前激活文件的文本
- * @returns
+ * @returns string
  */
 export function getActiveText() {
   const activeTextEditor = getActiveTextEditor()

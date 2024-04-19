@@ -11,7 +11,7 @@ import { getActiveTextEditor } from './getActiveTextEditor'
  * 跳入某个文件的某一行的位置
  * @param lineNumber 行数或者 range 范围
  * @param filepath 路径 默认使用当前激活的文件
- * @returns
+ * @returns Promise<TextEditor>
  */
 export function jumpToLine(lineNumber: number | PositionOption1 | [PositionOption1, PositionOption1] | vscode.Range, filepath = getCurrentFileUrl()) {
   let range: vscode.Range

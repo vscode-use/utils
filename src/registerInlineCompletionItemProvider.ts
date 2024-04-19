@@ -4,7 +4,7 @@ import type { InlineCompletionItem, InlineCompletionList, ProviderResult } from 
 /**
  * 注册内联自动补全
  * @param callback 回调函数，可返回一个InlineCompletionItem控制显示的内容
- * @returns
+ * @returns Disposable
  */
 export function registerInlineCompletionItemProvider(callback: (document: vscode.TextDocument,
   position: vscode.Position,

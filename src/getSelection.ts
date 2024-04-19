@@ -3,7 +3,7 @@ import { getOffsetFromPosition } from './getOffsetFromPosition'
 
 /**
  * 获取选中区域的一些信息
- * @returns
+ * @returns 选中区域的一些信息
  */
 export function getSelection() {
   const activeTextEditor = getActiveTextEditor()

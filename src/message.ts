@@ -10,7 +10,7 @@ import type { MessageOption } from './types'
  *  modal?: boolean
  *  detail?: string
  *  }
- * @returns
+ * @returns Thenable<string | undefined>
  */
 export function message(options: MessageOption | string) {
   let type = 'info'
@@ -43,7 +43,7 @@ export function message(options: MessageOption | string) {
 }
 
 message.info = function (
-  options: string | { message: string; buttons: string[] | string; modal?: boolean; detail?: string },
+  options: string | { message: string, buttons: string[] | string, modal?: boolean, detail?: string },
 ) {
   let message = ''
   let buttons: string[] = []
@@ -62,7 +62,7 @@ message.info = function (
 }
 
 message.error = function (
-  options: string | { message: string; buttons: string[] | string; modal?: boolean; detail?: string },
+  options: string | { message: string, buttons: string[] | string, modal?: boolean, detail?: string },
 ) {
   let message = ''
   let buttons: string[] = []
@@ -82,7 +82,7 @@ message.error = function (
 }
 
 message.warn = function (
-  options: string | { message: string; buttons: string[] | string; modal?: boolean; detail?: string },
+  options: string | { message: string, buttons: string[] | string, modal?: boolean, detail?: string },
 ) {
   let message = ''
   let buttons: string[] = []

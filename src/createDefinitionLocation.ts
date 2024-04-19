@@ -4,7 +4,7 @@ import * as vscode from 'vscode'
  * 创建定义的位置
  * @param url 路径
  * @param position 位置
- * @returns
+ * @returns Location
  */
 export function createDefinitionLocation(url: string, position: vscode.Position | number) {
   if (typeof position === 'number')

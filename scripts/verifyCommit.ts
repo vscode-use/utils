@@ -1,6 +1,7 @@
 // Invoked on the commit-msg git hook by simple-git-hooks.
 
 import { readFileSync } from 'node:fs'
+import process from 'node:process'
 import colors from 'picocolors'
 
 // get $1 from commit-msg script
@@ -19,7 +20,7 @@ if (!releaseRE.test(msg) && !commitRE.test(msg)) {
     )}\n\n${colors.red(
       '  Proper commit message format is required for automated changelog generation. Examples:\n\n',
     )}    ${colors.green('feat: add \'comments\' option')}\n`
-      + `    ${colors.green(
+    + `    ${colors.green(
         'fix: handle events on blur (close #28)',
       )}\n\n${colors.red(
         '  See .github/commit-convention.md for more details.\n',

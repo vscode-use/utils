@@ -35,4 +35,3 @@ export function createRange(start: PositionOption2 | PositionOption1 | number, e
     return new vscode.Range(_start, _end)
   throw new Error('createRange parameter error')
 }
-
