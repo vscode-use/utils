@@ -46,7 +46,7 @@
     "dev": "tsup ./src/index.ts --format cjs,esm --dts --clean --watch src",
     "format": "prettier --write --cache .",
     "lint": "eslint . --cache",
-    "lint:fix": "pnpm run lint --fix",
+    "lint:fix": "nr lint --fix",
     "prepublishOnly": "nr build",
     "release": "bumpp && npm publish",
     "start": "esno src/index.ts",
