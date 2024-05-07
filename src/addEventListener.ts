@@ -54,7 +54,7 @@ const authenticationMap = {
   'auth-change': 'onDidChangeSessions',
 }
 
-export function addEventListener<T extends (keyof typeof eventMap & keyof typeof workspaceMap & keyof typeof authenticationMap)>(
+export function addEventListener<T extends (keyof typeof eventMap | keyof typeof workspaceMap | keyof typeof authenticationMap)>(
   type: T,
   callback: T extends keyof EventCallbackMap
     ? EventCallbackMap[T]
@@ -65,15 +65,15 @@ export function addEventListener<T extends (keyof typeof eventMap & keyof typeof
         : never,
 ) {
   if (type in eventMap) {
-    const name = eventMap[type]
+    const name = eventMap[type as keyof typeof eventMap]
     return (vscode.window as any)[name]?.(callback)
   }
   else if (type in workspaceMap) {
-    const name = workspaceMap[type]
+    const name = workspaceMap[type as keyof typeof workspaceMap]
     return (vscode.workspace as any)[name]?.(callback)
   }
   else if (type in authenticationMap) {
-    const name = authenticationMap[type]
+    const name = authenticationMap[type as keyof typeof authenticationMap]
     return (vscode.authentication as any)[name]?.((e: any) => {
       const getSession = async (name: string) => await vscode.authentication.getSession(name, ['user:read'])
       return callback(e.provider.id, getSession)
