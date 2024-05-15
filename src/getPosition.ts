@@ -11,14 +11,15 @@ export function getPosition(offset: number, content: string = getActiveText()!) 
   let column = 0
   for (let n = 0; n < max; n++) {
     const cur = num + contents[n].length + (n > 0 ? 1 : 0)
-    if (num <= offset && cur >= offset) {
-      line = n
-      column = offset - num - (n > 0 ? 1 : 0)
+    line = n
+    column = offset - num - (n > 0 ? 1 : 0)
+    if (num <= offset && cur >= offset)
       break
-    }
 
     num = cur
   }
+
+  column = Math.min(column, contents[line].length)
   return {
     line,
     column,

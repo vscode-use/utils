@@ -12,7 +12,6 @@ npm i @vscode-use/utils -d
 ```
 ### [Example](https://github.com/Simon-He95/vitesse-vscode)
 
-
 ## 📝 Api
 
 - registerCommand： ***注册指令***
