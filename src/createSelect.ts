@@ -14,6 +14,15 @@ export function createSelect<T extends quickPickOptions>(options: string[] | vsc
       options = (options as string[]).map(label => ({ label }))
 
     quickPick.items = options as vscode.QuickPickItem[] // options 是你的选项数组
+    if (quickPickOptions) {
+      quickPick.canSelectMany = quickPickOptions.canSelectMany || false
+      quickPick.title = quickPickOptions.title || ''
+      quickPick.value = quickPickOptions.value || ''
+      quickPick.placeholder = quickPickOptions.placeholder || ''
+      quickPick.buttons = quickPickOptions.buttons || []
+      quickPick.matchOnDescription = quickPickOptions.matchOnDescription || false
+      quickPick.keepScrollPosition = quickPickOptions.keepScrollPosition || false
+    }
 
     if (quickPickOptions?.activeItems)
       quickPick.activeItems = quickPickOptions.activeItems
