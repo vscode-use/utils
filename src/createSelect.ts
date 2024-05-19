@@ -7,7 +7,7 @@ import type { quickPickOptions } from './types'
  * @param quickPickOptions
  * @returns Thenable<string | undefined>
  */
-export function createSelect<T extends quickPickOptions>(options: string[] | vscode.QuickPickItem[], quickPickOptions?: T): T['canSelectMany'] extends true ? Thenable<string[] | undefined> : Thenable<string | undefined> {
+export function createSelect<T extends quickPickOptions>(options: string[] | vscode.QuickPickItem[], quickPickOptions?: T): any {
   return new Promise((resolve) => {
     const quickPick = vscode.window.createQuickPick()
     if (typeof options[0] === 'string')
@@ -18,7 +18,7 @@ export function createSelect<T extends quickPickOptions>(options: string[] | vsc
     if (quickPickOptions?.activeItems)
       quickPick.activeItems = quickPickOptions.activeItems
     else
-      quickPick.activeItems = options.filter((item: any) => item?.picked) as vscode.QuickPickItem[]
+      quickPick.activeItems = (options as vscode.QuickPickItem[]).filter((item: any) => item.picked)
 
     quickPick.onDidChangeSelection((selection) => {
       if (quickPickOptions?.canSelectMany)
@@ -27,5 +27,5 @@ export function createSelect<T extends quickPickOptions>(options: string[] | vsc
         resolve(selection[0]?.label as any)
     })
     quickPick.show()
-  }) as T['canSelectMany'] extends true ? Thenable<string[] | undefined> : Thenable<string | undefined>
+  }) as any
 }
