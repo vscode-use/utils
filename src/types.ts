@@ -1,4 +1,4 @@
-import type { AccessibilityInformation, ColorTheme, Command, ConfigurationChangeEvent, FileCreateEvent, FileDeleteEvent, FileRenameEvent, InputBoxValidationMessage, ProgressLocation, Terminal, TextDocument, TextDocumentChangeEvent, TextEditor, TextEditorSelectionChangeEvent, TextEditorViewColumnChangeEvent, TextEditorVisibleRangesChangeEvent, ThemeColor, Uri, WorkspaceFoldersChangeEvent } from 'vscode'
+import type { AccessibilityInformation, ColorTheme, Command, ConfigurationChangeEvent, FileCreateEvent, FileDeleteEvent, FileRenameEvent, InputBoxValidationMessage, ProgressLocation, QuickInputButton, QuickPickItem, Terminal, TextDocument, TextDocumentChangeEvent, TextEditor, TextEditorSelectionChangeEvent, TextEditorViewColumnChangeEvent, TextEditorVisibleRangesChangeEvent, ThemeColor, Uri, WorkspaceFoldersChangeEvent } from 'vscode'
 
 export interface MessageOption {
   message: string
@@ -96,3 +96,14 @@ export interface CreateInputOptions {
 export type ISelections = { start: PositionOption2 | PositionOption1, end: PositionOption2 | PositionOption1, position?: 'left' | 'right' }[]
 
 export type ClearStyle = () => void
+
+export interface quickPickOptions {
+  canSelectMany?: boolean
+  title?: string
+  value?: string
+  placeholder?: string
+  buttons?: QuickInputButton[]
+  matchOnDescription?: boolean
+  keepScrollPosition?: boolean
+  activeItems?: QuickPickItem[]
+}
