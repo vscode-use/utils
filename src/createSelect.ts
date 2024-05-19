@@ -25,7 +25,7 @@ export function createSelect<T extends quickPickOptions>(options: string[] | vsc
     }
 
     if (quickPickOptions?.activeItems)
-      quickPick.activeItems = quickPickOptions.activeItems
+      quickPick.activeItems = (options as vscode.QuickPickItem[]).filter((item: any) => quickPickOptions.activeItems!.includes(item.label))
     else
       quickPick.activeItems = (options as vscode.QuickPickItem[]).filter((item: any) => item.picked)
 
