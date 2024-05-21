@@ -34,6 +34,7 @@ export function createSelect<T extends quickPickOptions>(options: string[] | vsc
         resolve(selection.map(item => item.label) as any)
       else
         resolve(selection[0]?.label as any)
+      quickPick.hide()
     })
     quickPick.show()
   }) as any
