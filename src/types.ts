@@ -1,4 +1,4 @@
-import type { AccessibilityInformation, ColorTheme, Command, ConfigurationChangeEvent, FileCreateEvent, FileDeleteEvent, FileRenameEvent, InputBoxValidationMessage, ProgressLocation, QuickInputButton, Terminal, TextDocument, TextDocumentChangeEvent, TextEditor, TextEditorSelectionChangeEvent, TextEditorViewColumnChangeEvent, TextEditorVisibleRangesChangeEvent, ThemeColor, Uri, WorkspaceFoldersChangeEvent } from 'vscode'
+import type { AccessibilityInformation, ColorTheme, Command, ConfigurationChangeEvent, FileCreateEvent, FileDeleteEvent, FileRenameEvent, InputBoxValidationMessage, ProgressLocation, QuickInputButton, Terminal, TextDocument, TextDocumentChangeEvent, TextEditor, TextEditorSelectionChangeEvent, TextEditorViewColumnChangeEvent, TextEditorVisibleRangesChangeEvent, ThemeColor, Uri, WindowState, WorkspaceFoldersChangeEvent } from 'vscode'
 
 export interface MessageOption {
   message: string
@@ -18,6 +18,7 @@ export interface EventCallbackMap {
   'activeText-change': (editor: TextEditor | undefined) => void
   'text-visible-change': (e: TextEditorVisibleRangesChangeEvent) => void
   'text-column-change': (e: TextEditorViewColumnChangeEvent) => void
+  'onfocus': (e: WindowState) => void
 }
 export interface WorkspaceCallbackMap {
   'text-change': (e: TextDocumentChangeEvent) => void

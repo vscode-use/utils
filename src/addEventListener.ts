@@ -5,7 +5,7 @@ import type { EventCallbackMap, WorkspaceCallbackMap } from './types'
  * 添加事件监听
  * @param type 事件类型
  * @param callback 回调函数
- * @description
+ * @d 时,你可以取消注册
  * 事件类型:
  * - terminal-close: 终端关闭
  * - terminal-open: 终端打开
@@ -38,6 +38,7 @@ const eventMap = {
   'activeText-change': 'onDidChangeActiveTextEditor',
   'text-visible-change': 'onDidChangeTextEditorVisibleRanges',
   'text-column-change': 'onDidChangeTextEditorViewColumn',
+  'onfocus': 'onDidChangeWindowState',
 }
 const workspaceMap = {
   'text-change': 'onDidChangeTextDocument',
