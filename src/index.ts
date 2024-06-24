@@ -1,3 +1,4 @@
+export * from './createExtension'
 export * from './getConfiguration'
 export * from './setConfiguration'
 export * from './message'
