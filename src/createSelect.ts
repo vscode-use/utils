@@ -9,6 +9,7 @@ import type { quickPickOptions } from './types'
  */
 export function createSelect<T extends quickPickOptions>(options: string[] | vscode.QuickPickItem[], quickPickOptions?: T): any {
   return new Promise((resolve) => {
+    const noop = () => { }
     const quickPick = vscode.window.createQuickPick()
     if (typeof options[0] === 'string')
       options = (options as string[]).map(label => ({ label }))
@@ -27,14 +28,29 @@ export function createSelect<T extends quickPickOptions>(options: string[] | vsc
     if (quickPickOptions?.activeItems)
       quickPick.activeItems = (options as vscode.QuickPickItem[]).filter((item: any) => quickPickOptions.activeItems!.includes(item.label))
     else
-      quickPick.activeItems = (options as vscode.QuickPickItem[]).filter((item: any) => item.picked)
+      quickPick.selectedItems = (options as vscode.QuickPickItem[]).filter((item: any) => item.picked)
 
-    quickPick.onDidChangeSelection((selection) => {
+    quickPick.activeItems = [quickPick.items[0]]
+    let selection: readonly vscode.QuickPickItem[]
+    quickPick.onDidChangeSelection((_selection) => {
+      selection = _selection
+      ; (quickPickOptions?.onDidChange || noop)(_selection)
+    })
+    quickPick.onDidAccept(() => {
       if (quickPickOptions?.canSelectMany)
         resolve(selection.map(item => item.label) as any)
       else
         resolve(selection[0]?.label as any)
+      ; (quickPickOptions?.onDidAccept || noop)()
       quickPick.hide()
+    })
+    quickPick.onDidTriggerButton(quickPickOptions?.onDidTriggerButton || noop)
+    quickPick.onDidTriggerItemButton(quickPickOptions?.onDidTriggerItemButton || noop)
+    quickPick.onDidChangeActive(quickPickOptions?.onDidChangeActive || noop)
+    quickPick.onDidChangeValue(quickPickOptions?.onDidChangeValue || noop)
+    quickPick.onDidHide((e) => {
+      (quickPickOptions?.onDidHide || noop)(e)
+      quickPick.dispose()
     })
     quickPick.show()
   }) as any

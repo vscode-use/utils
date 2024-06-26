@@ -1,4 +1,4 @@
-import type { AccessibilityInformation, ColorTheme, Command, ConfigurationChangeEvent, FileCreateEvent, FileDeleteEvent, FileRenameEvent, InputBoxValidationMessage, ProgressLocation, QuickInputButton, Terminal, TextDocument, TextDocumentChangeEvent, TextEditor, TextEditorSelectionChangeEvent, TextEditorViewColumnChangeEvent, TextEditorVisibleRangesChangeEvent, ThemeColor, Uri, WindowState, WorkspaceFoldersChangeEvent } from 'vscode'
+import type { AccessibilityInformation, ColorTheme, Command, ConfigurationChangeEvent, FileCreateEvent, FileDeleteEvent, FileRenameEvent, InputBoxValidationMessage, ProgressLocation, QuickInputButton, QuickPickItem, Terminal, TextDocument, TextDocumentChangeEvent, TextEditor, TextEditorSelectionChangeEvent, TextEditorViewColumnChangeEvent, TextEditorVisibleRangesChangeEvent, ThemeColor, Uri, WindowState, WorkspaceFoldersChangeEvent } from 'vscode'
 
 export interface MessageOption {
   message: string
@@ -107,6 +107,11 @@ export interface quickPickOptions {
   matchOnDescription?: boolean
   keepScrollPosition?: boolean
   activeItems?: string[]
-  onDidTriggerButton?: (button: QuickInputButton) => any
-  onDidTriggerItemButton?: (item: any, button: QuickInputButton) => any
+  onDidTriggerButton?: (e: any) => any
+  onDidTriggerItemButton?: (e: any) => any
+  onDidChangeActive?: (e: any) => any
+  onDidChangeValue?: (value: string) => any
+  onDidChange?: (items: readonly QuickPickItem[]) => any
+  onDidAccept?: () => any
+  onDidHide?: (e: any) => any
 }
