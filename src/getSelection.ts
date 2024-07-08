@@ -18,6 +18,7 @@ export function getSelection() {
       selectedTextArray: activeTextEditor.selections.map(selection =>
         code.slice(getOffsetFromPosition(selection.start, code), getOffsetFromPosition(selection.end, code)),
       ),
+      selectionArray: activeTextEditor.selections,
     }
   }
 }
