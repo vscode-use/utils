@@ -7,5 +7,5 @@ import * as vscode from 'vscode'
  * @returns Thenable<any>
  */
 export function executeCommand(name: string, ...params: any[]) {
-  return vscode.commands.executeCommand(name, ...params)
+  return vscode.commands.executeCommand<any>(name, ...params)
 }
