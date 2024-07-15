@@ -64,7 +64,7 @@ export function addEventListener<T extends (keyof typeof eventMap | keyof typeof
       : T extends keyof typeof authenticationMap
         ? (providerId: string, getSession: (name: string) => Promise<vscode.AuthenticationSession | undefined>) => void
         : never,
-): vscode.Disposable | undefined {
+): vscode.Disposable {
   if (type in eventMap) {
     const name = eventMap[type as keyof typeof eventMap]
     return (vscode.window as any)[name]?.(callback)
@@ -80,4 +80,5 @@ export function addEventListener<T extends (keyof typeof eventMap | keyof typeof
       return callback(e.provider.id, getSession)
     })
   }
+  return new vscode.Disposable(() => { })
 }
