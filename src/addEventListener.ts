@@ -28,7 +28,7 @@ import type { EventCallbackMap, WorkspaceCallbackMap } from './types'
  * - auth-change: 认证变化
  * @returns
  */
-const eventMap = {
+export const eventMap = {
   'terminal-close': 'onDidCloseTerminal',
   'terminal-open': 'onDidOpenTerminal',
   'terminal-change': 'onDidChangeActiveTerminal',
@@ -40,7 +40,7 @@ const eventMap = {
   'text-column-change': 'onDidChangeTextEditorViewColumn',
   'onfocus': 'onDidChangeWindowState',
 }
-const workspaceMap = {
+export const workspaceMap = {
   'text-change': 'onDidChangeTextDocument',
   'text-open': 'onDidOpenTextDocument',
   'text-save': 'onDidSaveTextDocument',
@@ -51,7 +51,7 @@ const workspaceMap = {
   'config-change': 'onDidChangeConfiguration',
   'text-close': 'onDidCloseTextDocument',
 }
-const authenticationMap = {
+export const authenticationMap = {
   'auth-change': 'onDidChangeSessions',
 }
 
@@ -64,7 +64,7 @@ export function addEventListener<T extends (keyof typeof eventMap | keyof typeof
       : T extends keyof typeof authenticationMap
         ? (providerId: string, getSession: (name: string) => Promise<vscode.AuthenticationSession | undefined>) => void
         : never,
-) {
+): Disposable | undefined {
   if (type in eventMap) {
     const name = eventMap[type as keyof typeof eventMap]
     return (vscode.window as any)[name]?.(callback)
