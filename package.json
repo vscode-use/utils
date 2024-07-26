@@ -1,7 +1,7 @@
 {
   "name": "@vscode-use/utils",
   "version": "0.1.10",
-  "packageManager": "pnpm@7.2.1",
+  "packageManager": "pnpm@7.33.7",
   "description": "",
   "author": "Simon He",
   "license": "MIT",
@@ -41,7 +41,7 @@
     "dist"
   ],
   "engines": {
-    "vscode": "^1.77.0"
+    "vscode": "^1.91.0"
   },
   "activationEvents": [
     "onStartupFinished"
@@ -59,26 +59,23 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.15.0",
+    "@antfu/eslint-config": "^2.23.2",
     "@antfu/ni": "^0.21.12",
-    "@types/node": "^18.0.0",
-    "@types/vscode": "^1.77.0",
+    "@types/node": "^18.19.42",
+    "@types/vscode": "^1.91.0",
     "bumpp": "^8.2.1",
-    "eslint": "^9.0.0",
+    "eslint": "^9.7.0",
     "esno": "^0.16.3",
-    "picocolors": "^1.0.0",
-    "prettier": "^2.8.1",
-    "tsup": "^8.1.0",
-    "typescript": "^4.7.4",
-    "vitest": "^0.15.1"
+    "picocolors": "^1.0.1",
+    "prettier": "^2.8.8",
+    "tsup": "^8.2.3",
+    "typescript": "^4.9.5",
+    "vitest": "^0.15.2"
   },
   "lint-staged": {
     "*": [
       "prettier --write --cache --ignore-unknown"
     ],
     "*.{vue,js,ts,jsx,tsx,md,json}": "eslint --fix"
-  },
-  "eslintConfig": {
-    "extends": "@antfu"
   }
 }
