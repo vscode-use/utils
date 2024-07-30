@@ -25,12 +25,22 @@ export function createSelect<T extends quickPickOptions>(options: string[] | vsc
       quickPick.keepScrollPosition = quickPickOptions.keepScrollPosition || false
     }
 
-    if (quickPickOptions?.activeItems)
-      quickPick.selectedItems = (options as vscode.QuickPickItem[]).filter((item: any) => quickPickOptions.activeItems!.includes(item.label))
-    else
+    if (quickPickOptions?.activeItems) {
+      let activeItem = quickPick.items[0]
+      quickPickOptions.activeItems.find((item) => {
+        const target = quickPick.items.find(i => i.label === item)
+        if (target) {
+          activeItem = target
+          return true
+        }
+        return false
+      })
+      quickPick.activeItems = [activeItem]
+    }
+    else {
       quickPick.selectedItems = (options as vscode.QuickPickItem[]).filter((item: any) => item.picked)
-
-    quickPick.activeItems = [quickPick.items[0]]
+      quickPick.activeItems = [quickPick.items[0]]
+    }
     let selection: readonly vscode.QuickPickItem[]
     quickPick.onDidChangeSelection((_selection) => {
       selection = _selection
