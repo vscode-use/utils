@@ -14,9 +14,9 @@ export function setStyle(decorationType: TextEditorDecorationType, range?: Range
     return
 
   const rangeOrOptins = range
-    ? (range as any).length
-        ? range
-        : [range]
+    ? Array.isArray(range)
+      ? range
+      : [range]
     : []
   activeTextEditor.setDecorations(decorationType, rangeOrOptins as Range[])
   return () => activeTextEditor.setDecorations(decorationType, [])
