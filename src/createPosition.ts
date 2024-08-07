@@ -15,5 +15,3 @@ export function createPosition(pos: PositionOption2 | PositionOption1 | number, 
       ? new vscode.Position(pos, pos1!)
       : new vscode.Position((pos as PositionOption2).line, (pos as PositionOption2).character ?? (pos as PositionOption2).column!)
 }
-
-createPosition([1, 2])
