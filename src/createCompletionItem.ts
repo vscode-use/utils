@@ -1,5 +1,5 @@
 import * as vscode from 'vscode'
-import type { Command, CompletionItemKind, MarkdownString, SnippetString } from 'vscode'
+import type { Command, CompletionItemKind, MarkdownString, Range, SnippetString } from 'vscode'
 import { createSnippetString } from './createSnippetString'
 
 export interface CompletionItemOptions {
@@ -13,6 +13,16 @@ export interface CompletionItemOptions {
   preselect?: boolean
   keepWhitespace?: boolean
   command?: Command
+  range?: Range | {
+    /**
+     * The range that should be used when insert-accepting a completion. Must be a prefix of `replaceRange`.
+     */
+    inserting: Range
+    /**
+     * The range that should be used when replace-accepting a completion.
+     */
+    replacing: Range
+  }
   [key: string]: any
 }
 
@@ -41,6 +51,7 @@ export interface CompletionItemOptions {
  * @param options.preselect boolean 补全项是否预选
  * @param options.keepWhitespace boolean 补全项是否保留空格
  * @param options.command Command 补全项的命令
+ * @param options.range Range 补全项的范围
  * @returns CompletionItem
  */
 export function createCompletionItem(options: CompletionItemOptions & { params?: string | string[] }) {
