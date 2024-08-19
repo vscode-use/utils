@@ -41,7 +41,7 @@
     "dist"
   ],
   "engines": {
-    "vscode": "^1.91.0"
+    "vscode": "^1.92.0"
   },
   "activationEvents": [
     "onStartupFinished"
@@ -59,12 +59,12 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.24.1",
+    "@antfu/eslint-config": "^2.26.0",
     "@antfu/ni": "^0.21.12",
-    "@types/node": "^18.19.43",
+    "@types/node": "^18.19.44",
     "@types/vscode": "^1.92.0",
     "bumpp": "^8.2.1",
-    "eslint": "^9.8.0",
+    "eslint": "^9.9.0",
     "esno": "^0.16.3",
     "picocolors": "^1.0.1",
     "prettier": "^2.8.8",
