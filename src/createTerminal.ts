@@ -6,7 +6,7 @@ import * as vscode from 'vscode'
  * @param options TerminalOptions | ExtensionTerminalOptions
  * @returns Terminal
  */
-export function createTerminal(name: string, options: vscode.TerminalOptions | vscode.ExtensionTerminalOptions) {
+export function createTerminal(name: string, options?: vscode.TerminalOptions | vscode.ExtensionTerminalOptions) {
   return vscode.window.createTerminal({
     name,
     ...options,
