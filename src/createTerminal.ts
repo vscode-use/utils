@@ -1,10 +1,14 @@
 import * as vscode from 'vscode'
 
 /**
- * 创建终端
- * @param name
+ * @name createTerminal 创建终端
+ * @param name 终端名称
+ * @param options TerminalOptions | ExtensionTerminalOptions
  * @returns Terminal
  */
-export function createTerminal(name: string) {
-  return vscode.window.createTerminal(name)
+export function createTerminal(name: string, options: vscode.TerminalOptions | vscode.ExtensionTerminalOptions) {
+  return vscode.window.createTerminal({
+    name,
+    ...options,
+  })
 }
