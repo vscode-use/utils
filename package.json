@@ -1,6 +1,6 @@
 {
   "name": "@vscode-use/utils",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "packageManager": "pnpm@7.33.7",
   "description": "",
   "author": "Simon He",
@@ -64,9 +64,9 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.26.0",
+    "@antfu/eslint-config": "^2.27.0",
     "@antfu/ni": "^0.21.12",
-    "@types/node": "^18.19.44",
+    "@types/node": "^18.19.45",
     "@types/vscode": "^1.92.0",
     "bumpp": "^8.2.1",
     "eslint": "^9.9.0",
