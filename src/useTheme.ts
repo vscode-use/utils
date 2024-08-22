@@ -30,7 +30,13 @@ function getAllTheme() {
 
 function setTheme(theme: string) {
   const config = vscode.workspace.getConfiguration()
-  return config.update('workbench.colorTheme', theme, vscode.ConfigurationTarget.Global)
+  return Promise.all(
+    [
+      config.update('workbench.colorTheme', theme, vscode.ConfigurationTarget.Global),
+      config.update('workbench.preferredLightColorTheme', theme, vscode.ConfigurationTarget.Global),
+      config.update('workbench.preferredDarkColorTheme', theme, vscode.ConfigurationTarget.Global),
+    ],
+  )
 }
 
 /**
