@@ -6,7 +6,6 @@ import { createRange } from './createRange'
 import { setSelection } from './setSelection'
 import { getActiveTextEditor } from './getActiveTextEditor'
 
-// todo: support lineNumber is Position
 /**
  * 跳入某个文件的某一行的位置
  * @param lineNumber 行数或者 range 范围
@@ -34,23 +33,29 @@ export function jumpToLine(lineNumber: number | PositionOption1 | [PositionOptio
   else {
     range = createRange([0, 0], [0, 0])
   }
-  if (filepath)
-    return openFile(filepath as string, { selection: range })
+  if (filepath === getCurrentFileUrl()) {
+    return toLine(range)
+  }
+  return openFile(filepath as string, { selection: range })
 }
 
 /**
  * 跳到当前文件的某一行
  * @param lineNumber 行数
  */
-export function toLine(lineNumber: number | [number, number]) {
+export function toLine(lineNumber: number | [number, number] | vscode.Range) {
   let range
-  if (Array.isArray(lineNumber))
+  if (lineNumber instanceof vscode.Range) {
+    range = lineNumber
+  }
+  else if (Array.isArray(lineNumber)) {
     range = createRange([lineNumber[0] - 1, lineNumber[1]], [lineNumber[0], 0])
-  else
+  }
+  else {
     range = createRange([lineNumber - 1, 0], [lineNumber, 0])
+  }
   const editor = getActiveTextEditor()
   if (editor) {
-    editor.revealRange(range, vscode.TextEditorRevealType.InCenter)
     setSelection(range.start, range.start)
   }
 }
