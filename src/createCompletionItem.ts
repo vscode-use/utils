@@ -28,19 +28,7 @@ export interface CompletionItemOptions {
 
 /**
  * 创建补全项
- * @param options  {
-  content: string // 补全项的内容
-  snippet?: string | SnippetString // 补全项的代码片段
-  detail?: string // 补全项的详细信息
-  type?: CompletionItemKind // 补全项的类型
-  documentation?: string | MarkdownString // 补全项的文档
-  sortText?: string // 补全项的排序文本
-  filterText?: string // 补全项的过滤文本
-  preselect?: boolean // 补全项是否预选
-  keepWhitespace?: boolean // 补全项是否保留空格
-  command?: Command // 补全项的命令
-  [key: string]: any // 补全项的其他属性
-}
+ * @param options CompletionItemOptions
  * @param options.content string 补全项的内容
  * @param options.snippet string | SnippetString 补全项的代码片段
  * @param options.detail string 补全项的详细信息
