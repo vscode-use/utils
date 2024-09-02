@@ -10,6 +10,10 @@
 ```
 npm i @vscode-use/utils -d
 ```
+
+## 推荐 VSCode 启动模板
+- https://github.com/Simon-He95/vitesse-vscode
+
 ### [Example](https://github.com/Simon-He95/vitesse-vscode)
 
 ## 📝 Api

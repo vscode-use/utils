@@ -12,6 +12,9 @@
 npm i @vscode-use/utils -d
 ```
 
+## Recommended VSCode Starter
+- https://github.com/Simon-He95/vitesse-vscode
+
 ### [Example](https://github.com/Simon-He95/vitesse-vscode)
 
 ## 📝 Api
