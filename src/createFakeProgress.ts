@@ -3,7 +3,7 @@ import { createProgress } from './createProgress'
 export function createFakeProgress(options: {
   title: string
   interval?: number
-  message: (increment: number) => string | void
+  message?: (increment: number) => string | void
   callback: (resolve: (value?: unknown) => void, reject: (msg?: string) => void) => void
 }) {
   const { title, interval = 10, message, callback } = options
@@ -19,7 +19,7 @@ export function createFakeProgress(options: {
             if (increment < 99) {
               increment++
               report({
-                message: message(increment) || `Progress bar ${increment}% completed`,
+                message: message?.(increment) || `Progress bar ${increment}% completed`,
                 increment,
               })
             }
