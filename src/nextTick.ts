@@ -5,6 +5,10 @@ import * as vscode from 'vscode'
  * @param fn 更新后待执行的函数
  * @returns Thenable<void>
  */
-export function nextTick(fn: () => void) {
-  return vscode.workspace.applyEdit(new vscode.WorkspaceEdit()).then(fn)
+export function nextTick(fn?: (result: boolean) => void) {
+  return new Promise((resolve) => {
+    vscode.workspace.applyEdit(new vscode.WorkspaceEdit()).then((result) => {
+      resolve(fn?.(result))
+    })
+  })
 }
