@@ -12,13 +12,16 @@ import { getActiveTextEditor } from './getActiveTextEditor'
  * @param filepath 路径 默认使用当前激活的文件
  * @returns Promise<TextEditor>
  */
-export function jumpToLine(lineNumber: number | PositionOption1 | [PositionOption1, PositionOption1] | vscode.Range, filepath = getCurrentFileUrl()) {
+export function jumpToLine(lineNumber: number | PositionOption1 | [PositionOption1, PositionOption1] | vscode.Range | vscode.Position, filepath = getCurrentFileUrl()) {
   let range: vscode.Range
   if (typeof lineNumber === 'number') {
     range = createRange([lineNumber, 0], [lineNumber, 0])
   }
   else if (lineNumber instanceof vscode.Range) {
     range = lineNumber
+  }
+  else if (lineNumber instanceof vscode.Position) {
+    range = createRange(lineNumber, lineNumber)
   }
   else if (Array.isArray(lineNumber)) {
     if (typeof lineNumber[0] === 'number') {
