@@ -59,6 +59,6 @@ export function toLine(lineNumber: number | [number, number] | vscode.Range) {
   }
   const editor = getActiveTextEditor()
   if (editor) {
-    setSelection(range.start, range.start)
+    setSelection(range.start, range.end)
   }
 }
