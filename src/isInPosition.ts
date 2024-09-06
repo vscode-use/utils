@@ -10,7 +10,7 @@ import { getActiveText } from './getActiveText'
  * @param offset 偏移量
  * @returns boolean
  */
-export function isInPosition(parentLoc: RangeLoc, childLoc: PositionOption2, offset = 0) {
+export function isInPosition(parentLoc: RangeLoc, childLoc: PositionOption2, offset = 0, offsetLine = 1) {
   if (offset === 0) {
     const { start, end } = parentLoc
     const startLine = start.line
@@ -19,22 +19,22 @@ export function isInPosition(parentLoc: RangeLoc, childLoc: PositionOption2, off
     const endLine = end.line
     const { line } = childLoc
     const character = childLoc.column || childLoc.character
-    if (line + 1 === startLine && character! <= startcharacter! - 1)
+    if (line + offsetLine === startLine && character! <= startcharacter! - 1)
       return false
-    if (line + 1 === endLine && character! > endcharacter! - 1)
+    if (line + offsetLine === endLine && character! > endcharacter! - 1)
       return false
-    if (line + 1 < startLine)
+    if (line + offsetLine < startLine)
       return false
-    if (line + 1 > endLine)
+    if (line + offsetLine > endLine)
       return false
   }
   else {
     const code = getActiveText()!.slice(offset)
-    const startOffset = getOffsetFromPosition(createPosition(parentLoc.start.line - 1, (parentLoc.start.character || parentLoc.start.column)!), code)!
+    const startOffset = getOffsetFromPosition(createPosition(parentLoc.start.line - offsetLine, (parentLoc.start.character || parentLoc.start.column)!), code)!
     const childOffset = getOffsetFromPosition(createPosition(childLoc))!
     if (childOffset < startOffset + offset)
       return false
-    const endOffset = getOffsetFromPosition(createPosition(parentLoc.end.line - 1, (parentLoc.end.character || parentLoc.end.column)!), code)!
+    const endOffset = getOffsetFromPosition(createPosition(parentLoc.end.line - offsetLine, (parentLoc.end.character || parentLoc.end.column)!), code)!
     if (childOffset > endOffset + offset)
       return false
   }
