@@ -7,5 +7,5 @@ import type { DecorationRenderOptions } from 'vscode'
  * @returns TextEditorDecorationType
  */
 export function createStyle(options: DecorationRenderOptions) {
-  return vscode.window.createTextEditorDecorationType(options)
+  return vscode.window.createTextEditorDecorationType({ rangeBehavior: vscode.DecorationRangeBehavior.ClosedClosed, ...options })
 }
