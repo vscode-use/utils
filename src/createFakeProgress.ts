@@ -28,7 +28,7 @@ export function createFakeProgress(options: {
 
         clearInterval(timer)
         report({
-          message: 'Progress bar 100% completed',
+          message: message?.(100) || `Progress bar 100% completed`,
           increment: 100,
         })
 
