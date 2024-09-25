@@ -7,6 +7,6 @@ import { createCompletionItem } from './createCompletionItem'
  * @param items CompletionItemOptions[]
  * @returns CompletionList
  */
-export function createCompletionList(items: (CompletionItemOptions & { params?: string | string[] })[]) {
+export function createCompletionList(items: (CompletionItemOptions & { params?: any })[]) {
   return new vscode.CompletionList(items.map(createCompletionItem))
 }

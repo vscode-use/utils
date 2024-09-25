@@ -42,7 +42,7 @@ export interface CompletionItemOptions {
  * @param options.range Range 补全项的范围
  * @returns CompletionItem
  */
-export function createCompletionItem(options: CompletionItemOptions & { params?: string | string[] }) {
+export function createCompletionItem(options: CompletionItemOptions & { params?: any }) {
   const { content, snippet, type } = options
 
   return Object.assign(new vscode.CompletionItem(content, type) as any, options, {
