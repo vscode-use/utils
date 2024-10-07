@@ -67,6 +67,14 @@ export function addEventListener<T extends (keyof typeof eventMap | keyof typeof
 ): vscode.Disposable {
   if (type in eventMap) {
     const name = eventMap[type as keyof typeof eventMap]
+    if (type === 'activeText-change') {
+      return (vscode.window as any)[name]?.((e: vscode.TextEditor | undefined) => {
+        if (!e) {
+          return
+        }
+        (callback as EventCallbackMap['activeText-change'])(e)
+      })
+    }
     return (vscode.window as any)[name]?.(callback)
   }
   else if (type in workspaceMap) {
