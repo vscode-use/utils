@@ -71,6 +71,14 @@ export function addEventListener<T extends (keyof typeof eventMap | keyof typeof
   }
   else if (type in workspaceMap) {
     const name = workspaceMap[type as keyof typeof workspaceMap]
+    if (type === 'text-change') {
+      return (vscode.workspace as any)[name]?.(({ contentChanges, document, reason }: vscode.TextDocumentChangeEvent) => {
+        if (contentChanges.length === 0) {
+          return
+        }
+        (callback as WorkspaceCallbackMap['text-change'])({ contentChanges, document, reason } as vscode.TextDocumentChangeEvent)
+      })
+    }
     return (vscode.workspace as any)[name]?.(callback)
   }
   else if (type in authenticationMap) {
