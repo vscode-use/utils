@@ -1,4 +1,5 @@
 import * as vscode from 'vscode'
+import { addEffect } from './util'
 
 /**
  * 注册指令
@@ -10,5 +11,5 @@ export function registerCommand(
   name: string,
   callback: (...args: any[]) => any,
 ) {
-  return vscode.commands.registerCommand(name, callback)
+  return addEffect(vscode.commands.registerCommand(name, callback))
 }

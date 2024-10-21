@@ -1,5 +1,6 @@
 import * as vscode from 'vscode'
 import type { DocumentSelector } from 'vscode'
+import { addEffect } from './util'
 
 /**
  * 注册inlayHints事件
@@ -13,5 +14,5 @@ export function registerInlayHintsProvider(filter: DocumentSelector, callback: (
       return callback(document, range, token)
     }
   }
-  return vscode.languages.registerInlayHintsProvider(filter, new MyInlayHintsProvider())
+  return addEffect(vscode.languages.registerInlayHintsProvider(filter, new MyInlayHintsProvider()))
 }

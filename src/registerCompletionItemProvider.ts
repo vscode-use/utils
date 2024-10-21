@@ -1,5 +1,6 @@
 import * as vscode from 'vscode'
 import type { CancellationToken, CompletionItem, CompletionList, ProviderResult } from 'vscode'
+import { addEffect } from './util'
 
 /**
  * 注册自动补全
@@ -16,7 +17,7 @@ export function registerCompletionItemProvider<T extends CompletionItem = Comple
   }
   if (typeof triggerCharacters === 'string')
     triggerCharacters = [triggerCharacters]
-  return vscode.languages.registerCompletionItemProvider(
+  return addEffect(vscode.languages.registerCompletionItemProvider(
     filter,
     resolveCompletionItem
       ? {
@@ -25,5 +26,5 @@ export function registerCompletionItemProvider<T extends CompletionItem = Comple
         } as any
       : { provideCompletionItems },
     ...triggerCharacters,
-  )
+  ))
 }

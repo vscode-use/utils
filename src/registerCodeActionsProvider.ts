@@ -1,5 +1,6 @@
 import * as vscode from 'vscode'
 import type { CodeActionProvider, CodeActionProviderMetadata, DocumentSelector } from 'vscode'
+import { addEffect } from './util'
 
 /**
  * 注册代码动作提供程序。
@@ -14,5 +15,5 @@ import type { CodeActionProvider, CodeActionProviderMetadata, DocumentSelector }
  * @return 一个{@link Disposable}，当该提供程序被弃置时会取消注册。
  */
 export function registerCodeActionsProvider(selector: DocumentSelector, provider: CodeActionProvider, metadata?: CodeActionProviderMetadata) {
-  return vscode.languages.registerCodeActionsProvider(selector, provider, metadata)
+  return addEffect(vscode.languages.registerCodeActionsProvider(selector, provider, metadata))
 }

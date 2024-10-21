@@ -1,5 +1,6 @@
 import * as vscode from 'vscode'
 import type { EventCallbackMap, WorkspaceCallbackMap } from './types'
+import { addEffect } from './util'
 
 /**
  * 添加事件监听
@@ -68,33 +69,33 @@ export function addEventListener<T extends (keyof typeof eventMap | keyof typeof
   if (type in eventMap) {
     const name = eventMap[type as keyof typeof eventMap]
     if (type === 'activeText-change') {
-      return (vscode.window as any)[name]?.((e: vscode.TextEditor | undefined) => {
+      return addEffect((vscode.window as any)[name]?.((e: vscode.TextEditor | undefined) => {
         if (!e) {
           return
         }
         (callback as EventCallbackMap['activeText-change'])(e)
-      })
+      }))
     }
-    return (vscode.window as any)[name]?.(callback)
+    return addEffect((vscode.window as any)[name]?.(callback))
   }
   else if (type in workspaceMap) {
     const name = workspaceMap[type as keyof typeof workspaceMap]
     if (type === 'text-change') {
-      return (vscode.workspace as any)[name]?.(({ contentChanges, document, reason }: vscode.TextDocumentChangeEvent) => {
+      return addEffect((vscode.workspace as any)[name]?.(({ contentChanges, document, reason }: vscode.TextDocumentChangeEvent) => {
         if (contentChanges.length === 0) {
           return
         }
         (callback as WorkspaceCallbackMap['text-change'])({ contentChanges, document, reason } as vscode.TextDocumentChangeEvent)
-      })
+      }))
     }
-    return (vscode.workspace as any)[name]?.(callback)
+    return addEffect((vscode.workspace as any)[name]?.(callback))
   }
   else if (type in authenticationMap) {
     const name = authenticationMap[type as keyof typeof authenticationMap]
-    return (vscode.authentication as any)[name]?.((e: any) => {
+    return addEffect((vscode.authentication as any)[name]?.((e: any) => {
       const getSession = async (name: string) => await vscode.authentication.getSession(name, ['user:read'])
       return callback(e.provider.id, getSession)
-    })
+    }))
   }
-  return new vscode.Disposable(() => { })
+  return addEffect(new vscode.Disposable(() => { }))
 }

@@ -1,5 +1,6 @@
 import * as vscode from 'vscode'
 import type { DefinitionProvider, DocumentSelector } from 'vscode'
+import { addEffect } from './util'
 
 /**
  * 注册cmd选中关键词的事件
@@ -8,5 +9,5 @@ import type { DefinitionProvider, DocumentSelector } from 'vscode'
  * @returns Disposable
  */
 export function registerDefinitionProvider(selector: DocumentSelector, provideDefinition: DefinitionProvider['provideDefinition']) {
-  return vscode.languages.registerDefinitionProvider(selector, { provideDefinition })
+  return addEffect(vscode.languages.registerDefinitionProvider(selector, { provideDefinition }))
 }

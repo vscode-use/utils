@@ -1,5 +1,6 @@
 import * as vscode from 'vscode'
 import type { DocumentSelector, HoverProvider } from 'vscode'
+import { addEffect } from './util'
 
 /**
  * 注册鼠标悬停事件
@@ -8,5 +9,5 @@ import type { DocumentSelector, HoverProvider } from 'vscode'
  * @returns Disposable
  */
 export function registerHoverProvider(selector: DocumentSelector, provideHover: HoverProvider['provideHover']) {
-  return vscode.languages.registerHoverProvider(selector, { provideHover })
+  return addEffect(vscode.languages.registerHoverProvider(selector, { provideHover }))
 }

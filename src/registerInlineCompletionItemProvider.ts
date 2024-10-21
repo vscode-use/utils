@@ -1,5 +1,6 @@
 import * as vscode from 'vscode'
 import type { InlineCompletionItem, InlineCompletionList, ProviderResult } from 'vscode'
+import { addEffect } from './util'
 
 /**
  * 注册内联自动补全
@@ -11,7 +12,7 @@ export function registerInlineCompletionItemProvider(provideInlineCompletionItem
   context: vscode.InlineCompletionContext,
   token: vscode.CancellationToken) => ProviderResult<InlineCompletionItem[] | InlineCompletionList>,
 ) {
-  return vscode.languages.registerInlineCompletionItemProvider({ pattern: '**' }, {
+  return addEffect(vscode.languages.registerInlineCompletionItemProvider({ pattern: '**' }, {
     provideInlineCompletionItems,
-  })
+  }))
 }
