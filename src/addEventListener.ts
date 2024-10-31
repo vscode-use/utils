@@ -20,7 +20,7 @@ import { addEffect } from './util'
  * - text-change: 文本变化
  * - text-open: 文本打开
  * - text-save: 文本保存
- * - folder-change: 文件夹变化
+ * - workspace-change: 文件夹变化
  * - file-create: 文件创建
  * - file-delete: 文件删除
  * - rename: 文件重命名
@@ -45,7 +45,7 @@ export const workspaceMap = {
   'text-change': 'onDidChangeTextDocument',
   'text-open': 'onDidOpenTextDocument',
   'text-save': 'onDidSaveTextDocument',
-  'folder-change': 'onDidChangeWorkspaceFolders',
+  'workspace-change': 'onDidChangeWorkspaceFolders',
   'file-create': 'onDidCreateFiles',
   'file-delete': 'onDidDeleteFiles',
   'rename': 'onDidRenameFiles',

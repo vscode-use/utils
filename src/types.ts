@@ -24,7 +24,7 @@ export interface WorkspaceCallbackMap {
   'text-change': (e: TextDocumentChangeEvent) => void
   'text-open': (doc: TextDocument) => void
   'text-save': (doc: TextDocument) => void
-  'folder-change': (e: WorkspaceFoldersChangeEvent) => void
+  'workspace-change': (e: WorkspaceFoldersChangeEvent) => void
   'file-create': (e: FileCreateEvent) => void
   'file-delete': (e: FileDeleteEvent) => void
   'rename': (e: FileRenameEvent) => void
