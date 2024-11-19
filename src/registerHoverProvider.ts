@@ -9,5 +9,12 @@ import { addEffect } from './util'
  * @returns Disposable
  */
 export function registerHoverProvider(selector: DocumentSelector, provideHover: HoverProvider['provideHover']) {
-  return addEffect(vscode.languages.registerHoverProvider(selector, { provideHover }))
+  const provideHoverWrapper: HoverProvider['provideHover'] = (document, position, token) => {
+    // 不处理 hover output 时的事件
+    if (document.uri.scheme === 'output')
+      return
+
+    return provideHover(document, position, token)
+  }
+  return addEffect(vscode.languages.registerHoverProvider(selector, { provideHover: provideHoverWrapper }))
 }
