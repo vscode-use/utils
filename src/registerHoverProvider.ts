@@ -8,10 +8,10 @@ import { addEffect } from './util'
  * @param provideHover 回调函数，可返回一个Hover控制鼠标悬停时显示的内容
  * @returns Disposable
  */
-export function registerHoverProvider(selector: DocumentSelector, provideHover: HoverProvider['provideHover']) {
+export function registerHoverProvider(selector: DocumentSelector, provideHover: HoverProvider['provideHover'], output?: boolean) {
   const provideHoverWrapper: HoverProvider['provideHover'] = (document, position, token) => {
     // 不处理 hover output 时的事件
-    if (document.uri.scheme === 'output')
+    if (!output && document.uri.scheme === 'output')
       return
 
     return provideHover(document, position, token)
