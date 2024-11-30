@@ -25,8 +25,9 @@ export function createLog(name: string, options = {
   info: '🔵',
   error: '🔴',
   debug: '🟢',
+  languageId: '',
 }) {
-  const outputChannel = createOutputChannel(name)
+  const outputChannel = createOutputChannel(name, options.languageId)
   return {
     show: () => {
       outputChannel.show()
