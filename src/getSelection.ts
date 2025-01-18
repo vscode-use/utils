@@ -1,3 +1,4 @@
+import { createRange } from './createRange'
 import { getActiveTextEditor } from './getActiveTextEditor'
 import { getLineText } from './getLineText'
 import { getOffsetFromPosition } from './getOffsetFromPosition'
@@ -22,6 +23,7 @@ export function getSelection() {
       selectionArray: activeTextEditor.selections.map(s => Object.assign(s, {
         lineText: getLineText(s.active.line)!,
         text: code.slice(getOffsetFromPosition(s.start, code), getOffsetFromPosition(s.end, code)),
+        selection: createRange(s.start, s.end),
       })),
     }
   }
