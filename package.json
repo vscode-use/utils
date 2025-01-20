@@ -67,6 +67,7 @@
     "@antfu/ni": "^0.21.12",
     "@types/node": "^18.19.45",
     "@types/vscode": "^1.92.0",
+    "alien-signals": "^1.0.0",
     "bumpp": "^8.2.1",
     "eslint": "^9.9.0",
     "esno": "^0.16.3",
