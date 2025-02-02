@@ -115,3 +115,8 @@ export interface quickPickOptions {
   onDidAccept?: () => any
   onDidHide?: (e: any) => any
 }
+
+export interface WriteableSignal<T> {
+  (): T
+  (value: T): void
+}

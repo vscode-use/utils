@@ -1,3 +1,4 @@
+import type { WriteableSignal } from './types'
 import { signal } from 'alien-signals'
 import * as vscode from 'vscode'
 import { addEventListener } from './addEventListener'
@@ -10,7 +11,7 @@ import { getConfiguration } from './getConfiguration'
  */
 type ScopedName = `${string}.${string}`
 
-export function useConfiguration<T>(name: ScopedName, defaultValue?: T) {
+export function useConfiguration<T>(name: ScopedName, defaultValue?: T): WriteableSignal<T> {
   const [scopedName, propName] = name.split('.')
 
   const config = signal<any>(vscode.workspace.getConfiguration(scopedName).get(propName, defaultValue))
