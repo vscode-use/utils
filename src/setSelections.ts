@@ -1,7 +1,7 @@
+import type { ISelections } from './types'
 import * as vscode from 'vscode'
 import { createRange } from './createRange'
 import { getActiveTextEditor } from './getActiveTextEditor'
-import type { ISelections } from './types'
 
 /**
  * 设置多个选中区域

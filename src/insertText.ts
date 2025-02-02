@@ -1,9 +1,9 @@
 import type { Position, SnippetString } from 'vscode'
 import { Range } from 'vscode'
-import { getActiveTextEditor } from './getActiveTextEditor'
-import { createSnippetString } from './createSnippetString'
-import { scrollInToView } from './scrollInToView'
 import { createRange } from './createRange'
+import { createSnippetString } from './createSnippetString'
+import { getActiveTextEditor } from './getActiveTextEditor'
+import { scrollInToView } from './scrollInToView'
 
 /**
  * 插入 {@link SnippetString snippet} 并将编辑器置于片段模式."片段模式"

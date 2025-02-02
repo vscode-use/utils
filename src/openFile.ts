@@ -1,5 +1,5 @@
-import * as vscode from 'vscode'
 import type { TextDocumentShowOptions, TextEditor } from 'vscode'
+import * as vscode from 'vscode'
 
 /**
  * 打开文件

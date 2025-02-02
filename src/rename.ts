@@ -1,5 +1,5 @@
-import * as vscode from 'vscode'
 import type { Uri } from 'vscode'
+import * as vscode from 'vscode'
 
 /**
  * 重命名文件

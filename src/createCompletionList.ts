@@ -1,5 +1,5 @@
-import * as vscode from 'vscode'
 import type { CompletionItemOptions } from './createCompletionItem'
+import * as vscode from 'vscode'
 import { createCompletionItem } from './createCompletionItem'
 
 /**

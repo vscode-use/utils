@@ -1,6 +1,6 @@
 import type { Range, TextEditorDecorationType } from 'vscode'
-import { getActiveTextEditor } from './getActiveTextEditor'
 import type { ClearStyle } from './types'
+import { getActiveTextEditor } from './getActiveTextEditor'
 
 /**
  * 设置样式

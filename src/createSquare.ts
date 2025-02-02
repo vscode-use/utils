@@ -1,5 +1,5 @@
-import * as vscode from 'vscode'
 import type { ThemeColor } from 'vscode'
+import * as vscode from 'vscode'
 
 /**
  * 创建一个方块

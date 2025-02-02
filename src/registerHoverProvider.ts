@@ -1,5 +1,5 @@
-import * as vscode from 'vscode'
 import type { DocumentSelector, HoverProvider } from 'vscode'
+import * as vscode from 'vscode'
 import { addEffect } from './util'
 
 /**

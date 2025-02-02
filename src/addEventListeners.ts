@@ -1,6 +1,6 @@
 import type * as vscode from 'vscode'
-import type { EventCallbackMap, WorkspaceCallbackMap } from './types'
 import type { authenticationMap, eventMap, workspaceMap } from './addEventListener'
+import type { EventCallbackMap, WorkspaceCallbackMap } from './types'
 import { addEventListener } from './addEventListener'
 
 /**

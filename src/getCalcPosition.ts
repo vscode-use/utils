@@ -1,8 +1,8 @@
-import { getActiveText } from './getActiveText'
 import type { PositionOption1, PositionOption2 } from './types'
 import { createPosition } from './createPosition'
-import { getPosition } from './getPosition'
+import { getActiveText } from './getActiveText'
 import { getOffsetFromPosition } from './getOffsetFromPosition'
+import { getPosition } from './getPosition'
 /**
  * 根据 position 和 offset 得到计算后的 position
  */

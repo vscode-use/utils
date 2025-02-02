@@ -1,5 +1,5 @@
-import * as vscode from 'vscode'
 import { signal } from 'alien-signals'
+import * as vscode from 'vscode'
 import { addEventListener } from './addEventListener'
 import { getConfiguration } from './getConfiguration'
 

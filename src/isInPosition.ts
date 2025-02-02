@@ -1,7 +1,7 @@
 import type { PositionOption2, RangeLoc } from './types'
-import { getOffsetFromPosition } from './getOffsetFromPosition'
 import { createPosition } from './createPosition'
 import { getActiveText } from './getActiveText'
+import { getOffsetFromPosition } from './getOffsetFromPosition'
 
 /**
  * 判断一个位置是否在另一个位置的范围内

@@ -1,5 +1,5 @@
-import * as vscode from 'vscode'
 import type { CancellationToken, CompletionItem, CompletionList, ProviderResult } from 'vscode'
+import * as vscode from 'vscode'
 import { addEffect } from './util'
 
 /**

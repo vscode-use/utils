@@ -1,5 +1,5 @@
-import * as vscode from 'vscode'
 import type { Command, CompletionItemKind, MarkdownString, Range, SnippetString } from 'vscode'
+import * as vscode from 'vscode'
 import { createSnippetString } from './createSnippetString'
 
 export interface CompletionItemOptions {

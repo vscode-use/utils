@@ -1,7 +1,7 @@
 import type { DecorationRenderOptions, Range } from 'vscode'
+import type { ClearStyle } from './types'
 import { createStyle } from './createStyle'
 import { setStyle } from './setStyle'
-import type { ClearStyle } from './types'
 
 /**
  * createStyleAnimation

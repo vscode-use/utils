@@ -1,5 +1,5 @@
-import * as vscode from 'vscode'
 import type { ConfigurationTarget } from 'vscode'
+import * as vscode from 'vscode'
 
 /**
  * 设置配置

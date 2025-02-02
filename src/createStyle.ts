@@ -1,5 +1,5 @@
-import * as vscode from 'vscode'
 import type { DecorationRenderOptions } from 'vscode'
+import * as vscode from 'vscode'
 
 /**
  * 创建样式

@@ -1,5 +1,5 @@
-import * as vscode from 'vscode'
 import type { EventCallbackMap, WorkspaceCallbackMap } from './types'
+import * as vscode from 'vscode'
 import { addEffect } from './util'
 
 /**

@@ -1,7 +1,7 @@
+import type { PositionOption1, PositionOption2 } from './types'
 import * as vscode from 'vscode'
 import { createRange } from './createRange'
 import { getActiveTextEditor } from './getActiveTextEditor'
-import type { PositionOption1, PositionOption2 } from './types'
 
 /**
  * Sets the selection in the active text editor.
