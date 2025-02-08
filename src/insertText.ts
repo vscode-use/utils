@@ -1,32 +1,38 @@
-import type { Position, SnippetString } from 'vscode'
-import { Range } from 'vscode'
+import type { Position } from 'vscode'
+import { Range, SnippetString } from 'vscode'
 import { createRange } from './createRange'
 import { createSnippetString } from './createSnippetString'
 import { getActiveTextEditor } from './getActiveTextEditor'
 import { scrollInToView } from './scrollInToView'
 
+type Location = Position | Range | readonly Position[] | readonly Range[]
+type Snippet = string | SnippetString
+export async function insertText(snippet: Snippet, location: Location, options?: { readonly undoStopBefore: boolean, readonly undoStopAfter: boolean }): Promise<boolean>
+export async function insertText(location: Location, snippet: Snippet, options?: { readonly undoStopBefore: boolean, readonly undoStopAfter: boolean }): Promise<boolean>
 /**
- * 插入 {@link SnippetString snippet} 并将编辑器置于片段模式."片段模式"
- * 表示编辑器添加占位符和附加光标,以便用户可以完成
- * 或接受片段.
- *
- * @param snippet 在此编辑中插入的片段.
- * @param location 插入片段的位置或范围,默认为当前编辑器选择或选择.
- * @param options 此编辑周围的撤消/重做行为.默认情况下,撤消停止将在此编辑之前和之后创建.
- * @param options.undoStopBefore 此编辑周围的撤消/重做行为.默认情况下,撤消停止将在此编辑之前和之后创建.
- * @param options.undoStopAfter 此编辑周围的撤消/重做行为.默认情况下,撤消停止将在此编辑之前和之后创建.
- * @return 一个承诺,以指示是否可以插入片段的值来解析.请注意,承诺不会发出信号
- * 片段已完全填写或被接受.
+ * 插入文本或代码片段到指定位置
+ * @param {Snippet | Location} snippet - 要插入的文本或代码片段
+ * @param {Location | Snippet} location - 插入位置，可以是 Position、Range 或它们的数组
+ * @param {object} [options] - 插入选项
+ * @param {boolean} [options.undoStopBefore] - 插入前是否创建撤销停止点
+ * @param {boolean} [options.undoStopAfter] - 插入后是否创建撤销停止点
+ * @returns {Promise<boolean>} - 插入是否成功
  */
-export async function insertText(snippet: string | SnippetString, location?: Position | Range | readonly Position[] | readonly Range[], options?: { readonly undoStopBefore: boolean, readonly undoStopAfter: boolean }) {
+export async function insertText(snippet: Snippet | Location, location: Snippet | Location, options?: { readonly undoStopBefore: boolean, readonly undoStopAfter: boolean }) {
   const activeTextEditor = getActiveTextEditor()
   if (!activeTextEditor)
     return
 
+  if (typeof snippet !== 'string' && !(snippet instanceof SnippetString)) {
+    const temp = snippet
+    snippet = location
+    location = temp
+  }
+
   if (typeof snippet === 'string')
     snippet = createSnippetString(snippet)
 
-  const res = await activeTextEditor.insertSnippet(snippet, location, options || {
+  const res = await activeTextEditor.insertSnippet(snippet as SnippetString, location as Location, options ?? {
     undoStopBefore: false,
     undoStopAfter: false,
   })
