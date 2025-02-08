@@ -26,7 +26,10 @@ export async function insertText(snippet: string | SnippetString, location?: Pos
   if (typeof snippet === 'string')
     snippet = createSnippetString(snippet)
 
-  const res = await activeTextEditor.insertSnippet(snippet, location, options)
+  const res = await activeTextEditor.insertSnippet(snippet, location, options || {
+    undoStopBefore: false,
+    undoStopAfter: false,
+  })
   if (res && !Array.isArray(location)) {
     scrollInToView(location instanceof Range ? location : createRange(location as Position, location as Position))
   }
