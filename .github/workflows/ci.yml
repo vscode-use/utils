@@ -9,49 +9,70 @@ on:
     branches:
       - main
 
-  merge_group: {}
-
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+
+      - name: Set node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Setup
+        run: npm i -g @antfu/ni
+
+      - name: Install
+        run: nci
+
+      - name: Lint
+        run: nr lint
+
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+
+      - name: Set node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Setup
+        run: npm i -g @antfu/ni
+
+      - name: Install
+        run: nci
+
+      - name: Typecheck
+        run: nr typecheck
+
   test:
     runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
-        os: [ubuntu-latest]
-        node_version: [18.18.2, lts/*]
-        include:
-          - os: macos-latest
-            node_version: lts/*
-          - os: windows-latest
-            node_version: lts/*
+        node: [lts/*]
+        os: [ubuntu-latest, windows-latest, macos-latest]
       fail-fast: false
 
     steps:
-      - name: Set git to use LF
-        run: |
-          git config --global core.autocrlf false
-          git config --global core.eol lf
-
       - uses: actions/checkout@v4
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v3
 
-      - name: Set node ${{ matrix.node_version }}
+      - name: Set node ${{ matrix.node }}
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node_version }}
-          cache: pnpm
-
-      # `npm i -g corepack@latest;` and  `corepack prepare pnpm@latest --activate;` are necessary to get the latest
-      # version of corepack, which has a fix for https://github.com/nodejs/corepack/issues/612
-      # (related https://github.com/pnpm/pnpm/issues/9029), so it can install pnpm.
-      # Those two can probably go away once the devcontainer is using a version of Node which includes a version corepack
-      # with the fix.
-
-      - run: npm i -g corepack@latest --force
-      - run: corepack prepare pnpm@latest --activate
-      - run: corepack enable
+          node-version: ${{ matrix.node }}
 
       - name: Setup
         run: npm i -g @antfu/ni
@@ -64,6 +85,3 @@ jobs:
 
       - name: Test
         run: nr test
-
-      - name: Typecheck
-        run: nr typecheck
