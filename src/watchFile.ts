@@ -1,6 +1,7 @@
 import type { GlobPattern } from 'vscode'
 import type { WatchFilesOptions } from './types'
 import { workspace } from 'vscode'
+import { addEffect } from './util'
 
 /**
  * 监听文件变化
@@ -16,6 +17,8 @@ export function watchFile(globPattern: GlobPattern, options: WatchFilesOptions) 
     watcher.onDidChange(onChange)
   if (onDelete)
     watcher.onDidDelete(onDelete)
+
+  addEffect(watcher)
 
   return () => watcher.dispose()
 }
