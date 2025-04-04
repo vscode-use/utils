@@ -7,8 +7,8 @@ import { scrollInToView } from './scrollInToView'
 
 type Location = Position | Range | readonly Position[] | readonly Range[]
 type Snippet = string | SnippetString
-export async function insertText(snippet: Snippet, location: Location, options?: { readonly undoStopBefore: boolean, readonly undoStopAfter: boolean }): Promise<boolean>
-export async function insertText(location: Location, snippet: Snippet, options?: { readonly undoStopBefore: boolean, readonly undoStopAfter: boolean }): Promise<boolean>
+export async function insertText(snippet: Snippet, location: Location, options?: { readonly undoStopBefore: boolean, readonly undoStopAfter: boolean, readonly textEditor?: TextEditor }): Promise<boolean>
+export async function insertText(location: Location, snippet: Snippet, options?: { readonly undoStopBefore: boolean, readonly undoStopAfter: boolean, readonly textEditor?: TextEditor }): Promise<boolean>
 /**
  * 插入文本或代码片段到指定位置
  * @param {Snippet | Location} snippet - 要插入的文本或代码片段
@@ -20,7 +20,7 @@ export async function insertText(location: Location, snippet: Snippet, options?:
  * @param {boolean} [options.scrollInToView] - 是否滚动到插入位置
  * @returns {Promise<boolean>} - 插入是否成功
  */
-export async function insertText(snippet: Snippet | Location, location: Snippet | Location, options: { readonly undoStopBefore: boolean, readonly undoStopAfter: boolean, textEditor?: TextEditor, scrollInToView?: boolean } = { undoStopBefore: false, undoStopAfter: false, textEditor: getActiveTextEditor(), scrollInToView: true }) {
+export async function insertText(snippet: Snippet | Location, location: Snippet | Location, options: { readonly undoStopBefore: boolean, readonly undoStopAfter: boolean, readonly textEditor?: TextEditor, scrollInToView?: boolean } = { undoStopBefore: false, undoStopAfter: false, textEditor: getActiveTextEditor(), scrollInToView: true }) {
   const activeTextEditor = options.textEditor
   if (!activeTextEditor)
     return false
