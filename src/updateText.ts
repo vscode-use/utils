@@ -14,11 +14,11 @@ export function updateText(callback: (editBuilder: TextEditorEdit) => void, opti
   /**
    * Add undo stop before making the edits.
    */
-  readonly undoStopBefore: boolean
+  readonly undoStopBefore?: boolean
   /**
    * Add undo stop after making the edits.
    */
-  readonly undoStopAfter: boolean
+  readonly undoStopAfter?: boolean
   /**
    * The active text editor.
    */
@@ -26,7 +26,7 @@ export function updateText(callback: (editBuilder: TextEditorEdit) => void, opti
 } = { undoStopBefore: false, undoStopAfter: false, textEditor: getActiveTextEditor() }) {
   const activeTextEditor = options.textEditor
   if (activeTextEditor)
-    return activeTextEditor.edit(callback, options)
+    return activeTextEditor.edit(callback, options as { undoStopBefore: boolean, undoStopAfter: boolean })
 
   return Promise.resolve(false)
 }
