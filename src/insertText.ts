@@ -1,4 +1,4 @@
-import type { Position } from 'vscode'
+import type { Position, TextEditor } from 'vscode'
 import { Range, SnippetString } from 'vscode'
 import { createRange } from './createRange'
 import { createSnippetString } from './createSnippetString'
@@ -16,12 +16,14 @@ export async function insertText(location: Location, snippet: Snippet, options?:
  * @param {object} [options] - 插入选项
  * @param {boolean} [options.undoStopBefore] - 插入前是否创建撤销停止点
  * @param {boolean} [options.undoStopAfter] - 插入后是否创建撤销停止点
+ * @param {TextEditor} [options.textEditor] - 指定的文本编辑器，默认为当前激活的编辑器
+ * @param {boolean} [options.scrollInToView] - 是否滚动到插入位置
  * @returns {Promise<boolean>} - 插入是否成功
  */
-export async function insertText(snippet: Snippet | Location, location: Snippet | Location, options?: { readonly undoStopBefore: boolean, readonly undoStopAfter: boolean }) {
-  const activeTextEditor = getActiveTextEditor()
+export async function insertText(snippet: Snippet | Location, location: Snippet | Location, options: { readonly undoStopBefore: boolean, readonly undoStopAfter: boolean, textEditor?: TextEditor, scrollInToView?: boolean } = { undoStopBefore: false, undoStopAfter: false, textEditor: getActiveTextEditor(), scrollInToView: true }) {
+  const activeTextEditor = options.textEditor
   if (!activeTextEditor)
-    return
+    return false
 
   if (typeof snippet !== 'string' && !(snippet instanceof SnippetString)) {
     const temp = snippet
@@ -32,11 +34,8 @@ export async function insertText(snippet: Snippet | Location, location: Snippet 
   if (typeof snippet === 'string')
     snippet = createSnippetString(snippet)
 
-  const res = await activeTextEditor.insertSnippet(snippet as SnippetString, location as Location, options ?? {
-    undoStopBefore: false,
-    undoStopAfter: false,
-  })
-  if (res && !Array.isArray(location)) {
+  const res = await activeTextEditor.insertSnippet(snippet as SnippetString, location as Location, options)
+  if (res && options.scrollInToView && !Array.isArray(location)) {
     scrollInToView(location instanceof Range ? location : createRange(location as Position, location as Position))
   }
   return res
