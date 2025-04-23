@@ -1,6 +1,6 @@
 import type { CompletionItemOptions } from './createCompletionItem'
-import * as vscode from 'vscode'
 import { createCompletionItem } from './createCompletionItem'
+import * as vscode from './vscode-shim'
 
 /**
  * 创建补全项组

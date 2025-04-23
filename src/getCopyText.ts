@@ -1,4 +1,4 @@
-import * as vscode from 'vscode'
+import * as vscode from './vscode-shim'
 
 /**
  * 获取剪贴板内容

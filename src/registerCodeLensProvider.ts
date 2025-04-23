@@ -1,6 +1,6 @@
-import type { CodeLensProvider, DocumentSelector } from 'vscode'
-import * as vscode from 'vscode'
+import type { CodeLensProvider, DocumentSelector } from './vscode-shim'
 import { addEffect } from './util'
+import * as vscode from './vscode-shim'
 
 /**
  * 注册代码镜头提供商。多个提供商可以注册一种语言。在这种情况下，供应商被要求在并行，结果被合并。失败的提供商（被拒绝的承诺或例外）将不会导致整个操作失败。

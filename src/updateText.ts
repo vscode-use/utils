@@ -1,4 +1,4 @@
-import type { TextEditor, TextEditorEdit } from 'vscode'
+import type { TextEditor, TextEditorEdit } from './vscode-shim'
 import { getActiveTextEditor } from './getActiveTextEditor'
 
 /**

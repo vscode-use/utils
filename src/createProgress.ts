@@ -1,5 +1,5 @@
 import type { ProgressOptions } from './types'
-import * as vscode from 'vscode'
+import * as vscode from './vscode-shim'
 
 export function createProgress(options: ProgressOptions) {
   const { title, location = vscode.ProgressLocation.Notification, cancellable = false, cancel, done } = options

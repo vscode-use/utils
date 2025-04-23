@@ -1,36 +1,45 @@
 {
   "name": "@vscode-use/utils",
+  "type": "module",
   "version": "0.1.53",
-  "packageManager": "pnpm@9.15.9",
-  "description": "",
+  "packageManager": "pnpm@10.9.0",
+  "description": "A collection of utility functions for VS Code extensions. Enhance your VS Code extension development with reusable, well-tested utilities.",
   "author": "Simon He",
   "license": "MIT",
   "funding": "https://github.com/sponsors/Simon-He95",
   "homepage": "https://github.com/vscode-use/utils#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vscode-use/utils.git"
+    "url": "https://github.com/vscode-use/utils"
   },
-  "bugs": "https://github.com/vscode-use/utils/issues",
+  "bugs": {
+    "url": "https://github.com/vscode-use/utils/issues"
+  },
   "keywords": [
     "vscode-use",
     "@vscode-use/utils",
     "utils",
-    "vscode"
+    "vscode",
+    "vscode-extension",
+    "vscode utilities",
+    "typescript",
+    "node",
+    "productivity",
+    "developer-tools"
   ],
   "sideEffects": false,
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     },
     "./index": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     }
   },
   "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "typesVersions": {
     "*": {
@@ -72,15 +81,14 @@
     "eslint": "^9.25.1",
     "picocolors": "^1.1.1",
     "prettier": "^2.8.8",
-    "tsdown": "^0.9.3",
-    "tsup": "^8.4.0",
-    "typescript": "^4.9.5",
+    "tsdown": "^0.9.5",
+    "typescript": "^5.8.3",
     "vitest": "^3.1.2"
   },
   "lint-staged": {
     "*": [
       "prettier --write --cache --ignore-unknown"
     ],
-    "*.{vue,js,ts,jsx,tsx,md,json}": "eslint --fix"
+    "*.{vue,js,ts,jsx,tsx,md,json}": "eslint . --fix"
   }
 }

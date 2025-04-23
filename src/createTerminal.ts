@@ -1,4 +1,4 @@
-import * as vscode from 'vscode'
+import * as vscode from './vscode-shim'
 
 /**
  * @name createTerminal 创建终端

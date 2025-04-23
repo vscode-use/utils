@@ -1,5 +1,5 @@
-import type { Uri } from 'vscode'
-import * as vscode from 'vscode'
+import type { Uri } from './vscode-shim'
+import * as vscode from './vscode-shim'
 
 /**
  * 重命名文件

@@ -1,4 +1,4 @@
-import * as vscode from 'vscode'
+import * as vscode from './vscode-shim'
 
 /**
  * 打开外部的一个地址

@@ -1,6 +1,6 @@
-import type { InlineCompletionItem, InlineCompletionList, ProviderResult } from 'vscode'
-import * as vscode from 'vscode'
+import type { InlineCompletionItem, InlineCompletionList, ProviderResult } from './vscode-shim'
 import { addEffect } from './util'
+import * as vscode from './vscode-shim'
 
 /**
  * 注册内联自动补全

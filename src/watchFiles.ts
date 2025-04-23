@@ -1,5 +1,5 @@
-import type { GlobPattern } from 'vscode'
 import type { WatchFilesOptions } from './types'
+import type { GlobPattern } from './vscode-shim'
 import { watchFile } from './watchFile'
 
 /**

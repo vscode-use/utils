@@ -1,4 +1,4 @@
-import * as vscode from 'vscode'
+import * as vscode from './vscode-shim'
 
 /**
  * 判断当前主题色

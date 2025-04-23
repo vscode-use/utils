@@ -1,4 +1,4 @@
-import type { Uri } from 'vscode'
+import type { Uri } from './vscode-shim'
 import { getActiveTextEditor } from './getActiveTextEditor'
 
 /**

@@ -1,9 +1,9 @@
-import type { Position, TextEditor } from 'vscode'
-import { Range, SnippetString } from 'vscode'
+import type { Position, TextEditor } from './vscode-shim'
 import { createRange } from './createRange'
 import { createSnippetString } from './createSnippetString'
 import { getActiveTextEditor } from './getActiveTextEditor'
 import { scrollInToView } from './scrollInToView'
+import { Range, SnippetString } from './vscode-shim'
 
 type Location = Position | Range | readonly Position[] | readonly Range[]
 type Snippet = string | SnippetString

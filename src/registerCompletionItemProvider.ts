@@ -1,6 +1,6 @@
-import type { CancellationToken, CompletionItem, CompletionList, ProviderResult } from 'vscode'
-import * as vscode from 'vscode'
+import type { CancellationToken, CompletionItem, CompletionList, ProviderResult } from './vscode-shim'
 import { addEffect } from './util'
+import * as vscode from './vscode-shim'
 
 /**
  * 注册自动补全

@@ -1,4 +1,4 @@
-import * as vscode from 'vscode'
+import * as vscode from './vscode-shim'
 
 /**
  * 创建外部输出管道

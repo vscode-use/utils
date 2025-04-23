@@ -1,6 +1,6 @@
-import type { Command, CompletionItemKind, MarkdownString, Range, SnippetString } from 'vscode'
-import * as vscode from 'vscode'
+import type { Command, CompletionItemKind, MarkdownString, Range, SnippetString } from './vscode-shim'
 import { createSnippetString } from './createSnippetString'
+import * as vscode from './vscode-shim'
 
 export interface CompletionItemOptions {
   content: string

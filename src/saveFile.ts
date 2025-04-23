@@ -1,6 +1,6 @@
-import * as vscode from 'vscode'
 import { getActiveTextEditor } from './getActiveTextEditor'
 import { nextTick } from './nextTick'
+import * as vscode from './vscode-shim'
 
 /**
  * 保存文件

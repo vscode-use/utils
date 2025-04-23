@@ -1,6 +1,6 @@
-import type { DocumentSelector, HoverProvider } from 'vscode'
-import * as vscode from 'vscode'
+import type { DocumentSelector, HoverProvider } from './vscode-shim'
 import { addEffect } from './util'
+import * as vscode from './vscode-shim'
 
 /**
  * 注册鼠标悬停事件

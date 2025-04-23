@@ -1,6 +1,6 @@
-import type { Uri } from 'vscode'
-import { workspace } from 'vscode'
+import type { Uri } from './vscode-shim'
 import { getActiveTextEditor } from './getActiveTextEditor'
+import { workspace } from './vscode-shim'
 /**
  * 获取当前工作区的根目录
  * @returns 返回当前工作区的根目录

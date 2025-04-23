@@ -1,5 +1,5 @@
 import type { BarOptions } from './types'
-import * as vscode from 'vscode'
+import * as vscode from './vscode-shim'
 
 /**
  * 创建底部栏

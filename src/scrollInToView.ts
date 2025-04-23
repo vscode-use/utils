@@ -1,4 +1,4 @@
-import type { Range, TextEditorRevealType } from 'vscode'
+import type { Range, TextEditorRevealType } from './vscode-shim'
 import { getActiveTextEditor } from './getActiveTextEditor'
 
 export function scrollInToView(range: Range, viewColumn: TextEditorRevealType = 1) {

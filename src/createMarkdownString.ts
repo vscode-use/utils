@@ -1,4 +1,4 @@
-import * as vscode from 'vscode'
+import * as vscode from './vscode-shim'
 
 export function createMarkdownString() {
   const md = new vscode.MarkdownString()

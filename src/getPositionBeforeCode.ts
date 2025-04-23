@@ -1,4 +1,4 @@
-import type * as vscode from 'vscode'
+import type * as vscode from './vscode-shim'
 import { getActiveText } from './getActiveText'
 import { getOffsetFromPosition } from './getOffsetFromPosition'
 /**

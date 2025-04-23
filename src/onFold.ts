@@ -1,5 +1,5 @@
-import type { Range } from 'vscode'
-import * as vscode from 'vscode'
+import type { Range } from './vscode-shim'
+import * as vscode from './vscode-shim'
 /**
  * 折叠指定的 range
  * @param rangesToFold Range[] 需要被折叠的 range

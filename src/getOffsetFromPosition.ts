@@ -1,4 +1,4 @@
-import type { Position } from 'vscode'
+import type { Position } from './vscode-shim'
 import { getActiveTextEditor } from './getActiveTextEditor'
 /**
  * 根据position计算出offset位置

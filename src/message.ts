@@ -1,5 +1,5 @@
 import type { MessageOption } from './types'
-import * as vscode from 'vscode'
+import * as vscode from './vscode-shim'
 
 /**
  * 消息弹窗

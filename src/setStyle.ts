@@ -1,5 +1,5 @@
-import type { Range, TextEditorDecorationType } from 'vscode'
 import type { ClearStyle } from './types'
+import type { Range, TextEditorDecorationType } from './vscode-shim'
 import { getActiveTextEditor } from './getActiveTextEditor'
 
 /**

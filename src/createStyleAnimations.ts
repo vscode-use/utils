@@ -1,5 +1,5 @@
-import type { DecorationRenderOptions, Range } from 'vscode'
 import type { ClearStyle } from './types'
+import type { DecorationRenderOptions, Range } from './vscode-shim'
 import { createStyle } from './createStyle'
 import { setStyle } from './setStyle'
 

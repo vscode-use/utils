@@ -1,10 +1,10 @@
 import type { PositionOption1 } from './types'
-import * as vscode from 'vscode'
 import { createRange } from './createRange'
 import { getActiveTextEditor } from './getActiveTextEditor'
 import { getCurrentFileUrl } from './getCurrentFileUrl'
 import { openFile } from './openFile'
 import { setSelection } from './setSelection'
+import * as vscode from './vscode-shim'
 
 /**
  * 跳入某个文件的某一行的位置
