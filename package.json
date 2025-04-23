@@ -52,8 +52,8 @@
     "onStartupFinished"
   ],
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch src",
+    "build": "tsdown src/index.ts",
+    "dev": "tsdown --watch src",
     "format": "prettier --write --cache .",
     "lint": "eslint . --cache",
     "lint:fix": "nr lint --fix",
@@ -62,19 +62,22 @@
     "test": "vitest",
     "typecheck": "tsc --noEmit"
   },
+  "dependencies": {
+    "alien-signals": "^1.0.13"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "^4.12.0",
     "@antfu/ni": "^0.21.12",
     "@types/node": "^18.19.86",
     "@types/vscode": "1.92.0",
-    "alien-signals": "^1.0.13",
     "bumpp": "^8.2.1",
-    "eslint": "^9.24.0",
+    "eslint": "^9.25.1",
     "picocolors": "^1.1.1",
     "prettier": "^2.8.8",
+    "tsdown": "^0.9.3",
     "tsup": "^8.4.0",
     "typescript": "^4.9.5",
-    "vitest": "^3.1.1"
+    "vitest": "^3.1.2"
   },
   "lint-staged": {
     "*": [
