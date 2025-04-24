@@ -1,7 +1,7 @@
 {
   "name": "@vscode-use/utils",
   "type": "module",
-  "version": "0.1.55",
+  "version": "0.1.56",
   "packageManager": "pnpm@10.9.0",
   "description": "A collection of utility functions for VS Code extensions. Enhance your VS Code extension development with reusable, well-tested utilities.",
   "author": "Simon He",
