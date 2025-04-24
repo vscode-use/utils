@@ -7,12 +7,12 @@ import * as vscode from './vscode-shim'
  * @param quickPickOptions
  * @returns Thenable<string | undefined>
  */
-export function createSelect<T extends quickPickOptions>(
+export function createSelect<T extends boolean = false>(
   options: (string | vscode.QuickPickItem)[],
-  quickPickOptions?: T,
-): Promise<string | string[] | undefined> {
+  quickPickOptions?: quickPickOptions & { canSelectMany?: T },
+): Promise<T extends true ? string[] : string | undefined> {
   return new Promise((resolve) => {
-    const noop = () => {}
+    const noop = () => { }
     const quickPick = vscode.window.createQuickPick()
     const fixedOptions = options.map((item: any) =>
       typeof item === 'string' ? { label: item } : item,
@@ -49,14 +49,14 @@ export function createSelect<T extends quickPickOptions>(
     let selection: readonly vscode.QuickPickItem[] = []
     quickPick.onDidChangeSelection((_selection) => {
       selection = _selection
-      ;(quickPickOptions?.onDidChange || noop)(_selection)
+      ; (quickPickOptions?.onDidChange || noop)(_selection)
     })
     quickPick.onDidAccept(() => {
       if (quickPickOptions?.canSelectMany)
-        resolve(selection.map(item => item.label))
+        resolve(selection.map(item => item.label) as any)
       else
-        resolve(selection[0]?.label)
-      ;(quickPickOptions?.onDidAccept || noop)()
+        resolve(selection[0]?.label as any)
+      ; (quickPickOptions?.onDidAccept || noop)()
       quickPick.hide()
     })
     quickPick.onDidTriggerButton(quickPickOptions?.onDidTriggerButton || noop)
