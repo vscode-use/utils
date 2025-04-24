@@ -10,7 +10,7 @@
   "homepage": "https://github.com/vscode-use/utils#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/vscode-use/utils"
+    "url": "git+https://github.com/vscode-use/utils.git"
   },
   "bugs": {
     "url": "https://github.com/vscode-use/utils/issues"
@@ -81,7 +81,7 @@
     "eslint": "^9.25.1",
     "picocolors": "^1.1.1",
     "prettier": "^2.8.8",
-    "tsdown": "^0.9.5",
+    "tsdown": "^0.9.6",
     "typescript": "^5.8.3",
     "vitest": "^3.1.2"
   },
