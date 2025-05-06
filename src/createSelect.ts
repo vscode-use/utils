@@ -55,7 +55,7 @@ export function createSelect<T extends boolean = false>(
       if (quickPickOptions?.canSelectMany)
         resolve(selection.map(item => item.label) as any)
       else
-        resolve(selection[0]?.label as any)
+        resolve(selection[0]?.label as any || quickPick.value)
       ; (quickPickOptions?.onDidAccept || noop)()
       quickPick.hide()
     })
