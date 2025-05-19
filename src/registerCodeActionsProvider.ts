@@ -1,6 +1,6 @@
-import type { CodeActionProvider, CodeActionProviderMetadata, DocumentSelector } from './vscode-shim'
+import type { CodeActionProvider, CodeActionProviderMetadata, DocumentSelector } from 'vscode'
+import * as vscode from 'vscode'
 import { addEffect } from './util'
-import * as vscode from './vscode-shim'
 
 /**
  * 注册代码动作提供程序。

@@ -1,5 +1,5 @@
-import type { TextDocumentShowOptions, TextEditor } from './vscode-shim'
-import * as vscode from './vscode-shim'
+import type { TextDocumentShowOptions, TextEditor } from 'vscode'
+import * as vscode from 'vscode'
 
 /**
  * 打开文件

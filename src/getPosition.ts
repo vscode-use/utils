@@ -1,5 +1,5 @@
+import * as vscode from 'vscode'
 import { getActiveText } from './getActiveText'
-import * as vscode from './vscode-shim'
 /**
  * 根据offset获取行列
  */

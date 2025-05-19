@@ -1,5 +1,5 @@
+import * as vscode from 'vscode'
 import { addEffect } from './util'
-import * as vscode from './vscode-shim'
 
 /**
  * 注册指令

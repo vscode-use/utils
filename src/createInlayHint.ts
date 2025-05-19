@@ -1,4 +1,4 @@
-import * as vscode from './vscode-shim'
+import * as vscode from 'vscode'
 
 export interface InlayHintOptions {
   position: vscode.Position

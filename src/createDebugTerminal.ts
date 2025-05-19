@@ -1,4 +1,4 @@
-import * as vscode from './vscode-shim'
+import * as vscode from 'vscode'
 
 /**
  * 创建一个调试终端

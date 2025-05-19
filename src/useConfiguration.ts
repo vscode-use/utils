@@ -1,8 +1,8 @@
 import type { WriteableSignal } from './types'
 import { signal } from 'alien-signals'
+import * as vscode from 'vscode'
 import { addEventListener } from './addEventListener'
 import { getConfiguration } from './getConfiguration'
-import * as vscode from './vscode-shim'
 
 /**
  * 获取配置

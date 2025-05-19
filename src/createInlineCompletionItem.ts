@@ -1,6 +1,6 @@
-import type { Command, Range, SnippetString } from './vscode-shim'
+import type { Command, Range, SnippetString } from 'vscode'
+import * as vscode from 'vscode'
 import { createSnippetString } from './createSnippetString'
-import * as vscode from './vscode-shim'
 
 export interface InlineCompletionItemOptions {
   insertText: string | SnippetString

@@ -1,7 +1,7 @@
+import type { GlobPattern } from 'vscode'
 import type { WatchFilesOptions } from './types'
-import type { GlobPattern } from './vscode-shim'
+import { workspace } from 'vscode'
 import { addEffect } from './util'
-import { workspace } from './vscode-shim'
 
 /**
  * 监听文件变化

@@ -1,5 +1,5 @@
 import type { PositionOption1, PositionOption2 } from './types'
-import * as vscode from './vscode-shim'
+import * as vscode from 'vscode'
 
 /**
  * 创建位置

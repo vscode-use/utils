@@ -1,5 +1,5 @@
-import type { DecorationRenderOptions } from './vscode-shim'
-import * as vscode from './vscode-shim'
+import type { DecorationRenderOptions } from 'vscode'
+import * as vscode from 'vscode'
 
 /**
  * 创建样式

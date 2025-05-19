@@ -1,5 +1,5 @@
-import type { ThemeColor } from './vscode-shim'
-import * as vscode from './vscode-shim'
+import type { ThemeColor } from 'vscode'
+import * as vscode from 'vscode'
 
 /**
  * 创建一个方块

@@ -1,4 +1,4 @@
-import type { AccessibilityInformation, ColorTheme, Command, ConfigurationChangeEvent, FileCreateEvent, FileDeleteEvent, FileRenameEvent, InputBoxValidationMessage, ProgressLocation, QuickInputButton, QuickPickItem, Terminal, TextDocument, TextDocumentChangeEvent, TextEditor, TextEditorSelectionChangeEvent, TextEditorViewColumnChangeEvent, TextEditorVisibleRangesChangeEvent, ThemeColor, Uri, WindowState, WorkspaceFoldersChangeEvent } from './vscode-shim'
+import type { AccessibilityInformation, ColorTheme, Command, ConfigurationChangeEvent, FileCreateEvent, FileDeleteEvent, FileRenameEvent, InputBoxValidationMessage, ProgressLocation, QuickInputButton, QuickPickItem, Terminal, TextDocument, TextDocumentChangeEvent, TextEditor, TextEditorSelectionChangeEvent, TextEditorViewColumnChangeEvent, TextEditorVisibleRangesChangeEvent, ThemeColor, Uri, WindowState, WorkspaceFoldersChangeEvent } from 'vscode'
 
 export interface MessageOption {
   message: string

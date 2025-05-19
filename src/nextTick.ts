@@ -1,4 +1,4 @@
-import * as vscode from './vscode-shim'
+import * as vscode from 'vscode'
 
 /**
  * 当进去文件更新（增删改查等）时，需要等到文件变化后执行函数

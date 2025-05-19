@@ -1,6 +1,6 @@
-import type { DefinitionProvider, DocumentSelector } from './vscode-shim'
+import type { DefinitionProvider, DocumentSelector } from 'vscode'
+import * as vscode from 'vscode'
 import { addEffect } from './util'
-import * as vscode from './vscode-shim'
 
 /**
  * 注册cmd选中关键词的事件

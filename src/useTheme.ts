@@ -1,4 +1,4 @@
-import * as vscode from './vscode-shim'
+import * as vscode from 'vscode'
 
 function getCurrentTheme() {
   const config = vscode.workspace.getConfiguration()

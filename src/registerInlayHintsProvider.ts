@@ -1,6 +1,6 @@
-import type { DocumentSelector } from './vscode-shim'
+import type { DocumentSelector } from 'vscode'
+import * as vscode from 'vscode'
 import { addEffect } from './util'
-import * as vscode from './vscode-shim'
 
 /**
  * 注册inlayHints事件

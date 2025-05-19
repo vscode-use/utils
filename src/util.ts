@@ -1,4 +1,4 @@
-import type * as vscode from './vscode-shim'
+import type * as vscode from 'vscode'
 // 自动收集函数副作用
 export const effectMaps: vscode.Disposable[] = []
 export function createEffectDeps() {

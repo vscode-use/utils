@@ -1,6 +1,6 @@
 import type { InlineCompletionItemOptions } from './createInlineCompletionItem'
+import * as vscode from 'vscode'
 import { createInlineCompletionItem } from './createInlineCompletionItem'
-import * as vscode from './vscode-shim'
 
 /**
  * 创建补全项组

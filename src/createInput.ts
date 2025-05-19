@@ -1,5 +1,5 @@
 import type { CreateInputOptions } from './types'
-import * as vscode from './vscode-shim'
+import * as vscode from 'vscode'
 
 /**
  * 创建输入框

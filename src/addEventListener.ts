@@ -1,6 +1,6 @@
 import type { EventCallbackMap, WorkspaceCallbackMap } from './types'
+import * as vscode from 'vscode'
 import { addEffect } from './util'
-import * as vscode from './vscode-shim'
 
 /**
  * 添加事件监听

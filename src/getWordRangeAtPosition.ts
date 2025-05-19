@@ -1,4 +1,4 @@
-import type * as vscode from './vscode-shim'
+import type * as vscode from 'vscode'
 import { getActiveTextEditor } from './getActiveTextEditor'
 /**
  * 根据position位置的关键词的range
