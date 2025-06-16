@@ -48,6 +48,10 @@ export function createRange(start: PositionOption2 | PositionOption1 | number, e
     _start = createPosition(start)
     _end = createPosition(end)
   }
+  else if ((start as any).position && (end as any).position) {
+    _start = (start as any).position
+    _end = (end as any).position
+  }
 
   if (_start && _end)
     return new vscode.Range(_start, _end)
