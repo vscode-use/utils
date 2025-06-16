@@ -2,7 +2,7 @@
   "name": "@vscode-use/utils",
   "type": "module",
   "version": "0.1.58",
-  "packageManager": "pnpm@10.9.0",
+  "packageManager": "pnpm@10.12.1",
   "description": "A collection of utility functions for VS Code extensions. Enhance your VS Code extension development with reusable, well-tested utilities.",
   "author": "Simon He",
   "license": "MIT",
@@ -83,7 +83,7 @@
     "prettier": "^2.8.8",
     "tsdown": "^0.9.6",
     "typescript": "^5.8.3",
-    "vitest": "^3.1.2"
+    "vitest": "^3.2.3"
   },
   "lint-staged": {
     "*": [

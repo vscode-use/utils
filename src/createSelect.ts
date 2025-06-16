@@ -1,4 +1,3 @@
-import type { quickPickOptions } from './types'
 import * as vscode from 'vscode'
 
 /**
@@ -9,7 +8,7 @@ import * as vscode from 'vscode'
  */
 export function createSelect<T extends boolean = false>(
   options: (string | vscode.QuickPickItem)[],
-  quickPickOptions?: quickPickOptions & { canSelectMany?: T },
+  quickPickOptions?: Partial<vscode.QuickPick<any>>,
 ): Promise<T extends true ? string[] : string | undefined> {
   return new Promise((resolve) => {
     const noop = () => { }
@@ -19,15 +18,7 @@ export function createSelect<T extends boolean = false>(
     ) as vscode.QuickPickItem[]
 
     quickPick.items = fixedOptions
-    if (quickPickOptions) {
-      quickPick.canSelectMany = quickPickOptions.canSelectMany || false
-      quickPick.title = quickPickOptions.title || ''
-      quickPick.value = quickPickOptions.value || ''
-      quickPick.placeholder = quickPickOptions.placeholder || ''
-      quickPick.buttons = quickPickOptions.buttons || []
-      quickPick.matchOnDescription = quickPickOptions.matchOnDescription || false
-      quickPick.keepScrollPosition = quickPickOptions.keepScrollPosition || false
-    }
+    Object.assign(quickPick, quickPickOptions)
 
     if (quickPickOptions?.activeItems && quickPick.items.length > 0) {
       let activeItem = quickPick.items[0]

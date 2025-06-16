@@ -107,6 +107,7 @@ export interface quickPickOptions {
   matchOnDescription?: boolean
   keepScrollPosition?: boolean
   activeItems?: string[]
+  ignoreFocusOut?: boolean
   onDidTriggerButton?: (e: any) => any
   onDidTriggerItemButton?: (e: any) => any
   onDidChangeActive?: (e: any) => any
