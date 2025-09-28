@@ -8,9 +8,12 @@ import { getOffsetFromPosition } from './getOffsetFromPosition'
  * @param parentLoc 父位置
  * @param childLoc 子位置
  * @param offset 偏移量
+ * @param offsetLine 行偏移量，默认1
+ * @param startOffset 起始位置的额外偏移量，默认0
+ * @param endOffset 结束位置的额外偏移量，默认0
  * @returns boolean
  */
-export function isInPosition(parentLoc: RangeLoc, childLoc: PositionOption2, offset = 0, offsetLine = 1) {
+export function isInPosition(parentLoc: RangeLoc, childLoc: PositionOption2, offset = 0, offsetLine = 1, startOffset = 0, endOffset = 0) {
   if (offset === 0) {
     const { start, end } = parentLoc
     const startLine = start.line
@@ -19,9 +22,9 @@ export function isInPosition(parentLoc: RangeLoc, childLoc: PositionOption2, off
     const endLine = end.line
     const { line } = childLoc
     const character = childLoc.column || childLoc.character
-    if (line + offsetLine === startLine && character! <= startcharacter! - 1)
+    if (line + offsetLine === startLine && character! <= startcharacter! - 1 + startOffset)
       return false
-    if (line + offsetLine === endLine && character! > endcharacter! - 1)
+    if (line + offsetLine === endLine && character!> endcharacter! - 1 + endOffset)
       return false
     if (line + offsetLine < startLine)
       return false
