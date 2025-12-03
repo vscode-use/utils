@@ -1,3 +1,4 @@
+import type { quickPickOptions as QuickPickOptions } from './types'
 import * as vscode from 'vscode'
 
 /**
@@ -8,7 +9,7 @@ import * as vscode from 'vscode'
  */
 export function createSelect<T extends boolean = false>(
   options: (string | vscode.QuickPickItem)[],
-  quickPickOptions?: Partial<vscode.QuickPick<any>>,
+  quickPickOptions?: QuickPickOptions & Partial<vscode.QuickPick<any>>,
 ): Promise<T extends true ? string[] : string | undefined> {
   return new Promise((resolve) => {
     const noop = () => { }
@@ -18,7 +19,17 @@ export function createSelect<T extends boolean = false>(
     ) as vscode.QuickPickItem[]
 
     quickPick.items = fixedOptions
-    Object.assign(quickPick, quickPickOptions)
+    const {
+      onDidChange,
+      onDidAccept,
+      onDidTriggerButton,
+      onDidTriggerItemButton,
+      onDidChangeActive,
+      onDidChangeValue,
+      onDidHide,
+      ...quickPickProps
+    } = quickPickOptions ?? {}
+    Object.assign(quickPick, quickPickProps)
 
     if (quickPickOptions?.activeItems && quickPick.items.length > 0) {
       let activeItem = quickPick.items[0]
@@ -54,22 +65,22 @@ export function createSelect<T extends boolean = false>(
     }
     quickPick.onDidChangeSelection((_selection) => {
       selection = _selection
-      ; (quickPickOptions?.onDidChange || noop)(_selection)
+      ; (onDidChange || noop)(_selection)
     })
     quickPick.onDidAccept(() => {
       if (quickPickOptions?.canSelectMany)
         resolveOnce(selection.map(item => item.label) as T extends true ? string[] : string | undefined)
       else
         resolveOnce((selection[0]?.label ?? quickPick.value) as T extends true ? string[] : string | undefined)
-      ; (quickPickOptions?.onDidAccept || noop)()
+      ; (onDidAccept || noop)()
       quickPick.hide()
     })
-    quickPick.onDidTriggerButton(quickPickOptions?.onDidTriggerButton || noop)
-    quickPick.onDidTriggerItemButton(quickPickOptions?.onDidTriggerItemButton || noop)
-    quickPick.onDidChangeActive(quickPickOptions?.onDidChangeActive || noop)
-    quickPick.onDidChangeValue(quickPickOptions?.onDidChangeValue || noop)
+    quickPick.onDidTriggerButton(onDidTriggerButton || noop)
+    quickPick.onDidTriggerItemButton(onDidTriggerItemButton || noop)
+    quickPick.onDidChangeActive(onDidChangeActive || noop)
+    quickPick.onDidChangeValue(onDidChangeValue || noop)
     quickPick.onDidHide((e) => {
-      (quickPickOptions?.onDidHide || noop)(e)
+      (onDidHide || noop)(e)
       resolveOnce(undefined)
       quickPick.dispose()
     })

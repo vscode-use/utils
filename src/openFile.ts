@@ -8,10 +8,7 @@ import * as vscode from 'vscode'
  * @returns Promise<TextEditor>
  */
 export function openFile(fileUri: string, showOptions?: TextDocumentShowOptions): Promise<TextEditor> {
-  return new Promise((resolve) => {
-    vscode.workspace
-      .openTextDocument(fileUri)
-      .then(doc => vscode.window.showTextDocument(doc, showOptions).then(resolve))
-      .catch(() => { })
-  })
+  return Promise
+    .resolve(vscode.workspace.openTextDocument(fileUri))
+    .then(doc => Promise.resolve(vscode.window.showTextDocument(doc, showOptions)))
 }

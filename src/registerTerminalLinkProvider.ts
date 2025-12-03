@@ -9,7 +9,7 @@ import { addEffect } from './util'
  * @returns Disposable
  */
 export function registerTerminalLinkProvider(
-  provideTerminalLinks: (context: vscode.TerminalLinkContext, token: vscode.CancellationToken) => ProviderResult<vscode.TerminalLink | vscode.TerminalLink[]>,
+  provideTerminalLinks: (context: vscode.TerminalLinkContext, token: vscode.CancellationToken) => ProviderResult<vscode.TerminalLink[]>,
   handleTerminalLink: (link: vscode.TerminalLink) => void,
 ): vscode.Disposable {
   return addEffect(vscode.window.registerTerminalLinkProvider({

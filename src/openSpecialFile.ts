@@ -7,7 +7,5 @@ import * as vscode from 'vscode'
  * @returns Promise<TextEditor>
  */
 export function openSpecialFile(fileUri: string): Promise<unknown> {
-  return new Promise((resolve) => {
-    vscode.commands.executeCommand('vscode.open', vscode.Uri.file(fileUri)).then(resolve).catch(() => { })
-  })
+  return Promise.resolve(vscode.commands.executeCommand('vscode.open', vscode.Uri.file(fileUri)))
 }

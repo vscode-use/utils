@@ -2,7 +2,7 @@
   "name": "@vscode-use/utils",
   "type": "module",
   "version": "0.1.60",
-  "packageManager": "pnpm@10.17.1",
+  "packageManager": "pnpm@10.24.0",
   "description": "A collection of utility functions for VS Code extensions. Enhance your VS Code extension development with reusable, well-tested utilities.",
   "author": "Simon He",
   "license": "MIT",
@@ -75,14 +75,14 @@
   "devDependencies": {
     "@antfu/eslint-config": "^4.19.0",
     "@antfu/ni": "^0.21.12",
-    "@types/node": "^18.19.127",
+    "@types/node": "^18.19.130",
     "@types/vscode": "1.92.0",
     "bumpp": "^8.2.1",
-    "eslint": "^9.36.0",
+    "eslint": "^9.39.1",
     "picocolors": "^1.1.1",
     "prettier": "^2.8.8",
     "tsdown": "^0.9.9",
-    "typescript": "^5.9.2",
+    "typescript": "^5.9.3",
     "vitest": "^3.2.4"
   },
   "lint-staged": {

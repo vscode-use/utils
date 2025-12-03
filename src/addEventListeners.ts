@@ -16,14 +16,20 @@ import { addEventListener } from './addEventListener'
  * @returns
  */
 
-export function addEventListeners<T extends (keyof typeof eventMap | keyof typeof workspaceMap | keyof typeof authenticationMap)>(
-  options: Array<[T, T extends keyof EventCallbackMap
-    ? EventCallbackMap[T]
-    : T extends keyof WorkspaceCallbackMap
-      ? WorkspaceCallbackMap[T]
-      : T extends keyof typeof authenticationMap
-        ? (providerId: string, getSession: (name: string) => Promise<vscode.AuthenticationSession | undefined>) => void
-        : never]>,
-) {
-  return options.map(([type, callback]) => addEventListener<T>(type, callback))
+type EventListenerTuple = {
+  [K in keyof typeof eventMap]: [K, EventCallbackMap[K]]
+}[keyof typeof eventMap]
+
+type WorkspaceListenerTuple = {
+  [K in keyof typeof workspaceMap]: [K, WorkspaceCallbackMap[K]]
+}[keyof typeof workspaceMap]
+
+type AuthListenerTuple = {
+  [K in keyof typeof authenticationMap]: [K, (providerId: string, getSession: (name: string) => Promise<vscode.AuthenticationSession | undefined>) => void]
+}[keyof typeof authenticationMap]
+
+type ListenerTuple = EventListenerTuple | WorkspaceListenerTuple | AuthListenerTuple
+
+export function addEventListeners(options: ListenerTuple[]) {
+  return options.map(([type, callback]) => addEventListener(type as any, callback as any))
 }

@@ -56,53 +56,47 @@ export const authenticationMap = {
   'auth-change': 'onDidChangeSessions',
 }
 
-type ListenerCallback<T> = T extends keyof EventCallbackMap
-  ? EventCallbackMap[T]
-  : T extends keyof WorkspaceCallbackMap
-    ? WorkspaceCallbackMap[T]
-    : T extends keyof typeof authenticationMap
-      ? (providerId: string, getSession: (name: string) => Promise<vscode.AuthenticationSession | undefined>) => void
-      : never
+type AuthCallback = (providerId: string, getSession: (name: string) => Promise<vscode.AuthenticationSession | undefined>) => void
+type WindowEventRegister = (listener: (...args: any[]) => any, thisArgs?: any) => vscode.Disposable
 
-export function addEventListener<T extends keyof typeof eventMap | keyof typeof workspaceMap | keyof typeof authenticationMap>(
-  type: T,
-  callback: ListenerCallback<T>,
+export function addEventListener<T extends keyof typeof eventMap>(type: T, callback: EventCallbackMap[T]): vscode.Disposable
+export function addEventListener<T extends keyof typeof workspaceMap>(type: T, callback: WorkspaceCallbackMap[T]): vscode.Disposable
+export function addEventListener<T extends keyof typeof authenticationMap>(type: T, callback: AuthCallback): vscode.Disposable
+export function addEventListener(
+  type: keyof typeof eventMap | keyof typeof workspaceMap | keyof typeof authenticationMap,
+  callback: (...args: any[]) => any,
 ): vscode.Disposable {
   if (type in eventMap) {
     const name = eventMap[type as keyof typeof eventMap]
+    const target = (vscode.window as unknown as Record<string, WindowEventRegister | undefined>)[name]
     if (type === 'activeText-change') {
-      const target = (vscode.window as Record<string, vscode.Disposable | undefined>)[name]
       return addEffect(target?.((e: vscode.TextEditor | undefined) => {
-        if (!e) {
+        if (!e)
           return
-        }
         (callback as EventCallbackMap['activeText-change'])(e)
-      }))
+      }) ?? new vscode.Disposable(() => { }))
     }
-    const target = (vscode.window as Record<string, vscode.Disposable | undefined>)[name]
-    return addEffect(target?.(callback as EventCallbackMap[keyof EventCallbackMap]))
+    return addEffect(target?.(callback) ?? new vscode.Disposable(() => { }))
   }
-  else if (type in workspaceMap) {
+  if (type in workspaceMap) {
     const name = workspaceMap[type as keyof typeof workspaceMap]
+    const target = (vscode.workspace as unknown as Record<string, WindowEventRegister | undefined>)[name]
     if (type === 'text-change') {
-      const target = (vscode.workspace as Record<string, vscode.Disposable | undefined>)[name]
       return addEffect(target?.(({ contentChanges, document, reason }: vscode.TextDocumentChangeEvent) => {
-        if (contentChanges.length === 0) {
+        if (contentChanges.length === 0)
           return
-        }
         (callback as WorkspaceCallbackMap['text-change'])({ contentChanges, document, reason } as vscode.TextDocumentChangeEvent)
-      }))
+      }) ?? new vscode.Disposable(() => { }))
     }
-    const target = (vscode.workspace as Record<string, vscode.Disposable | undefined>)[name]
-    return addEffect(target?.(callback as WorkspaceCallbackMap[keyof WorkspaceCallbackMap]))
+    return addEffect(target?.(callback) ?? new vscode.Disposable(() => { }))
   }
-  else if (type in authenticationMap) {
+  if (type in authenticationMap) {
     const name = authenticationMap[type as keyof typeof authenticationMap]
-    const target = (vscode.authentication as Record<string, vscode.Disposable | undefined>)[name]
+    const target = (vscode.authentication as unknown as Record<string, WindowEventRegister | undefined>)[name]
     return addEffect(target?.((e: { provider: { id: string } }) => {
       const getSession = async (name: string) => await vscode.authentication.getSession(name, ['user:read'])
-      return (callback as ListenerCallback<T>)(e.provider.id, getSession)
-    }))
+      ; (callback as AuthCallback)(e.provider.id, getSession)
+    }) ?? new vscode.Disposable(() => { }))
   }
   return addEffect(new vscode.Disposable(() => { }))
 }
