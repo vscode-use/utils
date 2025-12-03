@@ -6,9 +6,11 @@ import * as vscode from 'vscode'
  * @returns any
  */
 export function getConfiguration<T>(name: string, defaultValue?: T): any {
-  const [scopedName, propName] = name.split('.')
+  const splitIndex = name.indexOf('.')
+  if (splitIndex === -1)
+    return vscode.workspace.getConfiguration(name)
 
-  return propName
-    ? vscode.workspace.getConfiguration(scopedName).get(propName, defaultValue)
-    : vscode.workspace.getConfiguration(name)
+  const scopedName = name.slice(0, splitIndex)
+  const propName = name.slice(splitIndex + 1)
+  return vscode.workspace.getConfiguration(scopedName).get(propName, defaultValue)
 }

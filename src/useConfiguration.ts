@@ -1,6 +1,5 @@
 import type { WriteableSignal } from './types'
 import { signal } from 'alien-signals'
-import * as vscode from 'vscode'
 import { addEventListener } from './addEventListener'
 import { getConfiguration } from './getConfiguration'
 
@@ -12,13 +11,14 @@ import { getConfiguration } from './getConfiguration'
 type ScopedName = `${string}.${string}`
 
 export function useConfiguration<T>(name: ScopedName, defaultValue?: T): WriteableSignal<T> {
-  const [scopedName, propName] = name.split('.')
+  const splitIndex = name.indexOf('.')
+  const scopedName = name.slice(0, splitIndex)
+  const initialValue = getConfiguration<T>(name, defaultValue)
 
-  const config = signal<any>(vscode.workspace.getConfiguration(scopedName).get(propName, defaultValue))
+  const config = signal<T>(initialValue as T)
   addEventListener('config-change', (e) => {
-    if (e.affectsConfiguration(scopedName)) {
-      config(getConfiguration(name))
-    }
+    if (e.affectsConfiguration(scopedName))
+      config(getConfiguration<T>(name, defaultValue) as T)
   })
   return config
 }

@@ -59,17 +59,29 @@ export declare class Emitter<Events extends EventsMap = DefaultEvents> {
  * 用于订阅事件通信的工具
  */
 export function createEvents<Events extends EventsMap = DefaultEvents>(): Emitter<Events> {
-  return {
-    events: {},
+  type EventKey = keyof Events & string
+  const listeners: Partial<Record<EventKey, Events[EventKey][]>> = {}
+
+  const emitter: Emitter<Events> = {
+    events: listeners,
     emit(event, ...args) {
-      (this.events[event] || [] as any).forEach((i: any) => i(...args))
+      (listeners[event as EventKey] ?? []).forEach(listener => listener(...args))
     },
     on(event, cb) {
-      (this.events[event] = this.events[event] || [] as any).push(cb)
-      return () =>
-        (this.events[event] = (this.events[event] || [] as any).filter((i: any) => i !== cb))
+      const key = event as EventKey
+      const bucket = listeners[key] ?? []
+      bucket.push(cb)
+      listeners[key] = bucket
+      return () => {
+        const scopedListeners = listeners[key]
+        if (!scopedListeners)
+          return
+        listeners[key] = scopedListeners.filter(listener => listener !== cb)
+      }
     },
   }
+
+  return emitter
 }
 
 // const event = createEvents()

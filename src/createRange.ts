@@ -2,6 +2,13 @@ import type { PositionOption1, PositionOption2 } from './types'
 import * as vscode from 'vscode'
 import { createPosition } from './createPosition'
 
+function isRangeLike(value: unknown): value is { position: vscode.Position } {
+  return typeof value === 'object'
+    && value !== null
+    && 'position' in value
+    && (value as { position?: unknown }).position instanceof vscode.Position
+}
+
 /**
  * 创建一个 range
  */
@@ -48,9 +55,9 @@ export function createRange(start: PositionOption2 | PositionOption1 | number, e
     _start = createPosition(start)
     _end = createPosition(end)
   }
-  else if ((start as any).position && (end as any).position) {
-    _start = (start as any).position
-    _end = (end as any).position
+  else if (isRangeLike(start) && isRangeLike(end)) {
+    _start = start.position
+    _end = end.position
   }
 
   if (_start && _end)

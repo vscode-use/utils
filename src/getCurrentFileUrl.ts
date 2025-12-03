@@ -12,5 +12,5 @@ export function getCurrentFileUrl<T extends boolean = false>(isUri?: T): undefin
     return
   return (isUri
     ? activeTextEditor.document.uri
-    : activeTextEditor.document.uri.fsPath) as any
+    : activeTextEditor.document.uri.fsPath) as T extends true ? Uri : string
 }

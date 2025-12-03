@@ -9,8 +9,8 @@ import { watchFile } from './watchFile'
  * @returns 取消监听的函数
  */
 export function watchFiles(globPatterns: GlobPattern[], options: WatchFilesOptions) {
-  const { onChange, onDelete, ignoreCreateEvents, ignoreChangeEvents, ignoreDeleteEvents } = options
-  const disposals = globPatterns.map(globPattern => watchFile(globPattern, { onChange, onDelete, ignoreCreateEvents, ignoreChangeEvents, ignoreDeleteEvents }))
+  const { onCreate, onChange, onDelete, ignoreCreateEvents, ignoreChangeEvents, ignoreDeleteEvents } = options
+  const disposals = globPatterns.map(globPattern => watchFile(globPattern, { onCreate, onChange, onDelete, ignoreCreateEvents, ignoreChangeEvents, ignoreDeleteEvents }))
 
   return () => disposals.forEach(disposal => disposal())
 }

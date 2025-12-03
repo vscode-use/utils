@@ -10,9 +10,11 @@ import { addEffect } from './util'
  * @returns 取消监听的函数
  */
 export function watchFile(globPattern: GlobPattern, options: WatchFilesOptions) {
-  const { onChange, onDelete, ignoreCreateEvents, ignoreChangeEvents, ignoreDeleteEvents } = options
+  const { onCreate, onChange, onDelete, ignoreCreateEvents, ignoreChangeEvents, ignoreDeleteEvents } = options
   const watcher = workspace.createFileSystemWatcher(globPattern, ignoreCreateEvents, ignoreChangeEvents, ignoreDeleteEvents)
 
+  if (onCreate)
+    watcher.onDidCreate(onCreate)
   if (onChange)
     watcher.onDidChange(onChange)
   if (onDelete)

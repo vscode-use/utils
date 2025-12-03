@@ -12,5 +12,6 @@ export function openFile(fileUri: string, showOptions?: TextDocumentShowOptions)
     vscode.workspace
       .openTextDocument(fileUri)
       .then(doc => vscode.window.showTextDocument(doc, showOptions).then(resolve))
+      .catch(() => { })
   })
 }

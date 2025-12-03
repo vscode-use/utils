@@ -33,20 +33,34 @@ export function createSelect<T extends boolean = false>(
       quickPick.activeItems = [activeItem]
     }
     else if (quickPick.items.length > 0) {
-      quickPick.selectedItems = fixedOptions.filter((item: any) => item.picked)
-      quickPick.activeItems = [quickPick.items[0]]
+      const presetSelections = fixedOptions.filter((item: any) => item.picked)
+      if (presetSelections.length > 0) {
+        const quickPickWithSelection = quickPick as vscode.QuickPick<vscode.QuickPickItem> & { selectedItems: vscode.QuickPickItem[] }
+        quickPickWithSelection.selectedItems = presetSelections
+        quickPick.activeItems = [presetSelections[0]]
+      }
+      else {
+        quickPick.activeItems = [quickPick.items[0]]
+      }
     }
 
     let selection: readonly vscode.QuickPickItem[] = []
+    let resolved = false
+    const resolveOnce = (value: any) => {
+      if (resolved)
+        return
+      resolved = true
+      resolve(value)
+    }
     quickPick.onDidChangeSelection((_selection) => {
       selection = _selection
       ; (quickPickOptions?.onDidChange || noop)(_selection)
     })
     quickPick.onDidAccept(() => {
       if (quickPickOptions?.canSelectMany)
-        resolve(selection.map(item => item.label) as any)
+        resolveOnce(selection.map(item => item.label) as T extends true ? string[] : string | undefined)
       else
-        resolve(selection[0]?.label as any || quickPick.value)
+        resolveOnce((selection[0]?.label ?? quickPick.value) as T extends true ? string[] : string | undefined)
       ; (quickPickOptions?.onDidAccept || noop)()
       quickPick.hide()
     })
@@ -56,6 +70,7 @@ export function createSelect<T extends boolean = false>(
     quickPick.onDidChangeValue(quickPickOptions?.onDidChangeValue || noop)
     quickPick.onDidHide((e) => {
       (quickPickOptions?.onDidHide || noop)(e)
+      resolveOnce(undefined)
       quickPick.dispose()
     })
     quickPick.show()

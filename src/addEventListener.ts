@@ -56,45 +56,52 @@ export const authenticationMap = {
   'auth-change': 'onDidChangeSessions',
 }
 
-export function addEventListener<T extends (keyof typeof eventMap | keyof typeof workspaceMap | keyof typeof authenticationMap)>(
+type ListenerCallback<T> = T extends keyof EventCallbackMap
+  ? EventCallbackMap[T]
+  : T extends keyof WorkspaceCallbackMap
+    ? WorkspaceCallbackMap[T]
+    : T extends keyof typeof authenticationMap
+      ? (providerId: string, getSession: (name: string) => Promise<vscode.AuthenticationSession | undefined>) => void
+      : never
+
+export function addEventListener<T extends keyof typeof eventMap | keyof typeof workspaceMap | keyof typeof authenticationMap>(
   type: T,
-  callback: T extends keyof EventCallbackMap
-    ? EventCallbackMap[T]
-    : T extends keyof WorkspaceCallbackMap
-      ? WorkspaceCallbackMap[T]
-      : T extends keyof typeof authenticationMap
-        ? (providerId: string, getSession: (name: string) => Promise<vscode.AuthenticationSession | undefined>) => void
-        : never,
+  callback: ListenerCallback<T>,
 ): vscode.Disposable {
   if (type in eventMap) {
     const name = eventMap[type as keyof typeof eventMap]
     if (type === 'activeText-change') {
-      return addEffect((vscode.window as any)[name]?.((e: vscode.TextEditor | undefined) => {
+      const target = (vscode.window as Record<string, vscode.Disposable | undefined>)[name]
+      return addEffect(target?.((e: vscode.TextEditor | undefined) => {
         if (!e) {
           return
         }
         (callback as EventCallbackMap['activeText-change'])(e)
       }))
     }
-    return addEffect((vscode.window as any)[name]?.(callback))
+    const target = (vscode.window as Record<string, vscode.Disposable | undefined>)[name]
+    return addEffect(target?.(callback as EventCallbackMap[keyof EventCallbackMap]))
   }
   else if (type in workspaceMap) {
     const name = workspaceMap[type as keyof typeof workspaceMap]
     if (type === 'text-change') {
-      return addEffect((vscode.workspace as any)[name]?.(({ contentChanges, document, reason }: vscode.TextDocumentChangeEvent) => {
+      const target = (vscode.workspace as Record<string, vscode.Disposable | undefined>)[name]
+      return addEffect(target?.(({ contentChanges, document, reason }: vscode.TextDocumentChangeEvent) => {
         if (contentChanges.length === 0) {
           return
         }
         (callback as WorkspaceCallbackMap['text-change'])({ contentChanges, document, reason } as vscode.TextDocumentChangeEvent)
       }))
     }
-    return addEffect((vscode.workspace as any)[name]?.(callback))
+    const target = (vscode.workspace as Record<string, vscode.Disposable | undefined>)[name]
+    return addEffect(target?.(callback as WorkspaceCallbackMap[keyof WorkspaceCallbackMap]))
   }
   else if (type in authenticationMap) {
     const name = authenticationMap[type as keyof typeof authenticationMap]
-    return addEffect((vscode.authentication as any)[name]?.((e: any) => {
+    const target = (vscode.authentication as Record<string, vscode.Disposable | undefined>)[name]
+    return addEffect(target?.((e: { provider: { id: string } }) => {
       const getSession = async (name: string) => await vscode.authentication.getSession(name, ['user:read'])
-      return callback(e.provider.id, getSession)
+      return (callback as ListenerCallback<T>)(e.provider.id, getSession)
     }))
   }
   return addEffect(new vscode.Disposable(() => { }))

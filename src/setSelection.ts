@@ -30,22 +30,24 @@ export function setSelection(start: PositionOption2 | PositionOption1, end: Posi
  */
 export function setSelection<T extends vscode.Range | PositionOption2 | PositionOption1>(start: T, end?: T extends vscode.Range ? 'left' | 'right' : PositionOption2 | PositionOption1, position?: T extends vscode.Range ? vscode.TextEditorRevealType : 'left' | 'right', revealType?: vscode.TextEditorRevealType) {
   let range: vscode.Range
+  let cursorPosition: 'left' | 'right'
+  let reveal: vscode.TextEditorRevealType
   if (start instanceof vscode.Range) {
     range = start
-    revealType = position as vscode.TextEditorRevealType ?? 1
-    position = end as any ?? 'right'
+    cursorPosition = typeof end === 'string' ? end : 'right'
+    reveal = (typeof position === 'number' ? position : revealType) ?? vscode.TextEditorRevealType.Default
   }
   else {
     range = createRange(start, end as PositionOption2)
-    position = position as any ?? 'right'
-    revealType = revealType ?? 1
+    cursorPosition = (position as 'left' | 'right' | undefined) ?? 'right'
+    reveal = revealType ?? vscode.TextEditorRevealType.Default
   }
-  const selection = position === 'left'
+  const selection = cursorPosition === 'left'
     ? new vscode.Selection(range.end, range.start)
     : new vscode.Selection(range.start, range.end)
   const activeTextEditor = getActiveTextEditor()
   if (activeTextEditor) {
     activeTextEditor.selection = selection
-    activeTextEditor.revealRange(range, revealType)
+    activeTextEditor.revealRange(range, reveal)
   }
 }

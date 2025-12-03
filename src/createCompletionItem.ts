@@ -26,6 +26,8 @@ export interface CompletionItemOptions {
   [key: string]: any
 }
 
+export type CreatedCompletionItem<TParams = unknown> = vscode.CompletionItem & CompletionItemOptions & { params?: TParams }
+
 /**
  * 创建补全项
  * @param options CompletionItemOptions
@@ -42,12 +44,13 @@ export interface CompletionItemOptions {
  * @param options.range Range 补全项的范围
  * @returns CompletionItem
  */
-export function createCompletionItem(options: CompletionItemOptions & { params?: any }) {
+export function createCompletionItem<TParams = unknown>(options: CompletionItemOptions & { params?: TParams }): CreatedCompletionItem<TParams> {
   const { content, snippet, type } = options
-
-  return Object.assign(new vscode.CompletionItem(content, type) as any, options, {
+  const completionItem = new vscode.CompletionItem(content, type)
+  Object.assign(completionItem, options, {
     insertText: typeof snippet === 'string'
       ? createSnippetString(snippet)
       : snippet,
   })
+  return completionItem as CreatedCompletionItem<TParams>
 }

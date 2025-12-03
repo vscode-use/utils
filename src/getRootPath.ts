@@ -12,7 +12,7 @@ export function getRootPath<T extends boolean = false>(isUri?: T): undefined | (
     if (activeFolder) {
       return (isUri
         ? activeFolder.uri
-        : activeFolder.uri.fsPath) as any
+        : activeFolder.uri.fsPath) as T extends true ? Uri : string
     }
   }
 }

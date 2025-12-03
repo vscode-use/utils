@@ -24,7 +24,7 @@ export function isInPosition(parentLoc: RangeLoc, childLoc: PositionOption2, off
     const character = childLoc.column || childLoc.character
     if (line + offsetLine === startLine && character! <= startcharacter! - 1 + startOffset)
       return false
-    if (line + offsetLine === endLine && character!> endcharacter! - 1 + endOffset)
+    if (line + offsetLine === endLine && character! > endcharacter! - 1 + endOffset)
       return false
     if (line + offsetLine < startLine)
       return false

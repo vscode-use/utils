@@ -1,4 +1,4 @@
-import type { CompletionItemOptions } from './createCompletionItem'
+import type { CompletionItemOptions, CreatedCompletionItem } from './createCompletionItem'
 import * as vscode from 'vscode'
 import { createCompletionItem } from './createCompletionItem'
 
@@ -7,6 +7,6 @@ import { createCompletionItem } from './createCompletionItem'
  * @param items CompletionItemOptions[]
  * @returns CompletionList
  */
-export function createCompletionList(items: (CompletionItemOptions & { params?: any })[]) {
-  return new vscode.CompletionList(items.map(createCompletionItem))
+export function createCompletionList<TParams = unknown>(items: (CompletionItemOptions & { params?: TParams })[]): vscode.CompletionList<CreatedCompletionItem<TParams>> {
+  return new vscode.CompletionList(items.map(item => createCompletionItem(item)))
 }

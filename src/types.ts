@@ -69,6 +69,7 @@ export type PositionOption2 = {
 }
 
 export interface WatchFilesOptions {
+  onCreate?: (e: Uri) => any
   onChange?: (e: Uri) => any
   onDelete?: (e: Uri) => any
   ignoreCreateEvents?: boolean
@@ -90,8 +91,8 @@ export interface CreateInputOptions {
   value: string
   selection?: [number, number]
   placeHolder?: string
-  validate?: (value: string) => string | InputBoxValidationMessage | undefined | null |
-    Thenable<string | InputBoxValidationMessage | undefined | null>
+  validate?: (value: string) => string | InputBoxValidationMessage | undefined | null
+    | Thenable<string | InputBoxValidationMessage | undefined | null>
 }
 
 export type ISelections = { start: PositionOption2 | PositionOption1, end: PositionOption2 | PositionOption1, position?: 'left' | 'right' }[]
