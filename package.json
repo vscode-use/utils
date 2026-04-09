@@ -1,7 +1,7 @@
 {
   "name": "@vscode-use/utils",
   "type": "module",
-  "version": "0.1.61",
+  "version": "0.1.62",
   "packageManager": "pnpm@10.24.0",
   "description": "Typed utility helpers for building VS Code extensions, including commands, editor state, selections, completions, terminals, progress, and reactive helpers.",
   "author": "Simon He",
