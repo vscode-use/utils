@@ -8,6 +8,6 @@ import { addEffect } from './util'
  * @param provider 代码镜头提供商。
  * @return A {@link Disposable} 在处置时取消注册此提供商。
  */
-export function registerCodeLensProvider(selector: DocumentSelector, provider: CodeLensProvider) {
+export function registerCodeLensProvider(selector: DocumentSelector, provider: CodeLensProvider): vscode.Disposable {
   return addEffect(vscode.languages.registerCodeLensProvider(selector, provider))
 }

@@ -1,35 +1,38 @@
 import { createProgress } from './createProgress'
 
-export function createFakeProgress(options: {
+export interface CreateFakeProgressOptions {
   title: string
   interval?: number
   message?: (increment: number) => string | void
   callback: (resolve: (value?: unknown) => void, reject: (msg?: string) => void) => void
-}) {
+}
+
+export function createFakeProgress(options: CreateFakeProgressOptions): void {
   const { title, interval = 10, message, callback } = options
   createProgress({
     title,
     async done(report) {
       try {
-        let timer
+        let timer: ReturnType<typeof setInterval> | undefined
+        let progress = 0
         await new Promise((_resolve, _reject) => {
-          let increment = 0
           callback(_resolve, _reject)
           timer = setInterval(() => {
-            if (increment < 99) {
-              increment++
+            if (progress < 99) {
+              progress++
               report({
-                message: message?.(increment) || `Progress bar ${increment}% completed`,
-                increment,
+                message: message?.(progress) || `Progress bar ${progress}% completed`,
+                increment: 1,
               })
             }
           }, interval)
         })
 
-        clearInterval(timer)
+        if (timer)
+          clearInterval(timer)
         report({
           message: message?.(100) || `Progress bar 100% completed`,
-          increment: 100,
+          increment: 100 - progress,
         })
 
         await new Promise((resolve) => {

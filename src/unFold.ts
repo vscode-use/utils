@@ -4,11 +4,11 @@ import * as vscode from 'vscode'
 /**
  * 展开指定的 range
  * @param rangesToFold
- * @returns unknown[]
+ * @returns Thenable<void>[]
  */
-export function unFold(rangesToFold: Range[]) {
+export function unFold(rangesToFold: Range[]): Thenable<void>[] {
   return rangesToFold.map(range =>
-    vscode.commands.executeCommand('editor.unfold', {
+    vscode.commands.executeCommand<void>('editor.unfold', {
       selectionLines: [range.start.line, range.end.line],
     }),
   )

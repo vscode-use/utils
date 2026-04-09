@@ -3,25 +3,60 @@
 </p>
 <p align="center"> English | <a href="./README_zh.md">简体中文</a></p>
 
-🐰 vscode use has a secondary encapsulation of the vscode api, providing a large number of streamlined and practical functions, and making the function names closer to the actual meaning, just like lodash in vscode.
+# @vscode-use/utils
 
-## [📘 Documentation](https://vscode-use-docs.netlify.app/)
+Typed utility helpers for VS Code extension development. `@vscode-use/utils` wraps the VS Code API with smaller, clearer functions for commands, editor state, selections, completions, terminals, progress, and reactive helpers.
+
+## 📘 Documentation
+
+- Docs: https://vscode-use-docs.netlify.app/
+- npm: https://www.npmjs.com/package/@vscode-use/utils
+- VS Code starter: https://github.com/Simon-He95/vitesse-vscode
+- Example project: https://github.com/Simon-He95/vitesse-vscode
 
 ## 📍 Install
+
+```bash
+pnpm add @vscode-use/utils
+# or
+npm i @vscode-use/utils
 ```
-npm i @vscode-use/utils -d
+
+## Why @vscode-use/utils
+
+- Use shorter, typed wrappers around common VS Code APIs.
+- Work with editor text, selections, visible ranges, terminals, and files through focused helpers.
+- Build completion items, inline completions, code lenses, hovers, and inlay hints with less boilerplate.
+- React to VS Code state with `useConfiguration`, `useDark`, `useSelection`, `useVisibleRange`, `useActiveTextEditor`, and `useTheme`.
+
+## Quick Start
+
+```ts
+import { addEventListener, createCompletionItem, message, registerCommand, useSelection } from '@vscode-use/utils'
+
+registerCommand('demo.hello', () => {
+  message.info('Hello from @vscode-use/utils')
+})
+
+addEventListener('text-save', () => {
+  console.log('document saved')
+})
+
+const selection = useSelection()
+console.log(selection.value?.text)
+
+createCompletionItem({
+  content: 'hello',
+  detail: 'Sample completion item',
+})
 ```
 
-## Recommended VSCode Starter
-- https://github.com/Simon-He95/vitesse-vscode
-
-### [Example](https://github.com/Simon-He95/vitesse-vscode)
-
-## 📝 Api
+## 📝 API Overview
 
 - registerCommand： ***Registration instructions***
 - executeCommand： ***Trigger instructions***
 - getConfiguration： ***get workspace configuration***
+- useConfiguration： ***reactive configuration access***
 - message {type:'info'|'error',message:string,buttons:['ok']}： ***Pop up message***
 - openFile： ***Open a file.***
 - addEventListener： ***Listen to file switching, terminal, content change, add, delete and other events in vscode***
@@ -36,6 +71,8 @@ npm i @vscode-use/utils -d
 - getCopyText： ***Read the pasteboard Content.***
 - setCopyText： ***Plug the content into the pasteboard.***
 - updateText： ***Modify the text content***
+- replaceText： ***Replace text inside a range***
+- deleteText： ***Delete text inside a range***
 - jumpToLine： ***Open a file and jump to a certain line***
 - createBottomBar： ***Create the bottom bar button***
 - nextTick： ***Create the bottom bar button***
@@ -50,6 +87,10 @@ npm i @vscode-use/utils -d
 - registerCodeActionsProvider ***Registered Code Action Provider***
 - openExternalUrl： ***Open the external url in the browser***
 - getLineText： ***Get the text of a certain line***
+- useDark： ***Reactive dark theme state***
+- useSelection： ***Reactive editor selection state***
+- useVisibleRange： ***Reactive visible range state***
+- useActiveTextEditor： ***Reactive active editor state***
 - useTheme： ***Theme Configuration and Operatation***
 - isInPosition： ***Determine whether one area is a sub-area of another***
 - getCurrentFileUrl： ***Get the path of the current activation file***
@@ -295,7 +336,11 @@ npm i @vscode-use/utils -d
 
    ### Monitor file changes
    ```
-   watchFiles('filepath', (e) => {})
+   const watcher = watchFiles(['filepath'], {
+     onChange: (e) => {},
+   })
+
+   watcher.dispose()
    ```
 
    ### Create a progress bar
@@ -365,7 +410,7 @@ npm i @vscode-use/utils -d
    ```
    createInput({
      title: 'I am an input box',
-     placeHolder: 'Please enter content',
+     placeholder: 'Please enter content',
      value: ''
    })
    ```

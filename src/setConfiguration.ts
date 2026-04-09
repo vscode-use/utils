@@ -7,9 +7,14 @@ import * as vscode from 'vscode'
  * @param value 值
  * @param configurationTarget 范围
  * @param overrideInLanguage 是否覆盖默认
- * @returns Promise<void>
+ * @returns Thenable<void>
  */
-export function setConfiguration(name: string, value: any, configurationTarget?: ConfigurationTarget | boolean | null, overrideInLanguage?: boolean) {
+export function setConfiguration<T>(
+  name: string,
+  value: T,
+  configurationTarget?: ConfigurationTarget | boolean | null,
+  overrideInLanguage?: boolean,
+): Thenable<void> {
   const config = vscode.workspace.getConfiguration()
   return config.update(name, value, configurationTarget, overrideInLanguage)
 }

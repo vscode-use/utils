@@ -5,6 +5,6 @@ import * as vscode from 'vscode'
  * @param str
  * @returns SnippetString
  */
-export function createSnippetString(str: string | string[]) {
+export function createSnippetString(str: string | string[]): vscode.SnippetString {
   return new vscode.SnippetString(typeof str === 'string' ? str : str.join('\n'))
 }

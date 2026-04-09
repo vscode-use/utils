@@ -1,7 +1,14 @@
+import type { Position, Range, TextEditor } from 'vscode'
 import { getActiveTextEditor } from './getActiveTextEditor'
 
-export function getVisibleRange() {
-  const editor = getActiveTextEditor()
+export interface VisibleRangeInfo {
+  start: Position
+  end: Position
+  ranges: readonly Range[]
+}
+
+export function getVisibleRange(textEditor: TextEditor | undefined = getActiveTextEditor()): VisibleRangeInfo | null {
+  const editor = textEditor
   if (!editor)
     return null
   const visibleRanges = editor.visibleRanges

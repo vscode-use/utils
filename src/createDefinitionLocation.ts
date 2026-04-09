@@ -6,7 +6,7 @@ import * as vscode from 'vscode'
  * @param position 位置
  * @returns Location
  */
-export function createDefinitionLocation(url: string, position: vscode.Position | number) {
+export function createDefinitionLocation(url: string, position: vscode.Position | number): vscode.Location {
   if (typeof position === 'number')
     position = new vscode.Position(position, 0)
 

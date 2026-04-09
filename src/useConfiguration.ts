@@ -1,24 +1,22 @@
-import type { WriteableSignal } from './types'
-import { signal } from 'alien-signals'
+import type { ConfigurationName, DisposableSignal } from './types'
 import { addEventListener } from './addEventListener'
+import { createReactiveValue } from './createReactiveValue'
 import { getConfiguration } from './getConfiguration'
 
 /**
  * 获取配置
  * @param name 配置名，支持直接获取到xx.a下的value
- * @returns any
+ * @returns DisposableSignal<T | undefined>
  */
-type ScopedName = `${string}.${string}`
-
-export function useConfiguration<T>(name: ScopedName, defaultValue?: T): WriteableSignal<T> {
+export function useConfiguration<T>(name: ConfigurationName, defaultValue: T): DisposableSignal<T>
+export function useConfiguration<T>(name: ConfigurationName, defaultValue?: T): DisposableSignal<T | undefined>
+export function useConfiguration<T>(name: ConfigurationName, defaultValue?: T): DisposableSignal<T | undefined> {
   const splitIndex = name.indexOf('.')
   const scopedName = name.slice(0, splitIndex)
-  const initialValue = getConfiguration<T>(name, defaultValue)
-
-  const config = signal<T>(initialValue as T)
-  addEventListener('config-change', (e) => {
-    if (e.affectsConfiguration(scopedName))
-      config(getConfiguration<T>(name, defaultValue) as T)
+  return createReactiveValue(() => getConfiguration<T>(name, defaultValue), (update) => {
+    return addEventListener('config-change', (e) => {
+      if (e.affectsConfiguration(scopedName))
+        update()
+    })
   })
-  return config
 }

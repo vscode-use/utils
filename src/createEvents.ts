@@ -1,14 +1,11 @@
-type EventsMap = Record<string, any>
-
-interface DefaultEvents extends EventsMap {
-  [event: string]: (...args: any) => void
-}
+export type EventCallback = (...args: any[]) => void
+export type EventsMap = Record<string, EventCallback>
 
 export interface Unsubscribe {
   (): void
 }
 
-export declare class Emitter<Events extends EventsMap = DefaultEvents> {
+export declare class Emitter<Events extends EventsMap = EventsMap> {
   /**
    * Event names in keys and arrays with listeners in values.
    *
@@ -58,7 +55,7 @@ export declare class Emitter<Events extends EventsMap = DefaultEvents> {
 /**
  * 用于订阅事件通信的工具
  */
-export function createEvents<Events extends EventsMap = DefaultEvents>(): Emitter<Events> {
+export function createEvents<Events extends EventsMap = EventsMap>(): Emitter<Events> {
   const events: Partial<{ [E in keyof Events]: Events[E][] }> = {}
 
   return {

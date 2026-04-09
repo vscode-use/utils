@@ -10,7 +10,7 @@ import { addEffect } from './util'
 export function registerInlineCompletionItemProvider(
   provideInlineCompletionItems: (document: vscode.TextDocument, position: vscode.Position, context: vscode.InlineCompletionContext, token: vscode.CancellationToken) => ProviderResult<InlineCompletionItem[] | InlineCompletionList>,
   selector: DocumentSelector = { pattern: '**' },
-) {
+): vscode.Disposable {
   return addEffect(vscode.languages.registerInlineCompletionItemProvider(selector, {
     provideInlineCompletionItems,
   }))

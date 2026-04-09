@@ -23,7 +23,7 @@ import * as vscode from 'vscode'
  * @param options.accessibilityInformation AccessibilityInformation | undefined 栏的辅助信息
  * @returns StatusBarItem
  */
-export function createBottomBar(options: BarOptions) {
+export function createBottomBar(options: BarOptions): vscode.StatusBarItem {
   const { position = 'left', offset, text, tooltip, color, backgroundColor, accessibilityInformation, command } = options
   const positionMap = {
     left: 1,

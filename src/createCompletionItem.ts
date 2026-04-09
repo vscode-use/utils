@@ -2,7 +2,13 @@ import type { Command, CompletionItemKind, MarkdownString, Range, SnippetString 
 import * as vscode from 'vscode'
 import { createSnippetString } from './createSnippetString'
 
-export interface CompletionItemOptions {
+type BaseCompletionItemOptions = Omit<Partial<vscode.CompletionItem>, 'kind' | 'label' | 'insertText'>
+export type CompletionItemExtras = Record<never, never>
+export interface CompletionItemParams<TParams = unknown> {
+  params?: TParams
+}
+
+export type CompletionItemOptions<TExtra extends object = CompletionItemExtras> = BaseCompletionItemOptions & TExtra & {
   content: string
   snippet?: string | SnippetString
   detail?: string
@@ -23,10 +29,11 @@ export interface CompletionItemOptions {
      */
     replacing: Range
   }
-  [key: string]: any
 }
 
-export type CreatedCompletionItem<TParams = unknown> = vscode.CompletionItem & CompletionItemOptions & { params?: TParams }
+export type CompletionItemInput<TParams = unknown, TExtra extends object = CompletionItemExtras> = CompletionItemOptions<TExtra> & CompletionItemParams<TParams>
+
+export type CreatedCompletionItem<TParams = unknown, TExtra extends object = CompletionItemExtras> = vscode.CompletionItem & CompletionItemInput<TParams, TExtra>
 
 /**
  * 创建补全项
@@ -44,7 +51,7 @@ export type CreatedCompletionItem<TParams = unknown> = vscode.CompletionItem & C
  * @param options.range Range 补全项的范围
  * @returns CompletionItem
  */
-export function createCompletionItem<TParams = unknown>(options: CompletionItemOptions & { params?: TParams }): CreatedCompletionItem<TParams> {
+export function createCompletionItem<TParams = unknown, TExtra extends object = CompletionItemExtras>(options: CompletionItemInput<TParams, TExtra>): CreatedCompletionItem<TParams, TExtra> {
   const { content, snippet, type } = options
   const completionItem = new vscode.CompletionItem(content, type)
   Object.assign(completionItem, options, {
@@ -52,5 +59,5 @@ export function createCompletionItem<TParams = unknown>(options: CompletionItemO
       ? createSnippetString(snippet)
       : snippet,
   })
-  return completionItem as CreatedCompletionItem<TParams>
+  return completionItem as CreatedCompletionItem<TParams, TExtra>
 }

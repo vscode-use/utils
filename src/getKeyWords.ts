@@ -3,8 +3,7 @@ import { getActiveTextEditor } from './getActiveTextEditor'
 /**
  * 根据position获取关键词
  */
-export function getKeyWords(position: vscode.Position) {
-  const activeTextEditor = getActiveTextEditor()
-  if (activeTextEditor)
-    return activeTextEditor.document.getText(activeTextEditor.document.getWordRangeAtPosition(position))
+export function getKeyWords(position: vscode.Position, textEditor: vscode.TextEditor | undefined = getActiveTextEditor()): string | undefined {
+  if (textEditor)
+    return textEditor.document.getText(textEditor.document.getWordRangeAtPosition(position))
 }

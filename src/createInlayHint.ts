@@ -22,7 +22,7 @@ export interface InlayHintOptions {
  * @param options.paddingRight 是否右边填充
  * @returns InlayHint
  */
-export function createInlayHint(options: InlayHintOptions) {
+export function createInlayHint(options: InlayHintOptions): vscode.InlayHint {
   const { position, label, kind } = options
   return Object.assign(new vscode.InlayHint(position, label, kind), options)
 }

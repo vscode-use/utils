@@ -6,13 +6,25 @@ import { getCurrentFileUrl } from './getCurrentFileUrl'
 import { openFile } from './openFile'
 import { setSelection } from './setSelection'
 
+export interface JumpToLineOptions {
+  oneBased?: boolean
+  textEditor?: vscode.TextEditor
+}
+
+export type JumpToLineTarget = number | PositionOption1 | [PositionOption1, PositionOption1] | vscode.Range | vscode.Position
+export type ToLineTarget = number | [number, number] | vscode.Range
+
 /**
  * 跳入某个文件的某一行的位置
  * @param lineNumber 行数或者 range 范围
  * @param filepath 路径 默认使用当前激活的文件
- * @returns Promise<TextEditor>
+ * @returns 当前编辑器或打开后的编辑器
  */
-export function jumpToLine(lineNumber: number | PositionOption1 | [PositionOption1, PositionOption1] | vscode.Range | vscode.Position, filepath = getCurrentFileUrl(), options?: { oneBased?: boolean }) {
+export function jumpToLine(
+  lineNumber: JumpToLineTarget,
+  filepath?: string,
+  options?: JumpToLineOptions,
+): vscode.TextEditor | Thenable<vscode.TextEditor> | undefined {
   let range: vscode.Range
   if (typeof lineNumber === 'number') {
     const zeroBasedLine = options?.oneBased ? Math.max(lineNumber - 1, 0) : lineNumber
@@ -37,17 +49,19 @@ export function jumpToLine(lineNumber: number | PositionOption1 | [PositionOptio
   else {
     range = createRange([0, 0], [0, 0])
   }
-  if (filepath === getCurrentFileUrl()) {
-    return toLine(range)
+  const currentFilepath = getCurrentFileUrl(false, options?.textEditor)
+  const targetFilepath = filepath ?? currentFilepath
+  if (targetFilepath === currentFilepath) {
+    return toLine(range, options?.textEditor)
   }
-  return openFile(filepath as string, { selection: range })
+  return openFile(targetFilepath as string, { selection: range })
 }
 
 /**
  * 跳到当前文件的某一行
  * @param lineNumber 行数
  */
-export function toLine(lineNumber: number | [number, number] | vscode.Range) {
+export function toLine(lineNumber: ToLineTarget, textEditor: vscode.TextEditor | undefined = getActiveTextEditor()): vscode.TextEditor | undefined {
   let range
   if (lineNumber instanceof vscode.Range) {
     range = lineNumber
@@ -58,8 +72,8 @@ export function toLine(lineNumber: number | [number, number] | vscode.Range) {
   else {
     range = createRange([lineNumber - 1, 0], [lineNumber, 0])
   }
-  const editor = getActiveTextEditor()
-  if (editor) {
-    setSelection(range.start, range.end)
+  if (textEditor) {
+    setSelection(range, undefined, undefined, textEditor)
   }
+  return textEditor
 }

@@ -1,28 +1,43 @@
 import { createOutputChannel } from './createOutputChannel'
 
-/**
- * 创建一个日志记录器
- * @param {string} name - 日志记录器的名称
- * @param {object} options - 日志选项
- * @param {string} options.warn - 警告日志的前缀
- * @param {string} options.info - 信息日志的前缀
- * @param {string} options.error - 错误日志的前缀
- * @param {string} options.debug - 调试日志的前缀
- * @param {string} [options.languageId] - 语言ID（可选）
- * @returns {object} 日志记录器对象
- */
-export function createLog(name: string, options: {
+export interface CreateLogOptions {
   warn: string
   info: string
   error: string
   debug: string
   languageId?: string
-} = {
+}
+
+export interface Logger {
+  show: () => void
+  dispose: () => void
+  clear: () => void
+  append: (message: string) => void
+  appendLine: (message: string) => void
+  hide: () => void
+  info: (message: string) => void
+  warn: (message: string) => void
+  error: (message: string) => void
+  debug: (message: string) => void
+}
+
+/**
+ * 创建一个日志记录器
+ * @param {string} name - 日志记录器的名称
+ * @param {CreateLogOptions} options - 日志选项
+ * @param {string} options.warn - 警告日志的前缀
+ * @param {string} options.info - 信息日志的前缀
+ * @param {string} options.error - 错误日志的前缀
+ * @param {string} options.debug - 调试日志的前缀
+ * @param {string} [options.languageId] - 语言ID（可选）
+ * @returns Logger
+ */
+export function createLog(name: string, options: CreateLogOptions = {
   warn: '🟡',
   info: '🔵',
   error: '🔴',
   debug: '🟢',
-}) {
+}): Logger {
   const outputChannel = createOutputChannel(name, options.languageId)
   return {
     /**

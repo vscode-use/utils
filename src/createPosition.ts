@@ -8,7 +8,12 @@ import * as vscode from 'vscode'
  */
 export function createPosition(pos: number, pos1: number, offsetLine?: number, offsetColumn?: number): vscode.Position
 export function createPosition(pos: PositionOption2 | PositionOption1, offsetLine?: number, offsetColumn?: number): vscode.Position
-export function createPosition(pos: PositionOption2 | PositionOption1 | number, pos1?: number, offsetLine: number = 0, offsetColumn: number = 0) {
+export function createPosition(
+  pos: PositionOption2 | PositionOption1 | number,
+  pos1?: number,
+  offsetLine: number = 0,
+  offsetColumn: number = 0,
+): vscode.Position {
   if (Array.isArray(pos))
     return new vscode.Position(pos[0] - offsetLine, pos[1] - offsetColumn)
 

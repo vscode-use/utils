@@ -3,11 +3,11 @@
   "type": "module",
   "version": "0.1.61",
   "packageManager": "pnpm@10.24.0",
-  "description": "A collection of utility functions for VS Code extensions. Enhance your VS Code extension development with reusable, well-tested utilities.",
+  "description": "Typed utility helpers for building VS Code extensions, including commands, editor state, selections, completions, terminals, progress, and reactive helpers.",
   "author": "Simon He",
   "license": "MIT",
   "funding": "https://github.com/sponsors/Simon-He95",
-  "homepage": "https://github.com/vscode-use/utils#readme",
+  "homepage": "https://vscode-use-docs.netlify.app/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vscode-use/utils.git"
@@ -18,14 +18,16 @@
   "keywords": [
     "vscode-use",
     "@vscode-use/utils",
-    "utils",
     "vscode",
     "vscode-extension",
-    "vscode utilities",
+    "vscode-api",
+    "vscode-utils",
+    "vscode-extension-utils",
+    "vscode-extension-development",
     "typescript",
-    "node",
-    "productivity",
-    "developer-tools"
+    "completion-provider",
+    "quickpick",
+    "editor-utils"
   ],
   "sideEffects": false,
   "exports": {

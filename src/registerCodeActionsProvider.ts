@@ -14,6 +14,10 @@ import { addEffect } from './util'
  * @param metadata 关于提供者提供的代码操作类型的元数据。
  * @return 一个{@link Disposable}，当该提供程序被弃置时会取消注册。
  */
-export function registerCodeActionsProvider(selector: DocumentSelector, provider: CodeActionProvider, metadata?: CodeActionProviderMetadata) {
+export function registerCodeActionsProvider(
+  selector: DocumentSelector,
+  provider: CodeActionProvider,
+  metadata?: CodeActionProviderMetadata,
+): vscode.Disposable {
   return addEffect(vscode.languages.registerCodeActionsProvider(selector, provider, metadata))
 }

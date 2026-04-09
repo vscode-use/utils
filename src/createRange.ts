@@ -16,7 +16,12 @@ export function createRange(startLine: number, startChar: number, endLine: numbe
 export function createRange(startLine: number, startChar: number, end: PositionOption2 | PositionOption1 | vscode.Position): vscode.Range
 export function createRange(start: PositionOption2 | PositionOption1 | vscode.Position, endLine: number, endChar: number): vscode.Range
 export function createRange(start: PositionOption2 | PositionOption1 | vscode.Position, end: PositionOption2 | PositionOption1 | vscode.Position): vscode.Range
-export function createRange(start: PositionOption2 | PositionOption1 | number, end: PositionOption2 | PositionOption1 | number, v1?: PositionOption2 | PositionOption1 | number, v2?: number) {
+export function createRange(
+  start: PositionOption2 | PositionOption1 | vscode.Position | number,
+  end: PositionOption2 | PositionOption1 | vscode.Position | number,
+  v1?: PositionOption2 | PositionOption1 | vscode.Position | number,
+  v2?: number,
+): vscode.Range {
   let _start!: vscode.Position
   let _end!: vscode.Position
   if (start instanceof vscode.Position && end instanceof vscode.Position) {

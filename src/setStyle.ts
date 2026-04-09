@@ -1,4 +1,4 @@
-import type { Range, TextEditorDecorationType } from 'vscode'
+import type { Range, TextEditor, TextEditorDecorationType } from 'vscode'
 import type { ClearStyle } from './types'
 import { getActiveTextEditor } from './getActiveTextEditor'
 
@@ -8,9 +8,8 @@ import { getActiveTextEditor } from './getActiveTextEditor'
  * @param range
  * @returns ClearStyle
  */
-export function setStyle(decorationType: TextEditorDecorationType, range?: Range | Range[]): ClearStyle | undefined {
-  const activeTextEditor = getActiveTextEditor()
-  if (!activeTextEditor)
+export function setStyle(decorationType: TextEditorDecorationType, range?: Range | Range[], textEditor: TextEditor | undefined = getActiveTextEditor()): ClearStyle | undefined {
+  if (!textEditor)
     return
 
   const rangeOrOptins = range
@@ -18,6 +17,6 @@ export function setStyle(decorationType: TextEditorDecorationType, range?: Range
       ? range
       : [range]
     : []
-  activeTextEditor.setDecorations(decorationType, rangeOrOptins as Range[])
-  return () => activeTextEditor.setDecorations(decorationType, [])
+  textEditor.setDecorations(decorationType, rangeOrOptins as Range[])
+  return () => textEditor.setDecorations(decorationType, [])
 }

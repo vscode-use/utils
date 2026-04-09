@@ -8,6 +8,9 @@ import { addEffect } from './util'
  * @param provideDefinition 回调函数，可返回一个location控制跳转到哪一个路径
  * @returns Disposable
  */
-export function registerDefinitionProvider(selector: DocumentSelector, provideDefinition: DefinitionProvider['provideDefinition']) {
+export function registerDefinitionProvider(
+  selector: DocumentSelector,
+  provideDefinition: DefinitionProvider['provideDefinition'],
+): vscode.Disposable {
   return addEffect(vscode.languages.registerDefinitionProvider(selector, { provideDefinition }))
 }

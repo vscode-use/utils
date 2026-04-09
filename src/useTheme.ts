@@ -1,13 +1,26 @@
 import * as vscode from 'vscode'
 
-function getCurrentTheme() {
+export interface ThemeItem {
+  label: string
+  path: string
+  id: string
+  uiTheme: string
+}
+
+export interface UseThemeResult {
+  getCurrentTheme: () => string
+  getAllTheme: () => ThemeItem[]
+  setTheme: (theme: string) => Promise<[void, void, void]>
+}
+
+function getCurrentTheme(): string {
   const config = vscode.workspace.getConfiguration()
   return config.get('workbench.colorTheme') as string
 }
 
-function getAllTheme() {
+function getAllTheme(): ThemeItem[] {
   const extensions = vscode.extensions.all
-  const themeColors: { label: string, path: string, id: string, uiTheme: string }[] = []
+  const themeColors: ThemeItem[] = []
 
   // 遍历所有已安装的扩展
   for (const extension of extensions) {
@@ -28,7 +41,7 @@ function getAllTheme() {
   return themeColors
 }
 
-function setTheme(theme: string) {
+function setTheme(theme: string): Promise<[void, void, void]> {
   const config = vscode.workspace.getConfiguration()
   return Promise.all(
     [
@@ -43,7 +56,7 @@ function setTheme(theme: string) {
  * 获取和操作当前主题色相关信息
  * @returns 主题色相关操作
  */
-export function useTheme() {
+export function useTheme(): UseThemeResult {
   return {
     getCurrentTheme,
     getAllTheme,

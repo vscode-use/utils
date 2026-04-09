@@ -6,7 +6,7 @@ import * as vscode from 'vscode'
  * @param backgroundColor
  * @returns TextEditorDecorationType
  */
-export function createSquare(backgroundColor: string | ThemeColor) {
+export function createSquare(backgroundColor: string | ThemeColor): vscode.TextEditorDecorationType {
   return vscode.window.createTextEditorDecorationType({
     before: {
       contentText: '',

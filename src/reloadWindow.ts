@@ -1,5 +1,5 @@
 import * as vscode from 'vscode'
 
-export function reloadWindow() {
-  return vscode.commands.executeCommand('workbench.action.reloadWindow')
+export function reloadWindow(): Thenable<void> {
+  return vscode.commands.executeCommand<void>('workbench.action.reloadWindow')
 }

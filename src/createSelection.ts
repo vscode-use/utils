@@ -5,11 +5,16 @@ import { createPosition } from './createPosition'
 /**
  * 创建一个 selectionRange
  */
-export function createSelection(startLine: number, startChar: number, endLine: number, endChar: number): vscode.Range
-export function createSelection(startLine: number, startChar: number, end: PositionOption2 | PositionOption1 | vscode.Position): vscode.Range
-export function createSelection(start: PositionOption2 | PositionOption1 | vscode.Position, endLine: number, endChar: number): vscode.Range
-export function createSelection(start: PositionOption2 | PositionOption1 | vscode.Position, end: PositionOption2 | PositionOption1 | vscode.Position): vscode.Range
-export function createSelection(start: PositionOption2 | PositionOption1 | number, end: PositionOption2 | PositionOption1 | number, v1?: PositionOption2 | PositionOption1 | number, v2?: number) {
+export function createSelection(startLine: number, startChar: number, endLine: number, endChar: number): vscode.Selection
+export function createSelection(startLine: number, startChar: number, end: PositionOption2 | PositionOption1 | vscode.Position): vscode.Selection
+export function createSelection(start: PositionOption2 | PositionOption1 | vscode.Position, endLine: number, endChar: number): vscode.Selection
+export function createSelection(start: PositionOption2 | PositionOption1 | vscode.Position, end: PositionOption2 | PositionOption1 | vscode.Position): vscode.Selection
+export function createSelection(
+  start: PositionOption2 | PositionOption1 | vscode.Position | number,
+  end: PositionOption2 | PositionOption1 | vscode.Position | number,
+  v1?: PositionOption2 | PositionOption1 | vscode.Position | number,
+  v2?: number,
+): vscode.Selection {
   let _start!: vscode.Position
   let _end!: vscode.Position
   if (start instanceof vscode.Position && end instanceof vscode.Position) {

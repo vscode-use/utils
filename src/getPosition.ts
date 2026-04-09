@@ -1,9 +1,26 @@
+import type { TextEditor } from 'vscode'
 import * as vscode from 'vscode'
 import { getActiveText } from './getActiveText'
+
+export interface PositionInfo {
+  line: number
+  column: number
+  character: number
+  offset: number
+  position: vscode.Position
+}
 /**
  * 根据offset获取行列
  */
-export function getPosition(offset: number, content: string = getActiveText()!) {
+export function getPosition(offset: number, content: string): PositionInfo
+export function getPosition(offset: number, textEditor?: TextEditor): PositionInfo | undefined
+export function getPosition(offset: number, contentOrTextEditor?: string | TextEditor): PositionInfo | undefined {
+  const content = typeof contentOrTextEditor === 'string'
+    ? contentOrTextEditor
+    : getActiveText(contentOrTextEditor)
+  if (!content)
+    return
+
   const contents = content.split('\n')
   const max = contents.length
   let num = 0

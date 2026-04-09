@@ -1,31 +1,42 @@
-import type { CancellationToken, CompletionItem, CompletionItemProvider, CompletionList, ProviderResult } from 'vscode'
+import type { CompletionItem, CompletionItemProvider } from 'vscode'
 import * as vscode from 'vscode'
 import { addEffect } from './util'
 
+export type TriggerCharacters = string | readonly string[]
+
 /**
  * 注册自动补全
- * @param filter 设置针对什么语言才会触发自动补全
- * @param provideCompletionItems 为给定的职位和文件提供完成项目
- * @param resolveOrTrigger 给定一个完成项，填写更多数据或直接传入触发字符
- * @param triggerCharacters 触发条件比如通过输入某一个字符触发（在显式提供 resolve 时使用）
- * @returns Disposable
+ * filter 设置针对什么语言才会触发自动补全。
+ * provideCompletionItems 为给定的位置和文件提供完成项目。
+ * 第三个参数既可以是 resolveCompletionItem，也可以直接传入触发字符。
  */
 export function registerCompletionItemProvider<T extends CompletionItem = CompletionItem>(
-  filter: string | string[],
-  provideCompletionItems: (document: vscode.TextDocument, position: vscode.Position) => ProviderResult<T[] | CompletionList<T>>,
-  resolveOrTrigger?: ((item: T, token: CancellationToken) => ProviderResult<T>) | string | string[],
-  triggerCharacters: string | string[] = [],
-) {
-  let resolveCompletionItem: ((item: T, token: CancellationToken) => ProviderResult<T>) | undefined
+  filter: vscode.DocumentSelector,
+  provideCompletionItems: CompletionItemProvider<T>['provideCompletionItems'],
+  resolveCompletionItem: NonNullable<CompletionItemProvider<T>['resolveCompletionItem']>,
+  triggerCharacters?: TriggerCharacters,
+): vscode.Disposable
+export function registerCompletionItemProvider<T extends CompletionItem = CompletionItem>(
+  filter: vscode.DocumentSelector,
+  provideCompletionItems: CompletionItemProvider<T>['provideCompletionItems'],
+  triggerCharacters?: TriggerCharacters,
+): vscode.Disposable
+export function registerCompletionItemProvider<T extends CompletionItem = CompletionItem>(
+  filter: vscode.DocumentSelector,
+  provideCompletionItems: CompletionItemProvider<T>['provideCompletionItems'],
+  resolveOrTrigger?: NonNullable<CompletionItemProvider<T>['resolveCompletionItem']> | TriggerCharacters,
+  triggerCharacters: TriggerCharacters = [],
+): vscode.Disposable {
+  let resolveCompletionItem: NonNullable<CompletionItemProvider<T>['resolveCompletionItem']> | undefined
   let characters: string[]
 
   if (typeof resolveOrTrigger === 'function') {
     resolveCompletionItem = resolveOrTrigger
-    characters = Array.isArray(triggerCharacters) ? triggerCharacters : [triggerCharacters]
+    characters = toTriggerCharacters(triggerCharacters)
   }
   else {
     const provided = resolveOrTrigger ?? triggerCharacters
-    characters = Array.isArray(provided) ? provided : [provided]
+    characters = toTriggerCharacters(provided)
   }
 
   const provider: CompletionItemProvider<T> = resolveCompletionItem
@@ -37,4 +48,10 @@ export function registerCompletionItemProvider<T extends CompletionItem = Comple
     provider,
     ...characters,
   ))
+}
+
+function toTriggerCharacters(characters?: TriggerCharacters): string[] {
+  if (!characters)
+    return []
+  return typeof characters === 'string' ? [characters] : [...characters]
 }

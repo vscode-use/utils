@@ -1,16 +1,16 @@
-import type { WriteableSignal } from './types'
-import { signal } from 'alien-signals'
+import type { DisposableSignal } from './types'
 import { addEventListener } from './addEventListener'
+import { createReactiveValue } from './createReactiveValue'
 import { isDark } from './isDark'
 
 /**
  * 判断当前主题色
- * @returns boolean
+ * @returns DisposableSignal<boolean>
  */
-export function useDark(): WriteableSignal<boolean> {
-  const color = signal(isDark())
-  addEventListener('theme-change', () => {
-    color(isDark())
+export function useDark(): DisposableSignal<boolean> {
+  return createReactiveValue(isDark, (update) => {
+    return addEventListener('theme-change', () => {
+      update()
+    })
   })
-  return color
 }

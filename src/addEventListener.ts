@@ -56,47 +56,107 @@ export const authenticationMap = {
   'auth-change': 'onDidChangeSessions',
 }
 
-type AuthCallback = (providerId: string, getSession: (name: string) => Promise<vscode.AuthenticationSession | undefined>) => void
-type WindowEventRegister = (listener: (...args: any[]) => any, thisArgs?: any) => vscode.Disposable
+export interface GetSession {
+  (scopes: readonly string[], options?: vscode.AuthenticationGetSessionOptions): Promise<vscode.AuthenticationSession | undefined>
+  (providerId: string, scopes: readonly string[], options?: vscode.AuthenticationGetSessionOptions): Promise<vscode.AuthenticationSession | undefined>
+}
+export type AuthCallback = (providerId: string, getSession: GetSession) => void
+type EventRegister<T extends (...args: never[]) => unknown> = ((listener: T, thisArgs?: unknown) => vscode.Disposable) | undefined
+type AuthenticationChangeEvent = Parameters<Parameters<NonNullable<typeof vscode.authentication.onDidChangeSessions>>[0]>[0]
+export type ListenerType = keyof typeof eventMap | keyof typeof workspaceMap | keyof typeof authenticationMap
+export type ListenerCallback<T extends ListenerType>
+  = T extends keyof typeof eventMap
+    ? EventCallbackMap[T]
+    : T extends keyof typeof workspaceMap
+      ? WorkspaceCallbackMap[T]
+      : T extends keyof typeof authenticationMap
+        ? AuthCallback
+        : never
 
-export function addEventListener<T extends keyof typeof eventMap>(type: T, callback: EventCallbackMap[T]): vscode.Disposable
-export function addEventListener<T extends keyof typeof workspaceMap>(type: T, callback: WorkspaceCallbackMap[T]): vscode.Disposable
-export function addEventListener<T extends keyof typeof authenticationMap>(type: T, callback: AuthCallback): vscode.Disposable
-export function addEventListener(
-  type: keyof typeof eventMap | keyof typeof workspaceMap | keyof typeof authenticationMap,
-  callback: (...args: any[]) => any,
-): vscode.Disposable {
-  if (type in eventMap) {
-    const name = eventMap[type as keyof typeof eventMap]
-    const target = (vscode.window as unknown as Record<string, WindowEventRegister | undefined>)[name]
-    if (type === 'activeText-change') {
-      return addEffect(target?.((e: vscode.TextEditor | undefined) => {
-        if (!e)
-          return
-        (callback as EventCallbackMap['activeText-change'])(e)
-      }) ?? new vscode.Disposable(() => { }))
+const windowEventRegisters = {
+  'terminal-close': vscode.window.onDidCloseTerminal,
+  'terminal-open': vscode.window.onDidOpenTerminal,
+  'terminal-change': vscode.window.onDidChangeActiveTerminal,
+  'theme-change': vscode.window.onDidChangeActiveColorTheme,
+  'selection-change': vscode.window.onDidChangeTextEditorSelection,
+  'editor-visible': vscode.window.onDidChangeVisibleTextEditors,
+  'activeText-change': vscode.window.onDidChangeActiveTextEditor,
+  'text-visible-change': vscode.window.onDidChangeTextEditorVisibleRanges,
+  'text-column-change': vscode.window.onDidChangeTextEditorViewColumn,
+  'onfocus': vscode.window.onDidChangeWindowState,
+} satisfies { [K in keyof typeof eventMap]: EventRegister<EventCallbackMap[K]> }
+
+const workspaceEventRegisters = {
+  'text-change': vscode.workspace.onDidChangeTextDocument,
+  'text-open': vscode.workspace.onDidOpenTextDocument,
+  'text-save': vscode.workspace.onDidSaveTextDocument,
+  'workspace-change': vscode.workspace.onDidChangeWorkspaceFolders,
+  'file-create': vscode.workspace.onDidCreateFiles,
+  'file-delete': vscode.workspace.onDidDeleteFiles,
+  'rename': vscode.workspace.onDidRenameFiles,
+  'config-change': vscode.workspace.onDidChangeConfiguration,
+  'text-close': vscode.workspace.onDidCloseTextDocument,
+} satisfies { [K in keyof typeof workspaceMap]: EventRegister<WorkspaceCallbackMap[K]> }
+
+const authenticationEventRegisters = {
+  'auth-change': vscode.authentication.onDidChangeSessions,
+} satisfies { [K in keyof typeof authenticationMap]: EventRegister<(event: AuthenticationChangeEvent) => void> }
+
+export function addEventListener<T extends ListenerType>(type: T, callback: ListenerCallback<T>): vscode.Disposable {
+  if (type in eventMap)
+    return addWindowEventListener(type as keyof typeof eventMap, callback as EventCallbackMap[keyof typeof eventMap])
+  if (type in workspaceMap)
+    return addWorkspaceEventListener(type as keyof typeof workspaceMap, callback as WorkspaceCallbackMap[keyof typeof workspaceMap])
+  return addAuthenticationEventListener(callback as AuthCallback)
+}
+
+function addWindowEventListener<T extends keyof typeof eventMap>(type: T, callback: EventCallbackMap[T]): vscode.Disposable {
+  const disposable = new vscode.Disposable(() => { })
+  const register = windowEventRegisters[type] as EventRegister<EventCallbackMap[T]>
+  return addEffect(register?.(callback) ?? disposable)
+}
+
+function addWorkspaceEventListener<T extends keyof typeof workspaceMap>(type: T, callback: WorkspaceCallbackMap[T]): vscode.Disposable {
+  const disposable = new vscode.Disposable(() => { })
+
+  if (type === 'text-change') {
+    return addEffect(workspaceEventRegisters['text-change']?.(({ contentChanges, document, reason }: vscode.TextDocumentChangeEvent) => {
+      if (contentChanges.length === 0) {
+        return
+      }
+      ;(callback as WorkspaceCallbackMap['text-change'])({ contentChanges, document, reason } as vscode.TextDocumentChangeEvent)
+    }) ?? disposable)
+  }
+
+  const register = workspaceEventRegisters[type] as EventRegister<WorkspaceCallbackMap[T]>
+  return addEffect(register?.(callback) ?? disposable)
+}
+
+function addAuthenticationEventListener(callback: AuthCallback): vscode.Disposable {
+  return addEffect(authenticationEventRegisters['auth-change']?.((e: AuthenticationChangeEvent) => {
+    const getSession: GetSession = async (
+      providerIdOrScopes: string | readonly string[],
+      scopesOrOptions?: readonly string[] | vscode.AuthenticationGetSessionOptions,
+      maybeOptions?: vscode.AuthenticationGetSessionOptions,
+    ) => {
+      const providerId = typeof providerIdOrScopes === 'string' ? providerIdOrScopes : e.provider.id
+      let scopes: readonly string[] = []
+      let options: vscode.AuthenticationGetSessionOptions | undefined
+
+      if (Array.isArray(providerIdOrScopes)) {
+        scopes = providerIdOrScopes
+        options = scopesOrOptions as vscode.AuthenticationGetSessionOptions | undefined
+      }
+      else if (Array.isArray(scopesOrOptions)) {
+        scopes = scopesOrOptions
+        options = maybeOptions
+      }
+      else {
+        options = scopesOrOptions as vscode.AuthenticationGetSessionOptions | undefined
+      }
+
+      return vscode.authentication.getSession(providerId, scopes, options)
     }
-    return addEffect(target?.(callback) ?? new vscode.Disposable(() => { }))
-  }
-  if (type in workspaceMap) {
-    const name = workspaceMap[type as keyof typeof workspaceMap]
-    const target = (vscode.workspace as unknown as Record<string, WindowEventRegister | undefined>)[name]
-    if (type === 'text-change') {
-      return addEffect(target?.(({ contentChanges, document, reason }: vscode.TextDocumentChangeEvent) => {
-        if (contentChanges.length === 0)
-          return
-        (callback as WorkspaceCallbackMap['text-change'])({ contentChanges, document, reason } as vscode.TextDocumentChangeEvent)
-      }) ?? new vscode.Disposable(() => { }))
-    }
-    return addEffect(target?.(callback) ?? new vscode.Disposable(() => { }))
-  }
-  if (type in authenticationMap) {
-    const name = authenticationMap[type as keyof typeof authenticationMap]
-    const target = (vscode.authentication as unknown as Record<string, WindowEventRegister | undefined>)[name]
-    return addEffect(target?.((e: { provider: { id: string } }) => {
-      const getSession = async (name: string) => await vscode.authentication.getSession(name, ['user:read'])
-      ; (callback as AuthCallback)(e.provider.id, getSession)
-    }) ?? new vscode.Disposable(() => { }))
-  }
-  return addEffect(new vscode.Disposable(() => { }))
+    callback(e.provider.id, getSession)
+  }) ?? new vscode.Disposable(() => { }))
 }

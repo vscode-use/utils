@@ -11,9 +11,18 @@ import { getOffsetFromPosition } from './getOffsetFromPosition'
  * @param offsetLine 行偏移量，默认1
  * @param startOffset 起始位置的额外偏移量，默认0
  * @param endOffset 结束位置的额外偏移量，默认0
+ * @param code 源码文本，默认使用当前激活编辑器内容
  * @returns boolean
  */
-export function isInPosition(parentLoc: RangeLoc, childLoc: PositionOption2, offset = 0, offsetLine = 1, startOffset = 0, endOffset = 0) {
+export function isInPosition(
+  parentLoc: RangeLoc,
+  childLoc: PositionOption2,
+  offset = 0,
+  offsetLine = 1,
+  startOffset = 0,
+  endOffset = 0,
+  code: string = getActiveText()!,
+): boolean {
   if (offset === 0) {
     const { start, end } = parentLoc
     const startLine = start.line
@@ -32,13 +41,13 @@ export function isInPosition(parentLoc: RangeLoc, childLoc: PositionOption2, off
       return false
   }
   else {
-    const code = getActiveText()!.slice(offset)
-    const startOffset = getOffsetFromPosition(createPosition(parentLoc.start.line - offsetLine, (parentLoc.start.character || parentLoc.start.column)!), code)!
-    const childOffset = getOffsetFromPosition(createPosition(childLoc))!
-    if (childOffset < startOffset + offset)
+    const slicedCode = code.slice(offset)
+    const startBoundaryOffset = getOffsetFromPosition(createPosition(parentLoc.start.line - offsetLine, (parentLoc.start.character || parentLoc.start.column)!), slicedCode)!
+    const childOffset = getOffsetFromPosition(createPosition(childLoc), code)!
+    if (childOffset < startBoundaryOffset + offset)
       return false
-    const endOffset = getOffsetFromPosition(createPosition(parentLoc.end.line - offsetLine, (parentLoc.end.character || parentLoc.end.column)!), code)!
-    if (childOffset > endOffset + offset)
+    const endBoundaryOffset = getOffsetFromPosition(createPosition(parentLoc.end.line - offsetLine, (parentLoc.end.character || parentLoc.end.column)!), slicedCode)!
+    if (childOffset > endBoundaryOffset + offset)
       return false
   }
   return true

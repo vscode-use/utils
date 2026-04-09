@@ -1,10 +1,13 @@
-import type { Range, TextEditorRevealType } from 'vscode'
+import type { Range, TextEditor, TextEditorRevealType } from 'vscode'
 import { getActiveTextEditor } from './getActiveTextEditor'
 
-export function scrollInToView(range: Range, viewColumn: TextEditorRevealType = 1) {
-  const activeTextEditor = getActiveTextEditor()
-  if (!activeTextEditor)
+export function scrollInToView(
+  range: Range,
+  viewColumn: TextEditorRevealType = 1,
+  textEditor: TextEditor | undefined = getActiveTextEditor(),
+): void {
+  if (!textEditor)
     return
 
-  activeTextEditor.revealRange(range, viewColumn)
+  textEditor.revealRange(range, viewColumn)
 }

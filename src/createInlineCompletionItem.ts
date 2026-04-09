@@ -9,6 +9,20 @@ export interface InlineCompletionItemOptions {
   command?: Command
   insertAsSnippet?: boolean
 }
+export interface InlineCompletionItemParams<
+  TParams extends string | string[] | undefined = undefined,
+> {
+  params?: TParams
+}
+
+export type InlineCompletionItemInput<
+  TParams extends string | string[] | undefined = undefined,
+> = InlineCompletionItemOptions & InlineCompletionItemParams<TParams>
+
+export type CreatedInlineCompletionItem<
+  TParams extends string | string[] | undefined = undefined,
+> = vscode.InlineCompletionItem
+  & InlineCompletionItemInput<TParams>
 
 /**
  * 创建补全项
@@ -19,7 +33,9 @@ export interface InlineCompletionItemOptions {
  * @param options.command Command 补全项的命令
  * @returns InlineCompletionItem
  */
-export function createInlineCompletionItem<TParams extends string | string[] | undefined = undefined>(options: InlineCompletionItemOptions & { params?: TParams }) {
+export function createInlineCompletionItem<TParams extends string | string[] | undefined = undefined>(
+  options: InlineCompletionItemInput<TParams>,
+): CreatedInlineCompletionItem<TParams> {
   const { insertText, range, command, insertAsSnippet } = options
   const normalizedInsertText = typeof insertText === 'string' && insertAsSnippet
     ? createSnippetString(insertText)

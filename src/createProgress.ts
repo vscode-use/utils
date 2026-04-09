@@ -1,7 +1,7 @@
 import type { ProgressOptions } from './types'
 import * as vscode from 'vscode'
 
-export function createProgress(options: ProgressOptions) {
+export function createProgress(options: ProgressOptions): Thenable<void> {
   const { title, location = vscode.ProgressLocation.Notification, cancellable = false, cancel, done } = options
   return vscode.window.withProgress({
     location,

@@ -1,26 +1,61 @@
 <p align="center">
-<img src="./assets/kv.png" alt="css selector">
+<img src="./assets/kv.png" alt="vscode-use/utils">
 </p>
 <p align="center"> <a href="./README.md">English</a> | 简体中文</p>
-🐰 vscode use 针对 vscode api 进行了二次的封装，提供了大量精简实用的函数，并且让函数名更贴近实际意义，就如 vscode 中的 lodash。
+# @vscode-use/utils
 
-## [📘 Documentation](https://vscode-use-docs.netlify.app/)
+`@vscode-use/utils` 为 VS Code 扩展开发提供了一组类型友好的工具函数，覆盖命令、编辑器状态、选区、补全、终端、进度条以及响应式状态读取等常见场景。
+
+## 📘 Documentation
+
+- 文档站点：https://vscode-use-docs.netlify.app/
+- npm：https://www.npmjs.com/package/@vscode-use/utils
+- VS Code 启动模板：https://github.com/Simon-He95/vitesse-vscode
+- 示例项目：https://github.com/Simon-He95/vitesse-vscode
 
 ## 📍 Install
+
+```bash
+pnpm add @vscode-use/utils
+# 或
+npm i @vscode-use/utils
 ```
-npm i @vscode-use/utils -d
+
+## 为什么使用 @vscode-use/utils
+
+- 为常见 VS Code API 提供更短、更聚焦的 typed wrapper。
+- 统一处理编辑器文本、选区、可视区域、终端、文件和配置读写。
+- 以更少样板代码创建 completion item、inline completion、code lens、hover 和 inlay hint。
+- 通过 `useConfiguration`、`useDark`、`useSelection`、`useVisibleRange`、`useActiveTextEditor`、`useTheme` 获取响应式状态。
+
+## 快速开始
+
+```ts
+import { addEventListener, createCompletionItem, message, registerCommand, useSelection } from '@vscode-use/utils'
+
+registerCommand('demo.hello', () => {
+  message.info('Hello from @vscode-use/utils')
+})
+
+addEventListener('text-save', () => {
+  console.log('document saved')
+})
+
+const selection = useSelection()
+console.log(selection.value?.text)
+
+createCompletionItem({
+  content: 'hello',
+  detail: '示例补全项',
+})
 ```
 
-## 推荐 VSCode 启动模板
-- https://github.com/Simon-He95/vitesse-vscode
-
-### [Example](https://github.com/Simon-He95/vitesse-vscode)
-
-## 📝 Api
+## 📝 API 概览
 
 - registerCommand： ***注册指令***
 - executeCommand： ***触发指令***
 - getConfiguration： ***获取 workspace configuration***
+- useConfiguration： ***响应式读取配置***
 - message {type:'info'|'error',message:string,buttons:['ok']}： ***弹出消息***
 - openFile： ***打开某一个文件***
 - addEventListener： ***监听vscode中的文件切换、终端、内容变更、新增、删除等事件***
@@ -35,6 +70,8 @@ npm i @vscode-use/utils -d
 - getCopyText： ***读取粘贴板中的内容***
 - setCopyText 往粘贴板中塞入内容***
 - updateText： ***修改文本内容***
+- replaceText： ***替换指定范围内的文本***
+- deleteText： ***删除指定范围内的文本***
 - jumpToLine： ***打开文件并跳转到某一行***
 - createBottomBar： ***创建底部栏按钮***
 - nextTick： ***修改文本内容更新后的回调***
@@ -49,6 +86,10 @@ npm i @vscode-use/utils -d
 - registerCodeActionsProvider ***注册代码动作提供程序***
 - openExternalUrl： ***在浏览器中打开外部网址***
 - getLineText： ***获取某一行的文本***
+- useDark： ***响应式 dark 主题状态***
+- useSelection： ***响应式选区状态***
+- useVisibleRange： ***响应式可视区域状态***
+- useActiveTextEditor： ***响应式当前激活编辑器状态***
 - useTheme： ***主题信息获取和操作***
 - isInPosition： ***判断一块区域是否是另一块的子区域***
 - getCurrentFileUrl： ***获取当前激活文件的路径***
@@ -295,7 +336,11 @@ npm i @vscode-use/utils -d
 
   ###  监听文件变化
   ```
-  watchFiles('filepath', (e) => {})
+  const watcher = watchFiles(['filepath'], {
+    onChange: (e) => {},
+  })
+
+  watcher.dispose()
   ```
 
   ### 创建进度条
@@ -363,7 +408,7 @@ npm i @vscode-use/utils -d
   ```
   createInput({
     title: '我是输入框',
-    placeHolder: '请输入内容',
+    placeholder: '请输入内容',
     value: ''
   })
   ```

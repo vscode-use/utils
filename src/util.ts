@@ -1,11 +1,17 @@
 import type * as vscode from 'vscode'
-// 自动收集函数副作用
-export const effectMaps: vscode.Disposable[] = []
-export function createEffectDeps() {
-  effectMaps.length = 0
+
+let effectMaps: vscode.Disposable[] = []
+
+export function createEffectDeps(): vscode.Disposable[] {
+  effectMaps = []
   return effectMaps
 }
-export function addEffect(effect: vscode.Disposable) {
+
+export function setEffectDeps(disposables: vscode.Disposable[]): void {
+  effectMaps = disposables
+}
+
+export function addEffect<T extends vscode.Disposable>(effect: T): T {
   effectMaps.push(effect)
   return effect
 }

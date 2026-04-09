@@ -7,9 +7,9 @@ import { addEffect } from './util'
  * @param callback 回调函数
  * @returns Disposable
  */
-export function registerCommand(
+export function registerCommand<TArgs extends unknown[] = unknown[], TResult = unknown>(
   name: string,
-  callback: (...args: any[]) => any,
-) {
+  callback: (...args: TArgs) => TResult,
+): vscode.Disposable {
   return addEffect(vscode.commands.registerCommand(name, callback))
 }

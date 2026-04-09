@@ -1,11 +1,11 @@
+import type { TextEditor } from 'vscode'
 import { getActiveTextEditor } from './getActiveTextEditor'
 
 /**
  * 获取当前激活文件的文本
- * @returns string
+ * @returns string | undefined
  */
-export function getActiveText() {
-  const activeTextEditor = getActiveTextEditor()
-  if (activeTextEditor)
-    return activeTextEditor.document.getText()
+export function getActiveText(textEditor: TextEditor | undefined = getActiveTextEditor()): string | undefined {
+  if (textEditor)
+    return textEditor.document.getText()
 }

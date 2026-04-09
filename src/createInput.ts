@@ -20,18 +20,18 @@ import * as vscode from 'vscode'
  * @param options.title string 标题
  * @param options.value string 默认值
  * @param options.selection [number, number] 默认选中范围
- * @param options.placeHolder string 占位符
+ * @param options.placeholder string 占位符
  * @param options.validate (value: string) => string | InputBoxValidationMessage | undefined | null | Thenable<string | InputBoxValidationMessage | undefined | null> 验证函数
  * @returns Thenable<string | undefined>
  */
-export function createInput(options: CreateInputOptions) {
+export function createInput(options: CreateInputOptions): Thenable<string | undefined> {
   return vscode.window.showInputBox({
     prompt: options.prompt,
     password: options.password,
     title: options.title,
     value: options.value,
     valueSelection: options.selection,
-    placeHolder: options.placeHolder,
+    placeHolder: options.placeholder ?? options.placeHolder,
     validateInput: options.validate,
     ignoreFocusOut: options.ignoreFocusOut ?? true,
   })
